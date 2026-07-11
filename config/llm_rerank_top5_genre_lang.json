@@ -1,0 +1,30 @@
+{
+  "prompt_id": "highlight_reranker_v1_ko_variety_vlog",
+  "prompt_id_by_language_and_genre": {
+    "ko": {
+      "variety_vlog": "highlight_reranker_v1_ko_variety_vlog",
+      "lecture": "highlight_reranker_v1_ko_lecture",
+      "default": "highlight_reranker_v1_ko_variety_vlog"
+    },
+    "en": {
+      "default": "highlight_reranker_v1_en"
+    },
+    "default": {
+      "default": "highlight_reranker_v1_en"
+    }
+  },
+  "input_top_k": 5,
+  "output_top_k": 5,
+  "runs": [
+    {
+      "run_id": "gpt_4o_mini_top5_rerank_v1",
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "run_id": "claude_haiku45_top5_rerank_v1",
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
+    }
+  ]
+}

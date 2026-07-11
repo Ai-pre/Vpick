@@ -1,0 +1,2 @@
+pair_id,run_id,selector_type,prompt_id,model_name,rank,pred_start_sec,pred_end_sec,selected_scene_ids,confidence,notes
+P001,vpick_auto_20260705,vpick_auto,,vpick_auto,1,1338.95,1398.95,,0.88,자동 생성 숏폼 중 gold 구간을 포함한 후보

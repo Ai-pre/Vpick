@@ -1,0 +1,34 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.venv/
+venv/
+env/
+
+# Local/API artifacts
+logs/
+tmp/
+*.log
+*.key
+*.pem
+
+# Raw/private data
+data/raw/*
+!data/raw/.gitkeep
+data/interim/
+data/processed/*/
+!data/processed/ready/
+!data/processed/ready/**
+
+# Large or regenerated artifacts
+outputs/
+raw_responses/
+prompts/*_generated/
+
+# Video files are intentionally not versioned.
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi

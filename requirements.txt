@@ -1,0 +1,2 @@
+# The core pipeline uses Python standard library only.
+# Recommended: Python >= 3.10
