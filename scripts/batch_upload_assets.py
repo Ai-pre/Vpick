@@ -83,14 +83,31 @@ def read_rows(paths: list[str]) -> dict[str, list[dict]]:
     return all_rows
 
 
-def unique_longforms(all_rows: dict) -> dict[str, dict]:
-    """asset_id 미기입 고유 롱폼: {long_video_id: {url, channel, title힌트}}"""
+def seed_state_from_csv(all_rows: dict, state: dict) -> None:
+    """CSV에 이미 기입된 ID를 state에 반영 (수동 기입/이전 실행분 인식)."""
+    for rows in all_rows.values():
+        for r in rows:
+            lid = (r.get("long_video_id") or "").strip()
+            aid = (r.get("vpick_asset_id") or "").strip()
+            pid = (r.get("vpick_project_id") or "").strip()
+            if lid and aid and pid and not state["assets"].get(lid, {}).get("asset_id"):
+                state["assets"][lid] = {
+                    "project_id": pid, "asset_id": aid,
+                    "channel": (r.get("channel_name") or "misc").strip(),
+                    "status": state["assets"].get(lid, {}).get("status", "READY"),
+                }
+
+
+def unique_longforms(all_rows: dict, state: dict) -> dict[str, dict]:
+    """업로드 필요 고유 롱폼: CSV/state 어디에도 asset_id가 없는 것만."""
     out = {}
     for rows in all_rows.values():
         for r in rows:
             lid = (r.get("long_video_id") or "").strip()
             if not lid or (r.get("vpick_asset_id") or "").strip():
                 continue
+            if state["assets"].get(lid, {}).get("asset_id"):
+                continue  # 같은 롱폼의 다른 행/CSV에 이미 ID 존재
             if lid not in out:
                 out[lid] = {"url": r["long_video_url"].strip(),
                             "channel": (r.get("channel_name") or "misc").strip()}
@@ -138,7 +155,9 @@ def main() -> None:
 
     state = load_state()
     all_rows = read_rows(args.csv)
-    todo = unique_longforms(all_rows)
+    seed_state_from_csv(all_rows, state)
+    save_state(state)
+    todo = unique_longforms(all_rows, state)
     print(f"업로드 대상 고유 롱폼: {len(todo)}개")
 
     # 1) 업로드 제출
@@ -215,6 +234,12 @@ def main() -> None:
                     except Exception as ex:
                         print(f"    scenes 확인 실패: {ex}", file=sys.stderr)
             except Exception as ex:
+                if "HTTP 401" in str(ex):
+                    print("[인증 만료] 토큰이 만료됨. 폴링 중단.\n"
+                          "  VPICK_ACCESS_TOKEN 갱신(또는 이메일/비번 재설정) 후 "
+                          "같은 명령어로 재실행하면 이어서 진행됨.", file=sys.stderr)
+                    write_back(all_rows, paths_written, state["assets"])
+                    sys.exit(1)
                 print(f"[폴링 오류] {lid}: {ex}", file=sys.stderr)
         write_back(all_rows, paths_written, state["assets"])
         remaining = [lid for lid, a in state["assets"].items()
