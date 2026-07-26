@@ -1,0 +1,27 @@
+﻿{
+    "candidate_count":  60,
+    "unique_candidate_count":  60,
+    "empty_description_count":  0,
+    "min_chars_no_space":  46,
+    "max_chars_no_space":  64,
+    "mean_chars_no_space":  53.73,
+    "input_fields_used":  [
+                              "candidate_id",
+                              "duration_sec",
+                              "Vpick interval scene description",
+                              "final transcript"
+                          ],
+    "excluded_fields":  [
+                            "title",
+                            "YouTube metadata description",
+                            "channel",
+                            "label",
+                            "views",
+                            "likes",
+                            "URL",
+                            "before_context",
+                            "after_context"
+                        ],
+    "generation_method":  "Codex direct manual synthesis",
+    "generated_at":  "2026-07-27T00:47:19.0156088+09:00"
+}

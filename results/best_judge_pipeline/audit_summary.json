@@ -1,0 +1,53 @@
+{
+  "pipeline_id": "vpick_best_judge_2026_07_27",
+  "status": "intrinsic_quality_judge_only",
+  "dataset": {
+    "row_count": 60,
+    "channel_count": 6,
+    "channels": [
+      "BDNS",
+      "OOTB",
+      "숏박스",
+      "안원잘부",
+      "워크맨",
+      "피식대학"
+    ],
+    "judge_evidence_ready_count": 60,
+    "legacy_alignment_verified_count": 10,
+    "legacy_alignment_note": "usable_for_gold is the earlier strict source-alignment field; Judge readiness is audited against the blind evidence input.",
+    "performance_labels": {
+      "pos": 30,
+      "neg": 30
+    }
+  },
+  "blind_input": {
+    "row_count": 60,
+    "forbidden_key_count": 0,
+    "empty_description_count": 0,
+    "empty_transcript_count": 0,
+    "evidence_provider_counts": {
+      "yt_dlp_transcript_fallback": 13,
+      "vpick_scene_api": 47
+    }
+  },
+  "validation_targets": {
+    "row_count": 60,
+    "label_counts": {
+      "pos": 30,
+      "neg": 30
+    },
+    "role": "post_hoc_validation_only",
+    "passed_to_model": false
+  },
+  "reference_result": {
+    "row_count": 60,
+    "scored_count": 60,
+    "abstain_count": 0,
+    "unique_score_count": 18,
+    "largest_tie_group": 7,
+    "score_mean": 75.9375
+  },
+  "fixed_formula": "judge_score_100 = 0.5 * editorial_score_100 + 0.5 * engagement_score_100",
+  "performance_prediction_validated": false,
+  "audit_passed": true
+}

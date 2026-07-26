@@ -1,0 +1,14 @@
+{
+  "judge_run_id": "codex_direct_shortform_judge_v10",
+  "candidate_count": 60,
+  "scored_count": 60,
+  "abstain_count": 0,
+  "prompt_id": "shortform_judge_v10_ko",
+  "label_blind": true,
+  "score_formula": "0.5 * editorial_score_100 + 0.5 * engagement_score_100",
+  "judge_score_mean": 75.9375,
+  "judge_score_min": 21.875,
+  "judge_score_max": 100.0,
+  "unique_judge_scores": 18,
+  "largest_tie_group": 7
+}

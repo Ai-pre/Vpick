@@ -1,0 +1,56 @@
+{
+  "rubric_id": "shortform_judge_v10",
+  "prompt_id": "shortform_judge_v10_ko",
+  "input_modality": "candidate_short_description_transcript_with_compact_longform_overview",
+  "score_scale": {
+    "minimum": 0,
+    "maximum": 4
+  },
+  "axis_weights": {
+    "editorial": 0.5,
+    "engagement": 0.5
+  },
+  "dimension_weights": {
+    "editorial": {
+      "source_salience": 0.25,
+      "self_contained_clarity": 0.25,
+      "progression_payoff": 0.25,
+      "boundary_integrity": 0.25
+    },
+    "engagement": {
+      "opening_pull": 0.25,
+      "change_or_surprise": 0.25,
+      "emotional_or_information_gain": 0.25,
+      "memorable_specificity": 0.25
+    }
+  },
+  "abstain_policy": {
+    "ranking": "exclude",
+    "imputation": "none",
+    "report_rate_separately": true
+  },
+  "request_policy": {
+    "candidates_per_request": 1,
+    "distribution_constraints": false
+  },
+  "validation_gates": {
+    "min_candidate_coverage": 0.95,
+    "min_repeat_pair_coverage": 0.95,
+    "min_repeat_spearman_each_axis": 0.8,
+    "max_repeat_mae_each_axis": 10.0,
+    "min_human_anchor_candidates": 12,
+    "min_human_annotators": 2,
+    "min_human_editorial_spearman": 0.7,
+    "min_human_engagement_spearman": 0.6,
+    "min_human_inter_rater_spearman": 0.5,
+    "development_min_stable_channel_macro_auc": 0.6,
+    "development_min_within_channel_centered_correlation": 0.2,
+    "final_min_bootstrap_auc_ci_lower": 0.5
+  },
+  "run": {
+    "run_id": "claude_opus_4_8_shortform_judge_v10",
+    "provider": "anthropic",
+    "model": "claude-opus-4-8",
+    "judge_role": "primary_blind_pointwise_shortform_judge"
+  }
+}

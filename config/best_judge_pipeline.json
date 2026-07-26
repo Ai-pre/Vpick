@@ -1,0 +1,27 @@
+{
+  "pipeline_id": "vpick_best_judge_2026_07_27",
+  "status": "intrinsic_quality_judge_only",
+  "dataset": "data/processed/goldlabel_60_replaced_v6_channel_normalized_2026-07-23.csv",
+  "blind_input": "results/judge_evaluation_v2_2026-07-27/short_candidate_descriptions_codex/candidates_blind_short_description_60.jsonl",
+  "validation_targets": "data/processed/judge_validation_targets_60.csv",
+  "prompt": "prompts/shortform_judge_v10_ko.md",
+  "scoring_config": "config/shortform_judge_v10_opus.json",
+  "runner": "src/run_shortform_judge_v9.py",
+  "normalizer": "src/shortform_judge_v9.py",
+  "validator": "src/evaluate_shortform_judge_v9.py",
+  "package_audit": "src/audit_best_judge_pipeline.py",
+  "reference_result": "results/judge_evaluation_v2_2026-07-27/codex_judge_v10_blind/codex_judge_v10_scores.csv",
+  "reference_summary": "results/judge_evaluation_v2_2026-07-27/codex_judge_v10_blind/codex_judge_v10_summary.json",
+  "official_interpretation": {
+    "allowed": [
+      "candidate editorial quality diagnosis",
+      "candidate intrinsic engagement-potential diagnosis",
+      "explainable pointwise comparison under the same evidence policy"
+    ],
+    "not_allowed": [
+      "predicting views or likes",
+      "claiming validated within-channel performance ranking",
+      "using POS/NEG or performance percentile as model input"
+    ]
+  }
+}

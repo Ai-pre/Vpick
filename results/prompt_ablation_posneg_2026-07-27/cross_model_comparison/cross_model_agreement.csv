@@ -1,0 +1,6 @@
+﻿version,common_candidates,score_spearman,top10_overlap_count,top10_jaccard,mean_absolute_rank_gap
+v1,60,0.307,2,0.1111,14.8
+v2,60,0.3656,1,0.0526,14.1
+v3,60,0.2863,2,0.1111,15.45
+v4,60,0.1836,0,0.0,15.4167
+v5,60,-0.0034,1,0.0526,19.7833

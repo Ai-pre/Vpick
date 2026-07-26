@@ -1,18 +1,220 @@
-# Vpick Highlight Selection Pipeline
+# Vpick LLM-as-a-Judge and Highlight Selection
 
-Vpick 장면 분석 결과를 기반으로 유튜브 롱폼 영상에서 숏폼 하이라이트 후보를 선택하고, 실제 Shorts로 업로드된 gold 구간과 비교 평가하는 프로젝트입니다.
+Vpick 장면 분석 결과를 기반으로 숏폼 하이라이트 후보의 품질을 평가하는
+LLM-as-a-Judge를 먼저 검증하고, 검증된 Judge로 하이라이트 선택 파이프라인을
+개선하는 프로젝트입니다.
 
 이 레포는 원본 유튜브 영상을 다운로드하거나 mp4 파일을 저장하지 않습니다. 대신 Vpick이 제공하는 scene timestamp, description, transcript, speech timestamp를 활용합니다.
 
 ```text
-Long-form YouTube video
--> Vpick scene analysis
--> scene / speech timestamp, description, transcript
--> candidate window generation
--> adaptive coverage Top5 slate
--> LLM rerank
--> evaluation against real Shorts gold pairs
+Gold 60 published Shorts
+-> blind pointwise LLM Judge
+-> repeat reliability
+-> human reference alignment
+-> within-channel performance validity
+-> locked test
+-> only then Ours vs Vpick improvement experiment
 ```
+
+## Current Best Judge Pipeline (2026-07-27)
+
+현재 채택한 평가체계는 **원본 문맥을 포함한 후보 단독 Pointwise
+LLM-as-a-Judge**입니다. 최종 데이터는 6개 채널의 공개 롱폼-숏폼 페어
+60개이며, 채널명·타임스탬프·사용 가능 여부를 확정했습니다.
+
+```text
+Final 60 pairs
+-> Vpick evidence or timestamped transcript fallback
+-> candidate-specific description
+-> one label-blind candidate per request
+-> editorial 4 axes + engagement 4 axes
+-> pre-registered 50:50 aggregation
+-> reliability / human reference / performance diagnostics
+```
+
+Fable 5 피드백을 반영해 집계식을 실행 전에 고정했고, 점수 분포 제약과
+중간값 기본 규칙을 삭제했습니다. 증거 충분성은 총점에서 분리하고, 이유를 먼저
+작성한 뒤 점수를 부여하며, `abstain`은 순위 계산에서 제외합니다.
+
+현재 v10은 후보의 **편집 품질과 콘텐츠 흡인 잠재력 진단용**으로 사용합니다.
+채널 내 성과 백분위와의 상관이 낮았고, POS/NEG를 유지한 V1~V5 실험도 채택
+기준을 통과하지 못했으므로 조회수·좋아요 예측기로 사용하지 않습니다.
+
+- 전체 명세:
+  [`docs/best_judge_pipeline_2026-07-27.md`](docs/best_judge_pipeline_2026-07-27.md)
+- 프롬프트:
+  [`prompts/shortform_judge_v10_ko.md`](prompts/shortform_judge_v10_ko.md)
+- 확정 데이터:
+  [`data/processed/goldlabel_60_replaced_v6_channel_normalized_2026-07-23.csv`](data/processed/goldlabel_60_replaced_v6_channel_normalized_2026-07-23.csv)
+- 패키지 감사:
+  `python src/audit_best_judge_pipeline.py`
+- 서버 실행:
+  `BEST_JUDGE_REPEAT_COUNT=2 bash scripts/run_best_judge_pipeline.sh`
+
+아래 내용은 현재 결론에 도달하기까지의 설계와 이전 실험 기록입니다.
+
+## Evaluation System v1: five-case comparison
+
+현재 공식 비교 결과는 [`results/evaluation_system_v1/EVALUATION_SYSTEM_COMPARISON_REPORT.md`](results/evaluation_system_v1/EVALUATION_SYSTEM_COMPARISON_REPORT.md)에 있습니다.
+동일한 60개 공개 쇼츠를 기준으로 다음 다섯 체계를 비교합니다.
+
+1. 채널 상대 성과 baseline
+2. 숏폼 단독 Pointwise Judge
+3. 원본 조건부 Pointwise Judge
+4. 원본 조건부 Pairwise Judge
+5. 독립 품질과 원본 선택 점수를 분리한 Hybrid Judge
+
+성과 정답은 하나의 Pos/Neg 라벨로 합치지 않습니다.
+
+```text
+relative_log_view_score
+= log2((short_views + 1) / (channel_median_views + 1))
+
+channel_view_percentile
+= same-channel empirical percentile
+```
+
+두 값을 별도의 연속 성과 신호로 유지하고, 상·하위 25%는 AUC/F1 계산을 위한
+파생 구간으로만 사용합니다. 현재 데이터에는 업로드 후 7일·30일 고정 조회수가
+없으므로 성과 검증은 모두 `exploratory`입니다.
+
+실행:
+
+```bash
+python -m evaluation.prepare_data --config configs/evaluation.yaml
+python -m evaluation.build_behavior_labels --config configs/evaluation.yaml
+python -m evaluation.build_annotation_tasks --config configs/evaluation.yaml
+
+python -m evaluation.run_case --case channel_baseline
+python -m evaluation.run_case --case standalone_pointwise
+python -m evaluation.run_case --case source_pointwise
+python -m evaluation.run_case --case source_pairwise
+python -m evaluation.run_case --case hybrid
+
+python -m evaluation.compare_cases --config configs/evaluation.yaml
+```
+
+새 LLM 실행 전 입력 누출과 스키마만 확인:
+
+```bash
+python -m evaluation.run_judge \
+  --case source_pointwise \
+  --dry-run
+```
+
+실제 API 실행은 `configs/evaluation.yaml`의 `judge.provider`, `judge.model`을
+지정하고 해당 API 키를 환경변수에 설정한 뒤 `--dry-run` 없이 실행합니다.
+Mock 결과는 파이프라인 테스트용이며 검증 결과에 포함되지 않습니다.
+
+현재 실제 비교에서는 어떤 Case도 성과 예측 타당성을 통과하지 못했습니다.
+Case 3은 11개 반복 표본에서 Spearman `0.8611`로 안정적이었지만, 성과 백분위와의
+상관은 `0.0525`, Top-25 AUC는 `0.4865`였습니다. 따라서 잠정적으로
+`원본 조건부 품질 진단`에만 사용할 수 있고 `성과 예측 점수`로 부르면 안 됩니다.
+
+설계, 데이터 스키마, N/A 사유는
+[`docs/evaluation_system_v1.md`](docs/evaluation_system_v1.md)에 정리했습니다.
+
+## Judge-first v9
+
+현재 최우선 과제는 새 후보의 조회수를 맞히는 분류기가 아니라, 후보 하나의
+`편집·구간 선택 품질`과 `내재적 확산 잠재력`을 반복 가능하게 채점하는
+LLM-as-a-Judge를 확립하는 것입니다.
+
+- 메인 평가는 후보당 단독 요청인 pointwise 절대평가입니다.
+- editorial 4축과 engagement 4축을 분리합니다.
+- Pos/Neg는 engagement 축의 외부 타당도 검증에만 사용합니다.
+- 인간 평가는 12개 anchor x 2명만 사용하며 LLM Judge를 대체하지 않습니다.
+- Ours와 Vpick 후보는 Judge가 검증되기 전에는 평가체계 구축에 넣지 않습니다.
+
+```bash
+python src/run_shortform_judge_v9.py \
+  --repeat-count 2 \
+  --no-cache
+
+python src/evaluate_shortform_judge_v9.py \
+  --scores results/shortform_judge_v9/shortform_judge_v9_scores.csv \
+  --targets deliverables/2026-07-24/performance_judge_v1/candidate_targets_PRIVATE.csv \
+  --dataset-role development \
+  --out-dir results/shortform_judge_v9/validation
+```
+
+상세 정의와 합격 기준은
+[`docs/llm_judge_first_protocol_v1.md`](docs/llm_judge_first_protocol_v1.md)에
+있습니다.
+
+현재 Opus 4.8 실행은 1회차 60/60, 2회차 11/60까지 완료됐습니다. Anthropic
+워크스페이스 사용 한도로 남은 49건은 대기 중이며, 2회 공통 coverage가
+11/60이므로 상태는 `incomplete_repeat_run`입니다. 부분 결과는
+[`results/shortform_judge_v9/PARTIAL_RUN_REPORT.md`](results/shortform_judge_v9/PARTIAL_RUN_REPORT.md)에
+기록했습니다.
+
+## Rejected Performance Judge v1
+
+새로 생성된 단일 숏폼 후보의 채널 내 고성과 가능성을 평가하기 위한 별도
+Judge입니다. 실제 공개 숏폼 60개(Pos 30, Neg 30)를 사용하며, LLM은 성과를
+직접 선언하는 대신 훅, 반전, 감정 고점, 인용성, payoff, 시작·종료 경계 같은
+관찰 가능한 특징을 추출합니다. 최종 점수는 이 특징을 학습한 L2 정규화
+로지스틱 모델이 계산합니다.
+
+```text
+새 숏폼 후보
+-> Vpick 장면 설명·대사·타임스탬프
+-> blind pointwise LLM 평가
+-> 검증된 특징만 결합
+-> high_performance_score_0_100
+```
+
+누수 방지 원칙:
+
+- LLM 입력에는 채널명, 조회수, 백분위, Pos/Neg를 넣지 않습니다.
+- 같은 롱폼의 다른 숏폼을 통째로 제외하는 Leave-One-Longform-Out 검증을
+  주 평가로 사용합니다.
+- Leave-One-Channel-Out 결과는 처음 보는 채널에 대한 스트레스 테스트로
+  따로 기록합니다.
+- 30/30 극단 표본으로 학습했으므로 출력은 정확한 조회수나 실제 확률이
+  아닙니다. 고성과·저성과 경계는 LOLO 예측에서 각 극단군 정밀도 75%를
+  목표로 산출하며, 두 경계 사이는 `불확실`로 해석합니다.
+
+학습 및 검증:
+
+```bash
+python src/build_performance_judge_dataset_v1.py
+python src/train_performance_judge_v1.py
+```
+
+단일 후보 추론:
+
+```bash
+python src/predict_performance_judge_v1.py \
+  --candidate-json candidate.json \
+  --judge-json judgment.json \
+  --model-artifact deliverables/2026-07-24/performance_judge_v1/model_artifact.json
+```
+
+주요 결과:
+
+```text
+deliverables/2026-07-24/performance_judge_v1/
+├── candidates_blind.jsonl
+├── candidate_targets_PRIVATE.csv
+├── model_comparison.csv
+├── cross_validated_predictions_PRIVATE.csv
+├── model_artifact.json
+└── PERFORMANCE_JUDGE_REPORT.md
+```
+
+현재 검증 상태는 **`rejected`**입니다. 격리된 Claude Opus 4.8 API 평가에서
+6축 고정 총점 AUC는 `0.504`, 동일 v7 체크리스트 총점 AUC는 `0.364`였고,
+학습 보정 모델도 배포 기준을 통과하지 못했습니다. 기존 Codex 세션 점수는 더
+높았지만 비공개 라벨과 실행 맥락이 완전히 격리된 API 실행이 아니므로 배포
+근거에서 제외합니다. `predict_performance_judge_v1.py`는 검증 실패 artifact를
+기본적으로 거부합니다.
+
+전체 설계와 파인튜닝 보류 근거는
+[`docs/performance_judge_v1_design.md`](docs/performance_judge_v1_design.md)에
+정리했습니다. 검증 실패 이후 평가체계의 역할을 다시 나눈 설계는
+[`docs/performance_judge_next_iteration.md`](docs/performance_judge_next_iteration.md)에
+있습니다.
 
 한 줄로 정리하면:
 
@@ -100,7 +302,7 @@ vpick_asset_id
 
 `short_views`, `short_likes`, `label_notes`의 채널 내 백분위 정보는 gold label 신뢰도 판단에 사용합니다. 장르/채널마다 조회수 규모가 다르기 때문에 raw view count만 절대 비교하지 않고, 가능하면 채널 내 상대 성과를 함께 봅니다.
 
-### Control Dataset
+### Negative Gold Dataset
 
 파일:
 
@@ -108,13 +310,15 @@ vpick_asset_id
 data/processed/gold_dataset_pairs_control.csv
 ```
 
-대조군 데이터입니다.
+실제로 게시된 숏폼 중 성과가 낮은 `Neg` Gold 데이터입니다.
 
-- control short pairs: 7
+- negative Gold pairs: 7
 - unique long-form videos: 5
 - channels: 숏박스, 워크맨
 
-control set은 메인 평가용 gold가 아니라 judge 검증, 신뢰도 점검, 낮은 성과 short와의 비교 실험에 사용합니다.
+45개 구간은 모두 실제 게시 숏폼에서 얻은 Gold입니다. Gold 여부와 성과 라벨을 혼동하지 않도록 통합 CSV의 `evaluation_role`은 모두 `gold`이며, 별도 `performance_label`로 `pos`, `neg`, `unlabeled`를 기록합니다.
+
+2026-07-21 기준 Pilot 11개도 동일 채널 Shorts 50개 코호트의 조회수 백분위로 분류했습니다. 현재 전체 라벨은 `Pos 31`, `Neg 9`, `Unlabeled 5`이며, 기준은 상위 25%를 Pos, 하위 25%를 Neg, 중간 50%를 Unlabeled로 유지합니다. 수집 시점과 통계 출처는 `label_notes`와 `data/processed/pilot_channel_short_stats_2026-07-21.csv`에 기록합니다.
 
 ## Vpick Asset Upload
 
@@ -261,6 +465,158 @@ Ours adaptive_coverage + Claude Core@5: 0.545
 
 즉, Vpick의 영상 분석 자체를 대체하는 것이 아니라, Vpick이 제공한 장면 데이터 위에서 더 나은 하이라이트 선택기를 만든 것입니다.
 
+## Historical LLM Judge Experiments
+
+아래 v4~v8 실험은 v9 이전의 기록입니다. 반복 안정성, 인간 정합성, 성과
+정합성을 분리해야 한다는 근거로 보존하며 현재 주 Judge로 사용하지 않습니다.
+
+```text
+docs/evaluation_system_pointwise_v4.md
+prompts/shortform_pointwise_judge_v4_ko.md
+config/gold_pointwise_judge_v4_terra.json
+config/gold_pointwise_judge_v4_gemini_multimodal.json
+scripts/run_gold_pointwise_judge_v4.sh
+reports/gold_pointwise_judge_v4_2026-07-22.md
+results/gold_pointwise_judge_v4/
+```
+
+현재 결과에서 Terra의 반복 Spearman은 편집 0.8263·성과 0.7968이고, Gemini 멀티모달은 편집 0.3617·성과 0.5172입니다. Gemini의 Pos>Neg AUC는 0.6333으로 더 높지만 반복 신뢰성이 낮아 주 Judge로 사용하지 않습니다. 최종 검증은 층화 표본 15개 x 3명의 인간 절대평가와의 상관으로 결정합니다.
+
+```text
+src/build_judge_candidates.py
+src/run_llm_judge.py
+src/evaluate_llm_judge.py
+prompts/shortform_candidate_judge_v2_ko.md
+config/gold_judge_v1.json
+docs/llm_as_judge.md
+```
+
+Gold 45개에 대한 평가체계 검증은 다음과 같이 실행합니다.
+
+```bash
+REPEAT_COUNT=2 bash scripts/run_gold_judge_validation.sh
+```
+
+Judge는 고정된 익명 Gold 구간만 입력받으며 Pos/Neg 라벨, 조회수, 좋아요를 볼 수 없습니다. 현재 통합 데이터의 Pos 31개와 Neg 9개로 외부 성과 정합성을 사후 계산하고, Unlabeled 5개는 구분력 계산에서 제외합니다.
+
+Current consolidated Gold data and the first full Judge run are available at:
+
+```text
+data/processed/gold_dataset_pairs_all.csv
+data/processed/gold_dataset_pairs_all_summary.json
+reports/gold_judge_v1_2026-07-21.md
+results/gold_judge_v1/
+```
+
+The matched pairwise v4 evaluation separates editorial interval quality from intrinsic performance potential, reverses left/right presentation on the second repeat, and validates the Judge against three independent human raters. See:
+
+```text
+docs/evaluation_system_v4.md
+prompts/shortform_pairwise_judge_v4_ko.md
+config/gold_pairwise_judge_v4.json
+scripts/run_gold_pairwise_judge_v4.sh
+reports/gold_pairwise_judge_v4_2026-07-21.md
+results/gold_pairwise_judge_v4/
+```
+
+The v5 multimodal Judge sends the same 18 blind comparisons to Gemini as clipped public YouTube inputs. The completed Gemini 3.1 Flash-Lite run produced 36 real judgments in 10 batched API requests. It evaluates audio, expressions, actions, on-screen text, and boundaries instead of relying on transcript alone.
+
+The experiment reached full coverage, but left/right reversal agreement was only 0.5000 for editorial quality and 0.6111 for performance potential. It therefore remains a multimodal diagnostic, not a validated primary Judge. Terra and Claude remain independent text diagnostics, and three-person blind human evaluation remains the final validity gate.
+
+```text
+docs/evaluation_system_v5_multimodal.md
+prompts/shortform_pairwise_judge_v5_multimodal_ko.md
+prompts/shortform_pairwise_judge_v5_multimodal_batch_ko.md
+config/gold_pairwise_judge_v5_multimodal_batch.json
+scripts/run_gold_pairwise_gemini_multimodal_batch_v5.sh
+reports/gold_pairwise_judge_v5_multimodal_2026-07-21.md
+results/gold_pairwise_judge_v5_multimodal_batch/
+```
+
+The same-model modality ablation compares Gemini 3.1 Flash-Lite with text evidence only against the completed video/audio run. Multimodal input improved strict Pos preference from 0.1667 to 0.3889 and decisive Pos accuracy from 0.3000 to 0.6364, but editorial repeat agreement fell from 0.6667 to 0.5000. It is therefore used as a performance-potential diagnostic rather than a standalone editorial Judge.
+
+```text
+config/gold_pairwise_judge_v5_gemini_text_batch.json
+src/run_gemini_text_batch_judge.py
+scripts/run_gold_pairwise_gemini_text_ab_v5.sh
+reports/gemini_multimodal_ablation_2026-07-21.md
+results/gold_pairwise_judge_v5_text_batch/
+results/gold_pairwise_judge_v5_ab/
+```
+
+## Highlight Quality Evaluation v1
+
+성과 예측과 별도로, **같은 롱폼 안에서 어떤 구간이 더 좋은 하이라이트인가**를 평가하는
+블라인드 Judge입니다. 채널명, 조회수, Pos/Neg, 게시 여부, 후보 출처를 모델 입력에서
+제외하고 다음 6개 항목을 0~4점으로 채점합니다.
+
+| Dimension | Weight |
+|---|---:|
+| source salience | 0.20 |
+| hook | 0.20 |
+| payoff | 0.20 |
+| self-contained | 0.15 |
+| density | 0.15 |
+| boundary | 0.10 |
+
+총점은 모델이 직접 만들지 않고 코드가 0~100점으로 계산합니다. Pointwise가 기본 평가이고,
+pairwise는 같은 롱폼 후보끼리만 비교하며 A/B 순서를 뒤집어 순서 민감도를 진단합니다.
+
+```text
+config/highlight_quality_judge_v1.json
+prompts/highlight_quality_pointwise_v1_ko.md
+prompts/highlight_quality_pairwise_v1_ko.md
+src/highlight_quality_judge_v1.py
+src/build_highlight_quality_eval_v1.py
+src/run_highlight_quality_judge_v1.py
+deliverables/2026-07-24/highlight_quality_v1/
+```
+
+평가셋은 30개 롱폼에서 154개 후보와 동일 롱폼 비교 124쌍을 구성합니다. 후보 출처는
+published short 30개, boundary shift 60개, hard negative 30개, random 30개,
+Vpick baseline 2개, existing model 2개입니다. 공개된 고성과 숏폼은 신뢰 가능한 정답
+신호이지만 완전한 정답으로 강제하지 않습니다.
+
+```bash
+python src/build_highlight_quality_eval_v1.py
+
+python src/run_highlight_quality_judge_v1.py \
+  --mode pointwise \
+  --provider gemini \
+  --model gemini-3.1-flash-lite
+
+python src/run_highlight_quality_judge_v1.py \
+  --mode pairwise \
+  --provider gemini \
+  --model gemini-3.1-flash-lite \
+  --repeat-swapped
+```
+
+Gemini 3.1 Flash-Lite 전체 검증은 pointwise 154개와 pairwise 124쌍을 모두 완료했습니다.
+Pointwise에서 published short의 boundary shift 대비 엄격 승률은 35%였습니다. Pairwise에서
+A/B 반전까지 일치한 81쌍만 사용하면 boundary shift 대비 승률은 80.7%였지만, 전체 순서
+일치율이 65.3%에 그쳤습니다. 직접 비교는 경계 차이에 더 민감했으나 위치 편향이 커서 현재
+모델을 최종 검증된 주 Judge로 간주하지 않습니다. 자세한 구현 범위·결과·한계는
+`deliverables/2026-07-24/highlight_quality_v1/IMPLEMENTATION_AUDIT.md`에 기록합니다.
+
+```text
+results/highlight_quality_judge_v1_full/EVALUATION_REPORT.md
+results/highlight_quality_judge_v1_full/evaluation_summary.json
+```
+
+### Scene Evidence Coverage
+
+60개 숏폼 후보의 54개 고유 롱폼 중 43개는 실제 Vpick 장면 분석을 사용합니다. Vpick 재시도
+후에도 실패한 11개 롱폼은 `yt-dlp`의 타임코드 자막을 장면으로 묶고 Gemini가 자막에 근거한
+설명을 생성해 보완합니다. 이 fallback은 시각 근거가 없다고 명시하며 실제 Vpick 결과를
+덮어쓰거나 `vpick_available=1`로 기록하지 않습니다.
+
+```text
+src/build_subtitle_fallback_scenes.py
+data/raw/subtitle_fallback_scenes/
+deliverables/2026-07-24/performance_ranker/vpick_enrichment_summary.json
+```
+
 ## Repository Structure
 
 ```text
@@ -387,11 +743,11 @@ bash scripts/run_best_no_api_pipeline.sh \
 IoU = overlap / union
 ```
 
-## Multimodal Future Work
+## Multimodal Evaluation
 
-Qwen-Omni 같은 멀티모달 모델을 붙이려면 후보 구간의 실제 mp4 클립이 필요합니다. 현재는 유튜브 영상 다운로드 및 재배포가 법적/기술적으로 부담되므로 베스트 파이프라인에는 포함하지 않았습니다.
+평가체계에는 로컬 mp4를 내려받지 않고 Gemini의 공개 YouTube 구간 입력을 사용한 멀티모달 쌍대비교가 구현되어 있습니다. 이는 고정된 Gold 후보를 평가하는 Judge이며 Ours의 후보 생성·선택 파이프라인에는 아직 포함하지 않습니다.
 
-향후 합법적으로 후보 클립을 확보할 수 있다면 아래 구조를 추가할 수 있습니다.
+향후 합법적으로 후보 클립을 확보하거나 동일한 구간 입력 방식을 안정화하면 아래 구조로 선택 단계까지 확장할 수 있습니다.
 
 ```text
 Top15 candidate clips
@@ -400,4 +756,4 @@ Top15 candidate clips
 -> final Top5
 ```
 
-현재 버전에서는 Vpick의 멀티모달 장면 분석 결과를 사용하고, 그 위에서 후보 선택과 평가 체계를 개선합니다.
+현재 후보 선택은 Vpick의 멀티모달 장면 분석 결과를 사용하고, 평가는 Gemini 영상 Judge를 보조 진단으로 함께 보고합니다. Flash-Lite의 낮은 좌우 반전 일치도 때문에 최종 판정은 3인 인간 블라인드 평가 전까지 보류합니다.

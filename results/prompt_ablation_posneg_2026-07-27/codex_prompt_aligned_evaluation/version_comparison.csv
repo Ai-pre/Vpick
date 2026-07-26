@@ -1,0 +1,6 @@
+﻿version,judgment_rows,scored_rows,abstain_or_unscored,unmatched_candidate_ids,unique_scores,largest_tie_group,pooled_auc,channel_macro_auc,stable_channel_macro_auc,cell_pairwise_accuracy_macro,cell_spearman_macro,channel_macro_spearman_percentile,overall_spearman_percentile
+v1,60,60,0,0,17,19,0.5439,0.5558,0.5837,0.4735,0.1027,0.1571,0.1325
+v2,60,60,0,0,45,5,0.5422,0.5152,0.5541,0.5299,0.1184,0.1178,0.1418
+v3,60,60,0,0,51,5,0.54,0.5207,0.5623,0.5457,0.1487,0.141,0.1399
+v4,60,60,0,0,40,5,0.5406,0.5105,0.547,0.5359,0.1112,0.1199,0.1316
+v5,60,60,0,0,48,5,0.5322,0.5174,0.5574,0.5414,0.1447,0.1172,0.1141
