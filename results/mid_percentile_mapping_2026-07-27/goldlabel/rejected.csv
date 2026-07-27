@@ -1,0 +1,10 @@
+﻿short_video_id,long_video_id,channel_name,chosen_language,long_duration_sec,short_duration_sec,reject_reason
+7897ufDS5Is,P-qjWtLKEwE,BDNS,ko-orig,1078,59,origin_mismatch_suspect
+PY3YiviECBU,dYr0QASwhTs,BDNS,,956,58,gemini_empty_transcript
+m-MBLSS70x0,Ew4jW_X40Hk,안원잘부,ko,229,68,origin_mismatch_suspect
+P5hyRkrFUSY,IpoR_xlslLI,안원잘부,ko,279,37,origin_mismatch_suspect
+Ab2ZSmjbebg,Zeuzp5EAsR0,워크맨,ko,44,27,origin_mismatch_suspect
+02Y7z_3_tX0,Dc04VdKLleM,피식대학,ko,1248,46,origin_mismatch_suspect
+bxToIBbK4uk,i8zxaQf7GMY,피식대학,ko,1075,38,gemini_empty_transcript
+XkIZ5XuyOwI,gHox6hv3H2I,피식대학,ko-orig,809,30,needs_manual_review
+jesKrPOh9aE,heifaIjlSUc,안원잘부,ko-orig,1434,60,needs_manual_review

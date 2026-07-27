@@ -1,0 +1,5 @@
+﻿channel_name,short_video_id,short_video_url,long_video_id,long_video_url,pair_id,percentile_bucket,channel_performance_percentile,metadata_duration_sec,prev_status
+워크맨,Ab2ZSmjbebg,https://www.youtube.com/shorts/Ab2ZSmjbebg,chkzgW9aJrg,https://www.youtube.com/watch?v=chkzgW9aJrg,UMID006,p60_80,69.8,27,needs_url
+BDNS,9-d5puHUO9M,https://www.youtube.com/shorts/9-d5puHUO9M,475dCgzjNyE,https://www.youtube.com/watch?v=475dCgzjNyE,UMID009,p40_60,50.9,45,origin_ok_span_policy_pending
+BDNS,deaqIYxGIuY,https://www.youtube.com/shorts/deaqIYxGIuY,lFbfMG7vbyo,https://www.youtube.com/watch?v=lFbfMG7vbyo,UMID011,p20_40,29.7,50,resolved
+OOTB,DnfJdOHTUeI,https://www.youtube.com/shorts/DnfJdOHTUeI,0F_QvmClgOU,https://www.youtube.com/watch?v=0F_QvmClgOU,UMID014,p20_40,30.1,36,resolved

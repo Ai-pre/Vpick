@@ -1,0 +1,218 @@
+{
+  "label_rows": 60,
+  "score_rows": 60,
+  "joined_rows": 60,
+  "unmatched_score_rows": [],
+  "evaluated_columns": [
+    "judge_score_100",
+    "editorial_score_100",
+    "engagement_score_100",
+    "engagement_memorable_specificity_score_0_4",
+    "editorial_source_salience_score_0_4",
+    "editorial_self_contained_clarity_score_0_4"
+  ],
+  "iterations": 20000,
+  "axes": {
+    "judge_score_100": {
+      "spearman_percentile": 0.1214,
+      "spearman_p": 0.35408,
+      "spearman_n": 60,
+      "auc_pos_neg": 0.5333,
+      "auc_p": 0.66692,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 531,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.08,
+          "p": 0.58957,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.1831,
+          "p": 0.54922,
+          "n": 13
+        },
+        "_macro_weighted": {
+          "rho": 0.1024,
+          "p": null,
+          "n": 60
+        }
+      }
+    },
+    "editorial_score_100": {
+      "spearman_percentile": 0.0973,
+      "spearman_p": 0.46028,
+      "spearman_n": 60,
+      "auc_pos_neg": 0.5139,
+      "auc_p": 0.85466,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 827,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.0123,
+          "p": 0.9363,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.1599,
+          "p": 0.59997,
+          "n": 13
+        },
+        "_macro_weighted": {
+          "rho": 0.0443,
+          "p": null,
+          "n": 60
+        }
+      }
+    },
+    "engagement_score_100": {
+      "spearman_percentile": 0.1334,
+      "spearman_p": 0.31118,
+      "spearman_n": 60,
+      "auc_pos_neg": 0.5411,
+      "auc_p": 0.59197,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 439,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.1268,
+          "p": 0.39503,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.1784,
+          "p": 0.55677,
+          "n": 13
+        },
+        "_macro_weighted": {
+          "rho": 0.138,
+          "p": null,
+          "n": 60
+        }
+      }
+    },
+    "engagement_memorable_specificity_score_0_4": {
+      "spearman_percentile": 0.1623,
+      "spearman_p": 0.21644,
+      "spearman_n": 60,
+      "auc_pos_neg": 0.5828,
+      "auc_p": 0.25089,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 296,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.1644,
+          "p": 0.26519,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.1672,
+          "p": 0.58692,
+          "n": 13
+        },
+        "_macro_weighted": {
+          "rho": 0.165,
+          "p": null,
+          "n": 60
+        }
+      }
+    },
+    "editorial_source_salience_score_0_4": {
+      "spearman_percentile": 0.1507,
+      "spearman_p": 0.25199,
+      "spearman_n": 60,
+      "auc_pos_neg": 0.5728,
+      "auc_p": 0.31673,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 344,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.1492,
+          "p": 0.31563,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.0666,
+          "p": 0.82916,
+          "n": 13
+        },
+        "_macro_weighted": {
+          "rho": 0.1313,
+          "p": null,
+          "n": 60
+        }
+      }
+    },
+    "editorial_self_contained_clarity_score_0_4": {
+      "spearman_percentile": -0.0827,
+      "spearman_p": 0.52782,
+      "spearman_n": 60,
+      "auc_pos_neg": 0.4167,
+      "auc_p": 0.23679,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 1146,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": -0.1371,
+          "p": 0.36408,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.0046,
+          "p": 0.99125,
+          "n": 13
+        },
+        "_macro_weighted": {
+          "rho": -0.1064,
+          "p": null,
+          "n": 60
+        }
+      }
+    }
+  },
+  "holm_across_axes": {
+    "engagement_memorable_specificity_score_0_4": {
+      "p": 0.21644,
+      "holm_threshold": 0.00833,
+      "significant": false,
+      "rank": 1
+    },
+    "editorial_source_salience_score_0_4": {
+      "p": 0.25199,
+      "holm_threshold": 0.01,
+      "significant": false,
+      "rank": 2
+    },
+    "engagement_score_100": {
+      "p": 0.31118,
+      "holm_threshold": 0.0125,
+      "significant": false,
+      "rank": 3
+    },
+    "judge_score_100": {
+      "p": 0.35408,
+      "holm_threshold": 0.01667,
+      "significant": false,
+      "rank": 4
+    },
+    "editorial_score_100": {
+      "p": 0.46028,
+      "holm_threshold": 0.025,
+      "significant": false,
+      "rank": 5
+    },
+    "editorial_self_contained_clarity_score_0_4": {
+      "p": 0.52782,
+      "holm_threshold": 0.05,
+      "significant": false,
+      "rank": 6
+    }
+  },
+  "any_axis_significant": false
+}

@@ -1,0 +1,11 @@
+{
+  "rows": 2,
+  "status_counts": {
+    "located": 2
+  },
+  "min_coverage": 0.35,
+  "ratio_window": [
+    0.6,
+    2.5
+  ]
+}

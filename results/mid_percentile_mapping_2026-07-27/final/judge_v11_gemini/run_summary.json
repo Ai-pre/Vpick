@@ -1,0 +1,17 @@
+{
+  "evidence_rows": 94,
+  "repeat_count": 1,
+  "result_rows": 94,
+  "scored": 94,
+  "parse_status_counts": {
+    "score": 94
+  },
+  "judge_score_mean": 56.5851,
+  "judge_score_min": 35.0,
+  "judge_score_max": 71.6667,
+  "unique_judge_scores": 36,
+  "largest_tie_group": 10,
+  "model": "gemini-3.1-flash-lite",
+  "prompt_id": "shortform_judge_v11_ko",
+  "scores_path": "../results/mid_percentile_mapping_2026-07-27/final/judge_v11_gemini/judge_v10_gemini_scores.csv"
+}

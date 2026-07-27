@@ -1,0 +1,12 @@
+{
+  "longforms": 81,
+  "status_counts": {
+    "fetched": 50,
+    "cached": 30,
+    "unavailable": 1
+  },
+  "unavailable": [
+    "Nzvzpg0i78Y"
+  ],
+  "cache_dir": "../results/mid_percentile_mapping_2026-07-27/final/captions"
+}

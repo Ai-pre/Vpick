@@ -1,0 +1,27 @@
+﻿pair_id,channel_name,short_video_id,long_video_id,short_duration_sec,prior_alignment_status,prior_span_verdict,gemini_model,gemini_status,gemini_segment_count,gemini_cue_count,gemini_total_tokens,long_subtitle_file,long_cue_count,alignment_status,coverage,mean_match_score,predicted_start,predicted_end,predicted_start_time,predicted_end_time,source_span,segment_count,span_verdict,span_ratio,accept,resolved_status,gemini_error
+MID001,BDNS,deaqIYxGIuY,lFbfMG7vbyo,50,heavy_edit,span_implausible,gemini-3.6-flash,ok,17,17,7072,lFbfMG7vbyo.ko-orig.json3,347,light_edit,0.9278,81.96,455.58,503.96,07:35.580,08:23.960,48.38,2,plausible,0.968,1,recovered,
+MID004,BDNS,7897ufDS5Is,P-qjWtLKEwE,59,insufficient_alignment,unknown,gemini-3.6-flash,failed,,,,,,,,,,,,,,,,,,gemini_failed,"HTTP 429 {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a"
+MID008,BDNS,PY3YiviECBU,dYr0QASwhTs,58,no_shared_language,,gemini-3.6-flash,ok,10,10,7271,,,,,,,,,,,,,,,long_subtitle_missing,
+MID013,안원잘부,m-MBLSS70x0,Ew4jW_X40Hk,68,insufficient_alignment,unknown,gemini-3.6-flash,failed,,,,,,,,,,,,,,,,,,gemini_failed,"HTTP 429 {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a"
+MID014,안원잘부,P5hyRkrFUSY,IpoR_xlslLI,37,insufficient_alignment,unknown,gemini-3.6-flash,failed,,,,,,,,,,,,,,,,,,gemini_failed,"HTTP 429 {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a"
+MID015,워크맨,Ab2ZSmjbebg,Zeuzp5EAsR0,27,insufficient_alignment,unknown,gemini-3.6-flash,failed,,,,,,,,,,,,,,,,,,gemini_failed,"HTTP 429 {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a"
+MID017,피식대학,02Y7z_3_tX0,Dc04VdKLleM,46,insufficient_alignment,unknown,gemini-3.6-flash,failed,,,,,,,,,,,,,,,,,,gemini_failed,"HTTP 429 {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a"
+MID018,피식대학,bxToIBbK4uk,i8zxaQf7GMY,38,insufficient_alignment,unknown,gemini-3.6-flash,failed,,,,,,,,,,,,,,,,,,gemini_failed,"HTTP 429 {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a"

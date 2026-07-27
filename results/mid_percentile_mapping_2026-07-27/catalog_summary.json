@@ -1,0 +1,49 @@
+{
+  "channel_count": 6,
+  "short_count": 54,
+  "min_longform_sec": 300.0,
+  "channels": [
+    {
+      "channel_name": "BDNS",
+      "channel_id": "UC5xLohcPE65Y-U62X6snmRQ",
+      "video_count": 1041,
+      "longform_count": 831,
+      "source": "fetched"
+    },
+    {
+      "channel_name": "OOTB",
+      "channel_id": "UCRmm8763aqO0CoeLCA2jNSA",
+      "video_count": 290,
+      "longform_count": 275,
+      "source": "fetched"
+    },
+    {
+      "channel_name": "숏박스",
+      "channel_id": "UC1B6SalAoiJD7eHfMUA9QrA",
+      "video_count": 253,
+      "longform_count": 189,
+      "source": "fetched"
+    },
+    {
+      "channel_name": "안원잘부",
+      "channel_id": "UCWpY0eSJtyO-qNAPbKFRSSg",
+      "video_count": 23,
+      "longform_count": 20,
+      "source": "fetched"
+    },
+    {
+      "channel_name": "워크맨",
+      "channel_id": "UCwx6n_4OcLgzAGdty0RWCoA",
+      "video_count": 515,
+      "longform_count": 503,
+      "source": "fetched"
+    },
+    {
+      "channel_name": "피식대학",
+      "channel_id": "UCGX5sP4ehBkihHwt5bs5wvg",
+      "video_count": 1171,
+      "longform_count": 926,
+      "source": "fetched"
+    }
+  ]
+}

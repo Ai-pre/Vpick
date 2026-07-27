@@ -1,0 +1,19 @@
+{
+  "rows": 4,
+  "accepted": 2,
+  "needs_gemini": 1,
+  "alignment_status_counts": {
+    "insufficient_alignment": 1,
+    "continuous": 1,
+    "light_edit": 1,
+    "heavy_edit": 1
+  },
+  "chosen_language_counts": {
+    "ko-orig": 4
+  },
+  "span_verdict_counts": {
+    "unknown": 1,
+    "span_long_review": 1,
+    "plausible": 2
+  }
+}

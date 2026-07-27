@@ -1,0 +1,46 @@
+{
+  "label_rows": 94,
+  "subtitle_files": {
+    "vpick_short_subtitles_final_plain.csv": 94
+  },
+  "short_durations_supplied": 63,
+  "thresholds": {
+    "span_sec": [
+      10.0,
+      120.0
+    ],
+    "span_ratio": [
+      0.5,
+      1.8
+    ],
+    "max_duplication": 0.35,
+    "min_chars_per_sec": 1.5
+  },
+  "finding_counts": {
+    "duplicate_candidate_id": 0,
+    "duplicate_short_video_id": 0,
+    "missing_url_or_span": 0,
+    "span_out_of_range": 0,
+    "span_ratio_out_of_range": 0,
+    "span_exceeds_longform": 0,
+    "label_percentile_disagreement": 0,
+    "subtitle_row_missing": 0,
+    "empty_evidence": 0,
+    "rolling_caption_duplication": 0,
+    "sparse_transcript": 0
+  },
+  "findings": {
+    "duplicate_candidate_id": [],
+    "duplicate_short_video_id": [],
+    "missing_url_or_span": [],
+    "span_out_of_range": [],
+    "span_ratio_out_of_range": [],
+    "span_exceeds_longform": [],
+    "label_percentile_disagreement": [],
+    "subtitle_row_missing": [],
+    "empty_evidence": [],
+    "rolling_caption_duplication": [],
+    "sparse_transcript": []
+  },
+  "audit_passed": true
+}

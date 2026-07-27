@@ -1,0 +1,10 @@
+﻿short_video_id,long_video_id,channel_name,pair_id,caption_alignment_status,caption_span_verdict,gemini_resolved_status,long_duration_sec,short_duration_sec,reject_reason
+7897ufDS5Is,P-qjWtLKEwE,BDNS,MID004,insufficient_alignment,unknown,origin_mismatch_suspect,1078,59,origin_mismatch_suspect
+9-d5puHUO9M,475dCgzjNyE,BDNS,MID006,heavy_edit,plausible,,386,45,alignment_heavy_edit
+M4tdH9WM9jA,OqGTzxl9dVc,BDNS,MID007,heavy_edit,span_long_review,,60,32,alignment_heavy_edit
+PY3YiviECBU,dYr0QASwhTs,BDNS,MID008,no_shared_language,,gemini_empty_transcript,956,58,gemini_empty_transcript
+m-MBLSS70x0,Ew4jW_X40Hk,안원잘부,MID013,insufficient_alignment,unknown,origin_mismatch_suspect,229,68,origin_mismatch_suspect
+P5hyRkrFUSY,IpoR_xlslLI,안원잘부,MID014,insufficient_alignment,unknown,origin_mismatch_suspect,279,37,origin_mismatch_suspect
+Ab2ZSmjbebg,Zeuzp5EAsR0,워크맨,MID015,insufficient_alignment,unknown,origin_mismatch_suspect,44,27,origin_mismatch_suspect
+02Y7z_3_tX0,Dc04VdKLleM,피식대학,MID017,insufficient_alignment,unknown,origin_mismatch_suspect,1248,46,origin_mismatch_suspect
+bxToIBbK4uk,i8zxaQf7GMY,피식대학,MID018,insufficient_alignment,unknown,gemini_empty_transcript,1075,38,gemini_empty_transcript

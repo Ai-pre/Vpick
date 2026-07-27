@@ -1,0 +1,9 @@
+{
+  "targets": 7,
+  "recovered": 0,
+  "resolved_status_counts": {
+    "gemini_empty_transcript": 2,
+    "origin_mismatch_suspect": 5
+  },
+  "model": "gemini-3.1-flash-lite"
+}

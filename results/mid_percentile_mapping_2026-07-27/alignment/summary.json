@@ -1,0 +1,16 @@
+{
+  "pairs": 18,
+  "subtitle_pair_success": 17,
+  "subtitle_pair_success_rate": 0.9444,
+  "alignment_status_counts": {
+    "heavy_edit": 4,
+    "continuous": 7,
+    "insufficient_alignment": 4,
+    "light_edit": 2,
+    "missing_subtitle": 1
+  },
+  "auto_accept_pairs": 9,
+  "comparable_pairs": 0,
+  "mean_gold_interval_iou": null,
+  "within_5s_start_rate": null
+}

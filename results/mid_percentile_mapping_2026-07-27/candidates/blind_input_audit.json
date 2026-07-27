@@ -1,0 +1,23 @@
+{
+  "evidence_rows": 9,
+  "manifest_rows": 9,
+  "schema_matches_judge_input": true,
+  "observed_header": [
+    "candidate_id",
+    "duration_sec",
+    "description",
+    "transcript",
+    "before_context",
+    "after_context"
+  ],
+  "forbidden_key_count": 0,
+  "leaks": [],
+  "empty_description_count": 0,
+  "empty_transcript_count": 0,
+  "duplicate_candidate_ids": [],
+  "unmatched_candidate_ids": [],
+  "description_len_min": 64,
+  "description_len_max": 81,
+  "description_out_of_range": [],
+  "audit_passed": true
+}

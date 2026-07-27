@@ -1,0 +1,10 @@
+{
+  "targets": 8,
+  "recovered": 1,
+  "resolved_status_counts": {
+    "long_subtitle_missing": 1,
+    "recovered": 1,
+    "gemini_failed": 6
+  },
+  "model": "gemini-3.6-flash"
+}

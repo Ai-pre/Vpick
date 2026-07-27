@@ -1,0 +1,36 @@
+{
+  "rows": 94,
+  "label_fields": 22,
+  "subtitle_fields": 6,
+  "missing_span": [],
+  "missing_url": [],
+  "label_counts": {
+    "mid": 34,
+    "neg": 30,
+    "pos": 30
+  },
+  "bucket_counts": {
+    "p0_20": 30,
+    "p20_40": 12,
+    "p40_60": 12,
+    "p60_80": 10,
+    "p80_100": 30
+  },
+  "transcript_source_counts": {
+    "vpick_scene_api": 47,
+    "yt_dlp_transcript_fallback": 47
+  },
+  "channel_counts": {
+    "BDNS": 10,
+    "OOTB": 17,
+    "숏박스": 21,
+    "안원잘부": 15,
+    "워크맨": 21,
+    "피식대학": 10
+  },
+  "empty_description": [],
+  "empty_transcript": [],
+  "label_path": "../results/mid_percentile_mapping_2026-07-27/final/vpick_goldlabel_final_PRIVATE.csv",
+  "subtitle_path": "../results/mid_percentile_mapping_2026-07-27/final/vpick_short_subtitles_final.csv",
+  "plain_subtitle_path": "../results/mid_percentile_mapping_2026-07-27/final/vpick_short_subtitles_final_plain.csv"
+}

@@ -1,0 +1,26 @@
+{
+  "alignment_rows": 18,
+  "recovery_rows": 8,
+  "accepted": 9,
+  "rejected": 9,
+  "timestamp_method_counts": {
+    "yt_dlp_subtitle_alignment": 8,
+    "gemini_short_transcript_and_subtitle_alignment": 1
+  },
+  "bucket_counts": {
+    "p40_60": 3,
+    "p20_40": 5,
+    "p60_80": 1
+  },
+  "channel_counts": {
+    "피식대학": 1,
+    "OOTB": 4,
+    "BDNS": 4
+  },
+  "empty_transcript_count": 0,
+  "reject_reason_counts": {
+    "gemini_empty_transcript": 2,
+    "alignment_heavy_edit": 2,
+    "origin_mismatch_suspect": 5
+  }
+}

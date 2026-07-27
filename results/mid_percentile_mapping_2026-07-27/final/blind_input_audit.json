@@ -1,0 +1,35 @@
+{
+  "evidence_rows": 95,
+  "manifest_rows": 95,
+  "schema_matches_judge_input": true,
+  "observed_header": [
+    "candidate_id",
+    "duration_sec",
+    "description",
+    "transcript",
+    "before_context",
+    "after_context"
+  ],
+  "forbidden_key_count": 0,
+  "leaks": [],
+  "empty_description_count": 0,
+  "empty_transcript_count": 0,
+  "duplicate_candidate_ids": [],
+  "unmatched_candidate_ids": [],
+  "description_len_min": 42,
+  "description_len_max": 238,
+  "description_out_of_range": [
+    "C_10942df5b9a611",
+    "C_277df4844362e1",
+    "C_2c6ef4ac5ccb91",
+    "C_39e9ad74b67fff",
+    "C_3b4ab99fff5f32",
+    "C_4168d190df4080",
+    "C_71fff5aa4444f6",
+    "C_9da417f1ef3561",
+    "C_d1155bf44e11df",
+    "C_d28e1489f145b8",
+    "C_f042310a37676d"
+  ],
+  "audit_passed": false
+}

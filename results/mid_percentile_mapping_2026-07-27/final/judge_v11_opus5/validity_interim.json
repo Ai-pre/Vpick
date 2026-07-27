@@ -1,0 +1,184 @@
+{
+  "label_rows": 94,
+  "score_rows": 46,
+  "joined_rows": 46,
+  "unmatched_score_rows": [],
+  "evaluated_columns": [
+    "opening_pull",
+    "body_strength",
+    "boundary_integrity",
+    "judge_score_100",
+    "confidence_1_5"
+  ],
+  "iterations": 20000,
+  "axes": {
+    "opening_pull": {
+      "spearman_percentile": 0.0258,
+      "spearman_p": 0.86171,
+      "spearman_n": 46,
+      "auc_pos_neg": 0.4509,
+      "auc_p": 0.57187,
+      "auc_n": 46,
+      "n_needed_for_observed_rho": 11804,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": -0.0524,
+          "p": 0.75921,
+          "n": 35
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.0501,
+          "p": 0.88976,
+          "n": 11
+        },
+        "_macro_weighted": {
+          "rho": -0.0279,
+          "p": null,
+          "n": 46
+        }
+      }
+    },
+    "body_strength": {
+      "spearman_percentile": 0.1278,
+      "spearman_p": 0.39618,
+      "spearman_n": 46,
+      "auc_pos_neg": 0.5284,
+      "auc_p": 0.74306,
+      "auc_n": 46,
+      "n_needed_for_observed_rho": 479,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": -0.018,
+          "p": 0.9167,
+          "n": 35
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.6773,
+          "p": 0.02645,
+          "n": 11
+        },
+        "_macro_weighted": {
+          "rho": 0.1482,
+          "p": null,
+          "n": 46
+        }
+      }
+    },
+    "boundary_integrity": {
+      "spearman_percentile": 0.2863,
+      "spearman_p": 0.055,
+      "spearman_n": 46,
+      "auc_pos_neg": 0.552,
+      "auc_p": 0.54737,
+      "auc_n": 46,
+      "n_needed_for_observed_rho": 94,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.1531,
+          "p": 0.37173,
+          "n": 35
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.6196,
+          "p": 0.0489,
+          "n": 11
+        },
+        "_macro_weighted": {
+          "rho": 0.2646,
+          "p": null,
+          "n": 46
+        }
+      }
+    },
+    "judge_score_100": {
+      "spearman_percentile": 0.2009,
+      "spearman_p": 0.17954,
+      "spearman_n": 46,
+      "auc_pos_neg": 0.5331,
+      "auc_p": 0.70041,
+      "auc_n": 46,
+      "n_needed_for_observed_rho": 193,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.0717,
+          "p": 0.67457,
+          "n": 35
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.5103,
+          "p": 0.11154,
+          "n": 11
+        },
+        "_macro_weighted": {
+          "rho": 0.1766,
+          "p": null,
+          "n": 46
+        }
+      }
+    },
+    "confidence_1_5": {
+      "spearman_percentile": 0.2131,
+      "spearman_p": 0.15544,
+      "spearman_n": 46,
+      "auc_pos_neg": 0.5076,
+      "auc_p": 0.9626,
+      "auc_n": 46,
+      "n_needed_for_observed_rho": 171,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.0118,
+          "p": 0.9442,
+          "n": 35
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.668,
+          "p": 0.0301,
+          "n": 11
+        },
+        "_macro_weighted": {
+          "rho": 0.1687,
+          "p": null,
+          "n": 46
+        }
+      }
+    }
+  },
+  "holm_across_axes": {
+    "boundary_integrity": {
+      "p": 0.055,
+      "holm_threshold": 0.01,
+      "significant": false,
+      "rank": 1
+    },
+    "confidence_1_5": {
+      "p": 0.15544,
+      "holm_threshold": 0.0125,
+      "significant": false,
+      "rank": 2
+    },
+    "judge_score_100": {
+      "p": 0.17954,
+      "holm_threshold": 0.01667,
+      "significant": false,
+      "rank": 3
+    },
+    "body_strength": {
+      "p": 0.39618,
+      "holm_threshold": 0.025,
+      "significant": false,
+      "rank": 4
+    },
+    "opening_pull": {
+      "p": 0.86171,
+      "holm_threshold": 0.05,
+      "significant": false,
+      "rank": 5
+    }
+  },
+  "any_axis_significant": false
+}

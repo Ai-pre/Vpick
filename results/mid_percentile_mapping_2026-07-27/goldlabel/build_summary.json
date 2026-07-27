@@ -1,0 +1,26 @@
+{
+  "alignment_rows": 44,
+  "accepted": 32,
+  "rejected": 9,
+  "schema_field_count": 27,
+  "channel_counts": {
+    "BDNS": 6,
+    "OOTB": 6,
+    "숏박스": 7,
+    "안원잘부": 4,
+    "워크맨": 7,
+    "피식대학": 2
+  },
+  "timestamp_method_counts": {
+    "gemini_short_transcript_and_subtitle_alignment": 4,
+    "yt_dlp_subtitle_alignment": 28
+  },
+  "empty_transcript_count": 0,
+  "reject_reason_counts": {
+    "gemini_empty_transcript": 2,
+    "needs_manual_review": 2,
+    "origin_mismatch_suspect": 5
+  },
+  "gold_path": "../results/mid_percentile_mapping_2026-07-27/goldlabel/goldlabel_master_mid_percentile_PRIVATE.csv",
+  "judge_path": "../results/mid_percentile_mapping_2026-07-27/goldlabel/candidates_mid_percentile_blind.csv"
+}

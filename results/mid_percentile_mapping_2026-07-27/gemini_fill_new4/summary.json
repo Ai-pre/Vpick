@@ -1,0 +1,10 @@
+{
+  "targets": 4,
+  "recovered": 1,
+  "resolved_status_counts": {
+    "needs_manual_review": 2,
+    "origin_mismatch_suspect": 1,
+    "recovered": 1
+  },
+  "model": "gemini-3.1-flash-lite"
+}

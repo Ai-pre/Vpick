@@ -1,0 +1,150 @@
+{
+  "label_rows": 94,
+  "score_rows": 94,
+  "joined_rows": 94,
+  "unmatched_score_rows": [],
+  "evaluated_columns": [
+    "opening_pull",
+    "body_strength",
+    "boundary_integrity",
+    "judge_score_100"
+  ],
+  "iterations": 20000,
+  "axes": {
+    "opening_pull": {
+      "spearman_percentile": 0.0203,
+      "spearman_p": 0.84626,
+      "spearman_n": 94,
+      "auc_pos_neg": 0.4656,
+      "auc_p": 0.64407,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 18972,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.0682,
+          "p": 0.64702,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.0899,
+          "p": 0.54317,
+          "n": 47
+        },
+        "_macro_weighted": {
+          "rho": 0.0791,
+          "p": null,
+          "n": 94
+        }
+      }
+    },
+    "body_strength": {
+      "spearman_percentile": 0.1048,
+      "spearman_p": 0.31498,
+      "spearman_n": 94,
+      "auc_pos_neg": 0.565,
+      "auc_p": 0.38243,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 713,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.1774,
+          "p": 0.23659,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.0232,
+          "p": 0.87556,
+          "n": 47
+        },
+        "_macro_weighted": {
+          "rho": 0.1003,
+          "p": null,
+          "n": 94
+        }
+      }
+    },
+    "boundary_integrity": {
+      "spearman_percentile": 0.0045,
+      "spearman_p": 0.9651,
+      "spearman_n": 94,
+      "auc_pos_neg": 0.4989,
+      "auc_p": 0.9884,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 382205,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": -0.0137,
+          "p": 0.92635,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.0993,
+          "p": 0.51222,
+          "n": 47
+        },
+        "_macro_weighted": {
+          "rho": 0.0428,
+          "p": null,
+          "n": 94
+        }
+      }
+    },
+    "judge_score_100": {
+      "spearman_percentile": 0.0885,
+      "spearman_p": 0.40168,
+      "spearman_n": 94,
+      "auc_pos_neg": 0.5261,
+      "auc_p": 0.73571,
+      "auc_n": 60,
+      "n_needed_for_observed_rho": 1000,
+      "underpowered": true,
+      "stratified_by_transcript_source": {
+        "vpick_scene_api": {
+          "rho": 0.1111,
+          "p": 0.46128,
+          "n": 47
+        },
+        "yt_dlp_transcript_fallback": {
+          "rho": 0.1093,
+          "p": 0.46348,
+          "n": 47
+        },
+        "_macro_weighted": {
+          "rho": 0.1102,
+          "p": null,
+          "n": 94
+        }
+      }
+    }
+  },
+  "holm_across_axes": {
+    "body_strength": {
+      "p": 0.31498,
+      "holm_threshold": 0.0125,
+      "significant": false,
+      "rank": 1
+    },
+    "judge_score_100": {
+      "p": 0.40168,
+      "holm_threshold": 0.01667,
+      "significant": false,
+      "rank": 2
+    },
+    "opening_pull": {
+      "p": 0.84626,
+      "holm_threshold": 0.025,
+      "significant": false,
+      "rank": 3
+    },
+    "boundary_integrity": {
+      "p": 0.9651,
+      "holm_threshold": 0.05,
+      "significant": false,
+      "rank": 4
+    }
+  },
+  "any_axis_significant": false
+}
