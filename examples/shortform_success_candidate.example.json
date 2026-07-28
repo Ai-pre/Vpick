@@ -1,0 +1,18 @@
+{
+  "candidate_id": "new_candidate_001",
+  "duration_sec": 42.5,
+  "description": "진행자가 예상 밖의 답변을 듣고 되묻자 출연자가 구체적인 이유를 설명하며 대화가 결론에 도달한다.",
+  "transcript": "[0:00-0:04] S1: 정말 그렇게 결정한 거예요?\n[0:04-0:18] S2: 네. 처음에는 망설였는데 이 이유 때문에 선택했어요.\n[0:18-0:31] S1: 그건 예상하지 못했네요.\n[0:31-0:42] S2: 결과적으로는 그 선택이 가장 중요했습니다.",
+  "before_context": "[이전] 진행자가 선택의 배경을 질문한다.",
+  "after_context": "[이후] 다음 주제로 자연스럽게 전환한다.",
+  "visual_evidence_available": true,
+  "codex_features": {
+    "self_contained_clarity": 3,
+    "progression_payoff": 4,
+    "boundary_integrity": 3,
+    "opening_pull": 3,
+    "change_or_surprise": 3,
+    "emotional_or_information_gain": 3,
+    "memorable_specificity": 3
+  }
+}

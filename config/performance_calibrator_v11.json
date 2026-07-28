@@ -1,0 +1,75 @@
+{
+  "protocol_id": "performance_calibrator_v11_continuous_2026_07_28",
+  "objective": "Predict continuous within-channel Shorts performance percentile from blind candidate evidence.",
+  "target": "channel_performance_percentile_PRIVATE",
+  "group_key": "longform_id",
+  "channel_key": "channel_name",
+  "random_seeds": [20260728, 20260729, 20260730],
+  "outer_splits": 5,
+  "inner_splits": 4,
+  "bootstrap_repetitions": 2000,
+  "forbidden_features": [
+    "performance_label_PRIVATE",
+    "channel_performance_percentile_PRIVATE",
+    "percentile_bucket",
+    "dataset_role_v2",
+    "dataset_role_v3",
+    "channel_name",
+    "short_video_id",
+    "short_video_url",
+    "long_video_url"
+  ],
+  "deployment_eligible_models": [
+    "fixed_v10",
+    "fixed_equal_quality",
+    "ridge_quality",
+    "ridge_quality_structure",
+    "pairwise_quality_structure",
+    "extra_trees_quality_structure",
+    "char_tfidf",
+    "char_tfidf_numeric",
+    "pairwise_char_tfidf",
+    "pairwise_char_tfidf_numeric",
+    "rank_ensemble_text_structure",
+    "stacked_text_structure"
+  ],
+  "nested_selection_models": [
+    "ridge_quality",
+    "ridge_quality_structure",
+    "pairwise_quality_structure",
+    "extra_trees_quality_structure",
+    "char_tfidf",
+    "char_tfidf_numeric",
+    "pairwise_char_tfidf",
+    "pairwise_char_tfidf_numeric"
+  ],
+  "diagnostic_controls": [
+    "constant",
+    "random",
+    "source_presence_fixed",
+    "source_only"
+  ],
+  "selection_metric": {
+    "channel_centered_spearman": 0.4,
+    "channel_macro_spearman": 0.3,
+    "same_channel_pairwise_skill": 0.15,
+    "same_channel_local_pairwise_skill": 0.15
+  },
+  "acceptance_gates": {
+    "channel_centered_spearman_min": 0.3,
+    "channel_macro_spearman_min": 0.2,
+    "source_residual_spearman_min": 0.1,
+    "same_channel_pairwise_accuracy_min": 0.58,
+    "same_channel_local_pairwise_accuracy_min": 0.55,
+    "minimum_channel_centered_gain_over_source_control": 0.05,
+    "bootstrap_primary_ci_lower_min": 0.0
+  },
+  "notes": [
+    "Model inputs never include channel, views, likes, labels, percentiles, URLs, or dataset split roles.",
+    "Pos/Neg labels and AUC are not used in splitting, training, model selection, or reporting.",
+    "All folds use longform-only GroupKFold; the continuous percentile is the sole target.",
+    "Transcript source is available only to the source-only shortcut control and evaluation diagnostics.",
+    "All hyperparameter selection is nested inside grouped outer folds.",
+    "The previous locked test was already inspected, so v11 is exploratory OOF validation and requires a fresh final holdout before production claims."
+  ]
+}

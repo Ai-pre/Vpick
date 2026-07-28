@@ -1,0 +1,73 @@
+{
+  "artifact_id": "shortform_success_judge_v11_continuous",
+  "status": "experimental_rejected",
+  "model_name": "pairwise_char_tfidf_numeric",
+  "target_definition": "continuous within-channel Shorts view percentile",
+  "selected_c": 1.0,
+  "training_candidate_count": 94,
+  "training_longform_count": 85,
+  "training_pair_count": 619,
+  "quality_columns": [
+    "self_contained_clarity",
+    "progression_payoff",
+    "boundary_integrity",
+    "opening_pull",
+    "change_or_surprise",
+    "emotional_or_information_gain",
+    "memorable_specificity"
+  ],
+  "structure_columns": [
+    "duration_sec_feature",
+    "transcript_char_count",
+    "description_char_count",
+    "before_context_char_count",
+    "after_context_char_count",
+    "transcript_timed_line_count",
+    "transcript_line_count",
+    "speaker_marker_count",
+    "question_count",
+    "exclamation_count",
+    "bracket_count",
+    "hangul_ratio",
+    "transcript_chars_per_sec",
+    "description_chars_per_sec",
+    "visual_evidence_available_feature",
+    "description_missing",
+    "transcript_missing"
+  ],
+  "forbidden_inputs": [
+    "channel_name",
+    "views",
+    "likes",
+    "performance_label",
+    "performance_percentile",
+    "percentile_bucket",
+    "short_url"
+  ],
+  "validation": {
+    "primary_validation_pipeline": "nested_selected_pipeline",
+    "accepted_as_performance_judge": false,
+    "primary_validation_metrics": {
+      "model": "nested_selected_pipeline",
+      "deployment_eligible": true,
+      "pooled_spearman": 0.11252492952656301,
+      "channel_centered_spearman": 0.10477222671037803,
+      "channel_macro_spearman": 0.1345023350382014,
+      "source_residual_spearman": 0.057909339312929194,
+      "same_channel_pairwise_accuracy": 0.5462822458270106,
+      "same_channel_pair_count": 659,
+      "same_channel_local_pairwise_accuracy": 0.5592417061611374,
+      "same_channel_local_pair_count": 211,
+      "top_quintile_precision": 0.3333333333333333,
+      "channel_macro_ndcg": 0.8229925049794701,
+      "robust_rank_score": 0.11258061643121886,
+      "selection_score": 0.11391677679205603,
+      "loco_pooled_spearman": null,
+      "loco_channel_centered_spearman": null,
+      "loco_channel_macro_spearman": null,
+      "loco_source_residual_spearman": null
+    }
+  },
+  "artifact_private_path": "data/private/judge_validation_94/performance_calibrator_v11/shortform_success_judge_v11_experimental.joblib",
+  "warning": "This artifact is experimental and failed the registered validation gates. It may be used for research-only candidate reranking."
+}

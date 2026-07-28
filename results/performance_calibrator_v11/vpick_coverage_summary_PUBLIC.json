@@ -1,0 +1,14 @@
+{
+  "candidate_count": 94,
+  "longform_count": 85,
+  "canonical_vpick_longforms": 43,
+  "fallback_scene_longforms": 14,
+  "longforms_without_scene_file": 31,
+  "ready_inventory_longforms": 33,
+  "failed_inventory_longforms": 11,
+  "candidate_count_by_transcript_source": {
+    "yt_dlp_transcript_fallback": 47,
+    "vpick_scene_api": 47
+  },
+  "source_shortcut_warning": "Transcript source is forbidden in deployment models and retained only as a post-hoc shortcut control."
+}

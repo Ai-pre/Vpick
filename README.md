@@ -1,20 +1,44 @@
-# Vpick LLM-as-a-Judge and Highlight Selection
+# Vpick Shortform Success Judge and Highlight Selection
 
-Vpick 장면 분석 결과를 기반으로 숏폼 하이라이트 후보의 품질을 평가하는
-LLM-as-a-Judge를 먼저 검증하고, 검증된 Judge로 하이라이트 선택 파이프라인을
-개선하는 프로젝트입니다.
+Vpick 장면 분석 결과를 기반으로 새 숏폼 후보의 성공 잠재력을 평가하는
+하이브리드 Judge를 구축하고, 검증된 Judge로 하이라이트 선택 파이프라인을
+개선하는 프로젝트입니다. Codex LLM은 콘텐츠·편집 특징을 추출하고, 별도
+성과 보정기는 채널 내 연속 성과 백분위 순서를 학습합니다.
 
 이 레포는 원본 유튜브 영상을 다운로드하거나 mp4 파일을 저장하지 않습니다. 대신 Vpick이 제공하는 scene timestamp, description, transcript, speech timestamp를 활용합니다.
 
 ```text
-94 published Shorts -> auxiliary performance-consistency diagnosis
-same-longform Vpick candidates + published interval -> primary segment-alignment test
-Vpick vs Ours vs Ours+Judge -> pipeline improvement test
+Vpick evidence -> Codex seven-axis feature extraction
+Codex features + anonymous text -> continuous performance ranker
+new candidate -> shortform_success_potential_0_100
 ```
 
-## Current Validation Protocol (2026-07-28)
+## Shortform Success Judge v11 (2026-07-28)
 
-현재 Judge의 역할은 **조회수 예측**이 아니라, 같은 롱폼에서 나온 숏폼 후보의
+최종 목표는 신규 후보가 들어왔을 때 채널·조회수·성과 라벨을 보지 않고
+`shortform_success_potential_0_100`을 출력하는 것입니다. 이 값은 실제 조회수
+예측이 아니라 동일한 게시 조건을 가정한 콘텐츠 기반 상대 성과 잠재력입니다.
+
+현재 검증은 Pos/Neg와 AUC를 완전히 제외하고 채널 내 연속 성과 백분위만
+사용합니다. `longform_id` GroupKFold를 외부 5-fold·내부 4-fold로 구성하고,
+모델 종류와 하이퍼파라미터를 내부 fold에서만 선택합니다.
+
+완전 중첩 파이프라인의 채널 중심 Spearman은 `0.1048`, 채널 Macro Spearman은
+`0.1345`, 같은 채널 Pairwise 정확도는 `0.5463`입니다. 출처 존재 여부만 점수로
+쓴 사후 대조군의 채널 중심 Spearman `0.1780`을 이기지 못했으므로 현재 상태는
+**`experimental_rejected`**입니다. 연구용 후보 리랭킹은 가능하지만 검증된
+성과 예측기로 주장하지 않습니다.
+
+- 설계 및 사용법:
+  [`docs/shortform_success_judge_v11_continuous.md`](docs/shortform_success_judge_v11_continuous.md)
+- 연속 성과 검증:
+  [`results/performance_calibrator_v11/summary_PUBLIC.json`](results/performance_calibrator_v11/summary_PUBLIC.json)
+- 실행:
+  `python src/train_performance_calibrator_v11.py`
+
+## Prior Validation Protocol (2026-07-28)
+
+이전 단계에서 Judge의 역할은 **조회수 예측**이 아니라, 같은 롱폼에서 나온 숏폼 후보의
 편집·구간 선택 품질과 텍스트 근거상 콘텐츠 흡인력을 진단하고 최종 순서를
 보정하는 것입니다.
 
