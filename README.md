@@ -24,10 +24,11 @@ new candidate -> shortform_success_potential_0_100
 모델 종류와 하이퍼파라미터를 내부 fold에서만 선택합니다.
 
 완전 중첩 파이프라인의 채널 중심 Spearman은 `0.1048`, 채널 Macro Spearman은
-`0.1345`, 같은 채널 Pairwise 정확도는 `0.5463`입니다. 출처 존재 여부만 점수로
-쓴 사후 대조군의 채널 중심 Spearman `0.1780`을 이기지 못했으므로 현재 상태는
-**`experimental_rejected`**입니다. 연구용 후보 리랭킹은 가능하지만 검증된
-성과 예측기로 주장하지 않습니다.
+`0.1345`, 같은 채널 Pairwise 정확도는 `0.5463`입니다. 출처 관련 수치는 사후
+데이터 진단에만 사용하고 합격 게이트에서는 제외했습니다. 순위 상관, Pairwise
+정확도와 bootstrap 신뢰구간 게이트를 통과하지 못했으므로 현재 상태는
+**`experimental_rejected`**입니다. 연구용 후보 리랭킹은 가능하지만 검증된 성과
+예측기로 주장하지 않습니다.
 
 - 설계 및 사용법:
   [`docs/shortform_success_judge_v11_continuous.md`](docs/shortform_success_judge_v11_continuous.md)

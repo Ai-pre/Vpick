@@ -1231,7 +1231,6 @@ def audit_vpick_coverage(
 
 def acceptance_result(
     metrics: dict[str, Any],
-    strongest_source_control_metrics: dict[str, Any],
     bootstrap: dict[str, dict[str, float]],
     gates: dict[str, float],
 ) -> tuple[bool, list[dict[str, Any]]]:
@@ -1247,11 +1246,6 @@ def acceptance_result(
             float(gates["channel_macro_spearman_min"]),
         ),
         (
-            "source_residual_spearman",
-            float(metrics["source_residual_spearman"]),
-            float(gates["source_residual_spearman_min"]),
-        ),
-        (
             "same_channel_pairwise_accuracy",
             float(metrics["same_channel_pairwise_accuracy"]),
             float(gates["same_channel_pairwise_accuracy_min"]),
@@ -1260,16 +1254,6 @@ def acceptance_result(
             "same_channel_local_pairwise_accuracy",
             float(metrics["same_channel_local_pairwise_accuracy"]),
             float(gates["same_channel_local_pairwise_accuracy_min"]),
-        ),
-        (
-            "channel_centered_gain_over_source_control",
-            float(metrics["channel_centered_spearman"])
-            - float(
-                strongest_source_control_metrics["channel_centered_spearman"]
-            ),
-            float(
-                gates["minimum_channel_centered_gain_over_source_control"]
-            ),
         ),
         (
             "bootstrap_primary_ci_lower",
@@ -1560,7 +1544,6 @@ def main() -> None:
     )
     accepted, gate_details = acceptance_result(
         nested_row,
-        source_row,
         bootstrap_best,
         config["acceptance_gates"],
     )

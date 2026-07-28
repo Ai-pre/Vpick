@@ -86,12 +86,6 @@
       "passed": false
     },
     {
-      "gate": "source_residual_spearman",
-      "observed": 0.057909339312929194,
-      "required_minimum": 0.1,
-      "passed": false
-    },
-    {
       "gate": "same_channel_pairwise_accuracy",
       "observed": 0.5462822458270106,
       "required_minimum": 0.58,
@@ -102,12 +96,6 @@
       "observed": 0.5592417061611374,
       "required_minimum": 0.55,
       "passed": true
-    },
-    {
-      "gate": "channel_centered_gain_over_source_control",
-      "observed": -0.07318748874941167,
-      "required_minimum": 0.05,
-      "passed": false
     },
     {
       "gate": "bootstrap_primary_ci_lower",

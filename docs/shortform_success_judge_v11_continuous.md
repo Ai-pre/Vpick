@@ -86,7 +86,9 @@ therefore the fully nested model-selection pipeline.
 | local pairwise accuracy | 0.5592 |
 
 The fixed source-presence control obtains channel-centered Spearman `0.1780`.
-The fully nested pipeline therefore fails the registered acceptance gates.
+This is a post-hoc data diagnostic only and is excluded from every acceptance
+gate. The fully nested pipeline fails the registered rank correlation,
+pairwise accuracy, and bootstrap confidence gates.
 The 2,000-repetition longform bootstrap 95% interval for channel-centered
 Spearman is `[-0.0961, 0.3212]`.
 

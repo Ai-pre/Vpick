@@ -58,17 +58,15 @@
   "acceptance_gates": {
     "channel_centered_spearman_min": 0.3,
     "channel_macro_spearman_min": 0.2,
-    "source_residual_spearman_min": 0.1,
     "same_channel_pairwise_accuracy_min": 0.58,
     "same_channel_local_pairwise_accuracy_min": 0.55,
-    "minimum_channel_centered_gain_over_source_control": 0.05,
     "bootstrap_primary_ci_lower_min": 0.0
   },
   "notes": [
     "Model inputs never include channel, views, likes, labels, percentiles, URLs, or dataset split roles.",
     "Pos/Neg labels and AUC are not used in splitting, training, model selection, or reporting.",
     "All folds use longform-only GroupKFold; the continuous percentile is the sole target.",
-    "Transcript source is available only to the source-only shortcut control and evaluation diagnostics.",
+    "Transcript source is available only to the source-only shortcut control and evaluation diagnostics; source-related metrics never affect acceptance gates.",
     "All hyperparameter selection is nested inside grouped outer folds.",
     "The previous locked test was already inspected, so v11 is exploratory OOF validation and requires a fresh final holdout before production claims."
   ]

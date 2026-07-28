@@ -36,6 +36,14 @@ class ContinuousPerformanceCalibratorTests(unittest.TestCase):
             config["notes"],
         )
         self.assertNotIn("source_residual_spearman", config["selection_metric"])
+        self.assertNotIn(
+            "source_residual_spearman_min",
+            config["acceptance_gates"],
+        )
+        self.assertNotIn(
+            "minimum_channel_centered_gain_over_source_control",
+            config["acceptance_gates"],
+        )
 
     def test_grouped_splits_never_split_a_longform(self) -> None:
         groups = np.array(

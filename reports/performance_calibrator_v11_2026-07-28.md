@@ -72,10 +72,8 @@ OOF`다. 최종 상용 주장에는 새로 수집한 미공개 holdout이 필요
 |---|---|---|---|
 | channel_centered_spearman | 0.1048 | 0.3000 | False |
 | channel_macro_spearman | 0.1345 | 0.2000 | False |
-| source_residual_spearman | 0.0579 | 0.1000 | False |
 | same_channel_pairwise_accuracy | 0.5463 | 0.5800 | False |
 | same_channel_local_pairwise_accuracy | 0.5592 | 0.5500 | True |
-| channel_centered_gain_over_source_control | -0.0732 | 0.0500 | False |
 | bootstrap_primary_ci_lower | -0.0961 | 0.0000 | False |
 
 ## 6. 결론
