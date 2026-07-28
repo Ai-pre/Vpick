@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import math
@@ -53,6 +54,20 @@ def pearson(left: list[float], right: list[float]) -> float:
 
 def spearman(left: list[float], right: list[float]) -> float:
     return pearson(average_ranks(left), average_ranks(right))
+
+
+def binary_auc(labels: list[int], scores: list[float]) -> float:
+    positive_count = sum(labels)
+    negative_count = len(labels) - positive_count
+    if positive_count == 0 or negative_count == 0:
+        return math.nan
+    ranks = average_ranks(scores)
+    positive_rank_sum = sum(
+        rank for rank, label in zip(ranks, labels) if label == 1
+    )
+    return (
+        positive_rank_sum - positive_count * (positive_count + 1) / 2.0
+    ) / (positive_count * negative_count)
 
 
 def center(values: list[float], groups: list[str]) -> list[float]:
@@ -175,6 +190,15 @@ def metrics(
         labels=labels,
     )
     mid_indices = [index for index, label in enumerate(labels) if label == "mid"]
+    extreme_indices = [
+        index for index, label in enumerate(labels) if label in {"pos", "neg"}
+    ]
+    mid_y = select(y, mid_indices)
+    mid_score = select(score, mid_indices)
+    mid_channels = select(channels, mid_indices)
+    extreme_y = select(y, extreme_indices)
+    extreme_score = select(score, extreme_indices)
+    extreme_channels = select(channels, extreme_indices)
     return {
         "pooled_spearman": spearman(y, score),
         "channel_centered_spearman": spearman(
@@ -188,9 +212,18 @@ def metrics(
         "same_channel_local_pair_count": local_count,
         "within_label_bucket_pairwise_accuracy": within_bucket,
         "within_label_bucket_pair_count": within_bucket_count,
-        "mid_only_spearman": spearman(
-            select(y, mid_indices),
-            select(score, mid_indices),
+        "mid_only_pooled_spearman": spearman(mid_y, mid_score),
+        "mid_only_channel_centered_spearman": spearman(
+            center(mid_y, mid_channels),
+            center(mid_score, mid_channels),
+        ),
+        "extremes_pos_neg_channel_centered_spearman": spearman(
+            center(extreme_y, extreme_channels),
+            center(extreme_score, extreme_channels),
+        ),
+        "extremes_pos_neg_auc": binary_auc(
+            [1 if labels[index] == "pos" else 0 for index in extreme_indices],
+            extreme_score,
         ),
         "top_quintile_precision": top_quintile_precision(y, score, channels),
         "channel_macro_ndcg": macro_ndcg(y, score, channels),
@@ -198,6 +231,12 @@ def metrics(
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Independently audit v13 OOF predictions and metric inflation."
+    )
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+
     targets = read_csv(TARGET_PATH)
     scores = {
         row["candidate_id"]: row
@@ -248,7 +287,11 @@ def main() -> None:
             for name, values in comparisons.items()
         },
     }
-    print(json.dumps(output, ensure_ascii=False, indent=2))
+    rendered = json.dumps(output, ensure_ascii=False, indent=2)
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(rendered + "\n", encoding="utf-8")
+    print(rendered)
 
 
 if __name__ == "__main__":

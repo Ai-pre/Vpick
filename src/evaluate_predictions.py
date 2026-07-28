@@ -42,6 +42,72 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
+def deduplicate_ranked_predictions(
+    predictions: list[dict[str, str]],
+    interval_decimals: int = 3,
+) -> tuple[list[dict[str, str]], list[dict[str, Any]]]:
+    """Keep the first occurrence of each ranked interval and refill from later ranks."""
+    group_fields = (
+        "run_id",
+        "selector_type",
+        "prompt_id",
+        "model_name",
+        "pair_id",
+    )
+    grouped: dict[
+        tuple[str, ...],
+        list[tuple[int, dict[str, str]]],
+    ] = defaultdict(list)
+    for row_index, row in enumerate(predictions):
+        key = tuple(str(row.get(field, "")) for field in group_fields)
+        grouped[key].append((row_index, row))
+
+    deduplicated: list[dict[str, str]] = []
+    audit_rows: list[dict[str, Any]] = []
+    for key, indexed_rows in grouped.items():
+        ordered = sorted(
+            indexed_rows,
+            key=lambda item: (to_int(item[1].get("rank"), 1), item[0]),
+        )
+        seen: set[tuple[float, float]] = set()
+        retained: list[dict[str, str]] = []
+        original_top5: set[tuple[float, float]] = set()
+        for _, row in ordered:
+            start = to_float(row.get("pred_start_sec"))
+            end = to_float(row.get("pred_end_sec"))
+            if start is None or end is None:
+                raise ValueError(
+                    f"Missing predicted segment for pair_id={row.get('pair_id')}"
+                )
+            interval = (
+                round(start, interval_decimals),
+                round(end, interval_decimals),
+            )
+            if to_int(row.get("rank"), 1) <= 5:
+                original_top5.add(interval)
+            if interval in seen:
+                continue
+            seen.add(interval)
+            retained.append(dict(row))
+
+        for new_rank, row in enumerate(retained, start=1):
+            row["rank"] = str(new_rank)
+            deduplicated.append(row)
+
+        audit_rows.append(
+            {
+                **dict(zip(group_fields, key)),
+                "original_candidate_count": len(ordered),
+                "unique_candidate_count": len(retained),
+                "duplicate_rows_removed": len(ordered) - len(retained),
+                "original_top5_unique_count": len(original_top5),
+                "final_top5_unique_count": min(5, len(retained)),
+                "top5_underfilled": len(retained) < 5,
+            }
+        )
+    return deduplicated, audit_rows
+
+
 def overlap_seconds(pred_start: float, pred_end: float, gold_start: float, gold_end: float) -> float:
     return max(0.0, min(pred_end, gold_end) - max(pred_start, gold_start))
 
@@ -262,10 +328,22 @@ def main() -> int:
     parser.add_argument("--core-coverage-threshold", type=float, default=0.70)
     parser.add_argument("--tight-iou-threshold", type=float, default=0.30)
     parser.add_argument("--start-tolerance-sec", type=float, default=10.0)
+    parser.add_argument(
+        "--keep-duplicate-intervals",
+        action="store_true",
+        help=(
+            "Preserve duplicate time intervals for historical reproduction. "
+            "By default, exact duplicate intervals are removed and ranks are refilled."
+        ),
+    )
     args = parser.parse_args()
 
     dataset = {row["pair_id"]: row for row in read_csv(Path(args.dataset))}
     predictions = read_csv(Path(args.predictions))
+    if args.keep_duplicate_intervals:
+        duplicate_audit: list[dict[str, Any]] = []
+    else:
+        predictions, duplicate_audit = deduplicate_ranked_predictions(predictions)
     metric_rows = []
     for pred in predictions:
         pair_id = pred["pair_id"]
@@ -284,6 +362,26 @@ def main() -> int:
     out_dir = Path(args.out_dir)
     write_csv(out_dir / "metrics.csv", metric_rows)
     summary = summarize(metric_rows)
+    if duplicate_audit:
+        write_csv(out_dir / "duplicate_interval_audit.csv", duplicate_audit)
+        summary["prediction_audit"] = {
+            "duplicate_policy": "deduplicate_exact_interval_and_refill_rank",
+            "duplicate_rows_removed": sum(
+                int(row["duplicate_rows_removed"]) for row in duplicate_audit
+            ),
+            "groups_with_duplicates": sum(
+                int(row["duplicate_rows_removed"]) > 0 for row in duplicate_audit
+            ),
+            "groups_with_fewer_than_5_unique_candidates": sum(
+                bool(row["top5_underfilled"]) for row in duplicate_audit
+            ),
+            "audit_csv": str(out_dir / "duplicate_interval_audit.csv"),
+        }
+    else:
+        summary["prediction_audit"] = {
+            "duplicate_policy": "preserve_input_rows",
+            "duplicate_rows_removed": 0,
+        }
     write_csv(out_dir / "long_recall.csv", summary["long_videos"])
     (out_dir / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
 

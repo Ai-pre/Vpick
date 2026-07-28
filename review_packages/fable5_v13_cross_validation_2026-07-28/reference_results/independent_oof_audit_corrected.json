@@ -1,0 +1,73 @@
+{
+  "warning": "The label-bucket oracle deliberately reads diagnostic labels. It is an invalid model and exists only to expose metric inflation.",
+  "metrics": {
+    "v13_repeated_grouped_oof": {
+      "pooled_spearman": 0.2906659179390644,
+      "channel_centered_spearman": 0.31247426113857174,
+      "channel_macro_spearman": 0.32032967428556547,
+      "same_channel_pairwise_accuracy": 0.6145675265553869,
+      "same_channel_pair_count": 659,
+      "same_channel_local_pairwise_accuracy": 0.5876777251184834,
+      "same_channel_local_pair_count": 211,
+      "within_label_bucket_pairwise_accuracy": 0.4892086330935252,
+      "within_label_bucket_pair_count": 139,
+      "mid_only_pooled_spearman": -0.06959318763968356,
+      "mid_only_channel_centered_spearman": -0.20840984684050787,
+      "extremes_pos_neg_channel_centered_spearman": 0.3918577222764603,
+      "extremes_pos_neg_auc": 0.7144444444444444,
+      "top_quintile_precision": 0.47619047619047616,
+      "channel_macro_ndcg": 0.8671814206220594
+    },
+    "codex_fixed_judge_score": {
+      "pooled_spearman": 0.01311475219913521,
+      "channel_centered_spearman": 0.008017748209400377,
+      "channel_macro_spearman": -0.026861940380095,
+      "same_channel_pairwise_accuracy": 0.503793626707132,
+      "same_channel_pair_count": 659,
+      "same_channel_local_pairwise_accuracy": 0.43364928909952605,
+      "same_channel_local_pair_count": 211,
+      "within_label_bucket_pairwise_accuracy": 0.5,
+      "within_label_bucket_pair_count": 139,
+      "mid_only_pooled_spearman": 0.07079813671086549,
+      "mid_only_channel_centered_spearman": 0.006270552248068808,
+      "extremes_pos_neg_channel_centered_spearman": 0.030832964349443766,
+      "extremes_pos_neg_auc": 0.49277777777777776,
+      "top_quintile_precision": 0.3333333333333333,
+      "channel_macro_ndcg": 0.7915813389444972
+    },
+    "duration_only": {
+      "pooled_spearman": -0.033007807741612764,
+      "channel_centered_spearman": -0.047574664025241895,
+      "channel_macro_spearman": 0.0033175916926115935,
+      "same_channel_pairwise_accuracy": 0.44537177541729894,
+      "same_channel_pair_count": 659,
+      "same_channel_local_pairwise_accuracy": 0.46919431279620855,
+      "same_channel_local_pair_count": 211,
+      "within_label_bucket_pairwise_accuracy": 0.4568345323741007,
+      "within_label_bucket_pair_count": 139,
+      "mid_only_pooled_spearman": -0.16656479415300088,
+      "mid_only_channel_centered_spearman": -0.20963308878821443,
+      "extremes_pos_neg_channel_centered_spearman": -0.009962899709473895,
+      "extremes_pos_neg_auc": 0.4633333333333333,
+      "top_quintile_precision": 0.09523809523809523,
+      "channel_macro_ndcg": 0.7990343000120855
+    },
+    "label_bucket_oracle_invalid_for_deployment": {
+      "pooled_spearman": 0.8912107370324459,
+      "channel_centered_spearman": 0.9186156593465398,
+      "channel_macro_spearman": 0.8286714878034109,
+      "same_channel_pairwise_accuracy": 0.8877086494688923,
+      "same_channel_pair_count": 659,
+      "same_channel_local_pairwise_accuracy": 0.8104265402843602,
+      "same_channel_local_pair_count": 211,
+      "within_label_bucket_pairwise_accuracy": 0.4676258992805755,
+      "within_label_bucket_pair_count": 139,
+      "mid_only_pooled_spearman": -0.21382698092368707,
+      "mid_only_channel_centered_spearman": -0.33486248318467515,
+      "extremes_pos_neg_channel_centered_spearman": 0.9129081649885822,
+      "extremes_pos_neg_auc": 1.0,
+      "top_quintile_precision": 0.8095238095238095,
+      "channel_macro_ndcg": 0.9870710411043243
+    }
+  }
+}

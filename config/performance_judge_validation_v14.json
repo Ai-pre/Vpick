@@ -1,0 +1,57 @@
+{
+  "protocol_id": "performance_judge_validation_v14_mid_sensitive_2026_07_28",
+  "claim": "Rank unseen shortform candidates by within-channel performance percentile, including the ambiguous middle range.",
+  "target": "channel_performance_percentile_PRIVATE",
+  "group_key": "longform_id",
+  "label_thresholds": {
+    "neg_max_percentile": 20.0,
+    "pos_min_percentile": 80.0
+  },
+  "minimum_evaluation_size": {
+    "total_candidates": 180,
+    "mid_candidates": 150
+  },
+  "sampling_design": "mid_enriched_holdout; the 150-mid requirement is a targeted diagnostic, not the expected share of a naturally sampled 180-item set",
+  "acceptance_gates": {
+    "mid_only_channel_centered_spearman_min": 0.2,
+    "mid_only_channel_centered_spearman_ci_lower_min": 0.0,
+    "same_channel_local_pairwise_accuracy_min": 0.6,
+    "same_channel_local_pairwise_accuracy_ci_lower_min": 0.5,
+    "extremes_pos_neg_auc_min": 0.65,
+    "extremes_pos_neg_auc_ci_lower_min": 0.5
+  },
+  "diagnostic_only_metrics": [
+    "all_channel_centered_spearman",
+    "pooled_spearman",
+    "same_channel_pairwise_accuracy",
+    "top_quintile_precision"
+  ],
+  "bootstrap_repetitions": 4000,
+  "bootstrap_seed": 20260728,
+  "bootstrap_unit": "longform_id",
+  "forbidden_model_inputs": [
+    "channel_name",
+    "views",
+    "likes",
+    "performance_label_PRIVATE",
+    "channel_performance_percentile_PRIVATE",
+    "percentile_bucket",
+    "dataset_role_v2",
+    "dataset_role_v3",
+    "short_video_id",
+    "short_video_url",
+    "long_video_url",
+    "transcript_source"
+  ],
+  "excluded_proxy_features_for_next_model": [
+    "transcript_timed_line_count",
+    "speaker_marker_count",
+    "bracket_count",
+    "transcript_line_count"
+  ],
+  "deployment_validation": {
+    "score_with_exact_packaged_artifact": true,
+    "oof_seed_average_is_not_a_substitute_for_artifact_holdout": true,
+    "fresh_untouched_holdout_required": true
+  }
+}

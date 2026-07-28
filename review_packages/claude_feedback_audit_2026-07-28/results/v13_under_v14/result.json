@@ -1,0 +1,74 @@
+{
+  "protocol_id": "performance_judge_validation_v14_mid_sensitive_2026_07_28",
+  "holdout_id": "v13_repeated_grouped_oof_development_diagnostic",
+  "confirmed_fresh_untouched": false,
+  "metrics": {
+    "candidate_count": 94,
+    "mid_candidate_count": 34,
+    "all_channel_centered_spearman": 0.3209855143669577,
+    "pooled_spearman": 0.29066591793906443,
+    "same_channel_pairwise_accuracy": 0.6145675265553869,
+    "same_channel_local_pairwise_accuracy": 0.5876777251184834,
+    "top_quintile_precision": 0.47619047619047616,
+    "mid_only_pooled_spearman": -0.06959318763968356,
+    "mid_only_channel_centered_spearman": -0.21085633073592097,
+    "extremes_pos_neg_auc": 0.7144444444444444
+  },
+  "bootstrap": {
+    "mid_only_channel_centered_spearman": {
+      "lower_95": -0.5942371548349155,
+      "median": -0.20147366926579421,
+      "upper_95": 0.22220463909882127,
+      "valid_repetitions": 4000
+    },
+    "same_channel_local_pairwise_accuracy": {
+      "lower_95": 0.4418540994737736,
+      "median": 0.5841584158415841,
+      "upper_95": 0.7143018745959924,
+      "valid_repetitions": 4000
+    },
+    "extremes_pos_neg_auc": {
+      "lower_95": 0.5656517739060435,
+      "median": 0.7160246913580247,
+      "upper_95": 0.8494631801889867,
+      "valid_repetitions": 4000
+    }
+  },
+  "sample_size_gates": {
+    "total_candidates": {
+      "observed": 94,
+      "required_minimum": 180,
+      "passed": false
+    },
+    "mid_candidates": {
+      "observed": 34,
+      "required_minimum": 150,
+      "passed": false
+    }
+  },
+  "statistical_gates": {
+    "mid_only_channel_centered_spearman": {
+      "observed": -0.21085633073592097,
+      "required_minimum": 0.2,
+      "ci_lower": -0.5942371548349155,
+      "ci_lower_required_minimum": 0.0,
+      "passed": false
+    },
+    "same_channel_local_pairwise_accuracy": {
+      "observed": 0.5876777251184834,
+      "required_minimum": 0.6,
+      "ci_lower": 0.4418540994737736,
+      "ci_lower_required_minimum": 0.5,
+      "passed": false
+    },
+    "extremes_pos_neg_auc": {
+      "observed": 0.7144444444444444,
+      "required_minimum": 0.65,
+      "ci_lower": 0.5656517739060435,
+      "ci_lower_required_minimum": 0.5,
+      "passed": true
+    }
+  },
+  "accepted_as_continuous_performance_judge": false,
+  "acceptance_note": "Acceptance requires a fresh untouched holdout, minimum total and mid sample sizes, and all pre-registered point-estimate and CI gates."
+}

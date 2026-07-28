@@ -1,0 +1,130 @@
+﻿pair_id,long_video_id,short_video_id,run_id,selector_type,prompt_id,model_name,rank,pred_start_sec,pred_end_sec,selected_scene_ids,confidence,notes
+G024,5Vnj42O0s0M,Do2V1iG8X2Y,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,11.6,41.6,,0.92,vpick_shortform_id=77488d59-0dcd-4ebd-ae40-2336c86d0f7c; title=기강 잡는 선배 해원? 신인 아이돌 당황
+G024,5Vnj42O0s0M,Do2V1iG8X2Y,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,389.9,417.9,,0.88,vpick_shortform_id=1dbc9c1a-b7b3-4ec4-94bf-d2e21b3499c0; title=워크돌X위글위글 역대급 굿즈 출시
+G024,5Vnj42O0s0M,Do2V1iG8X2Y,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,103.3,132.4,,0.88,vpick_shortform_id=bceeb44e-b09a-4bf9-b6a2-c4b58d5f5204; title=위글베어의 우주 과과몰입 현장
+G024,5Vnj42O0s0M,Do2V1iG8X2Y,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,238.4,283.4,,0.88,vpick_shortform_id=694b83f9-bac3-423b-9e20-b7dfed9eb927; title=BTS 백업댄서 출신 아이돌의 과거?
+G024,5Vnj42O0s0M,Do2V1iG8X2Y,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,290.4,320.4,,0.87,vpick_shortform_id=3a0fb7d4-765c-474d-abc9-2173733a5b7d; title=목마 타고 거울 청소? 환상의 팀워크
+G023,81i9AucS92M,nXeoxjbSrcg,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,924.1,941.0,,0.88,vpick_shortform_id=69a51c1b-e03e-43c9-89f1-593b710dece7; title=애인 차에 낯선 블루투스 기록?
+G023,81i9AucS92M,nXeoxjbSrcg,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,322.3,352.3,,0.88,vpick_shortform_id=d5922069-5cec-449f-ae1c-92a461c34a73; title=외제차 성능 순위! 벤츠가 3위인 이유
+G023,81i9AucS92M,nXeoxjbSrcg,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,53.55,98.55,,0.88,vpick_shortform_id=0c227871-e07f-4b86-b158-bc761bf79393; title=권은비 진짜 차가 다마스? 정비소
+G023,81i9AucS92M,nXeoxjbSrcg,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,0.0,28.6,,0.88,vpick_shortform_id=5e155698-92e2-43cc-af6b-9bb69e60fd0f; title=숏폼 하이라이트
+G023,81i9AucS92M,nXeoxjbSrcg,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,827.9,884.2,,0.865,vpick_shortform_id=fade0a6e-da16-4452-946f-7dc334949a12; title=정비사 하루 일당 300만 원 실화?
+G021,C8qoM6yN4OU,LPRH42Hc9Ko,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,527.1,552.7,,0.92,vpick_shortform_id=a00e3777-2aaa-4092-ab14-8eba694e05f5; title=코울슬로 쏟고 북극곰 소환함
+G021,C8qoM6yN4OU,LPRH42Hc9Ko,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,266.75,296.75,,0.92,vpick_shortform_id=727c6f8d-9d62-4618-bc88-2b8f409d2183; title=손질 중 관통 사고? 소름 돋는 실화
+G021,C8qoM6yN4OU,LPRH42Hc9Ko,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,573.6,633.6,,0.9,vpick_shortform_id=215dc189-8828-4adf-a914-d4d894a5c5e2; title=육즙 폭발! 말랑카우급 브리스킷
+G021,C8qoM6yN4OU,LPRH42Hc9Ko,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,182.9,212.9,,0.88,vpick_shortform_id=6f46a087-6135-4730-b6ec-f2bb2e707e1b; title=텍사스 100도 오븐? 리얼 바베큐
+G021,C8qoM6yN4OU,LPRH42Hc9Ko,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,37.7,80.0,,0.88,vpick_shortform_id=67602483-b4ad-4c30-9d52-328dbc7cda79; title=장성규 BTS급 선언?
+G016,D-xlw07rGEM,ub9-c5PlBIY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,157.55,187.55,,0.92,vpick_shortform_id=7e8cf286-98b8-4f4b-811f-776d681536f8; title=단대 호수 수달 출몰? 대학원생의 일침
+G016,D-xlw07rGEM,ub9-c5PlBIY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,1196.3,1210.4,,0.88,vpick_shortform_id=cc6d3e74-7243-4064-be37-15b8482d239b; title=AI로 10분 만에 과제 끝내기
+G016,D-xlw07rGEM,ub9-c5PlBIY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,1090.35,1120.35,,0.88,"vpick_shortform_id=144a4158-0e8e-42de-951e-4bd41203eee0; title=3일 밤샌 과제, 10분 만에 끝?"
+G016,D-xlw07rGEM,ub9-c5PlBIY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,857.3,917.3,,0.88,vpick_shortform_id=cbd5b04a-81ef-46ea-a1dc-5afa90fcf2e5; title=문창과가말하는자소서필승전략
+G016,D-xlw07rGEM,ub9-c5PlBIY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,235.6,280.6,,0.88,vpick_shortform_id=a01cb60e-351d-4afa-a44a-1e0fca6c1a2b; title=체대생 선입견? 웃음폭발 캠퍼스 인터뷰
+G027,K3jHdrfM6l4,e1D9hyrtyek,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,724.8,754.8,,0.9,vpick_shortform_id=6071bfd8-c27d-4fa5-b308-33dc9e1cace5; title=슈화의 심쿵 화보 포즈 과외
+G027,K3jHdrfM6l4,e1D9hyrtyek,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,479.2,509.2,,0.88,vpick_shortform_id=0b9fc282-ae2c-478c-8bba-007de69264b1; title=인생은 계획대로 안 됩니다
+G027,K3jHdrfM6l4,e1D9hyrtyek,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,1.7,31.7,,0.88,vpick_shortform_id=b6ebe26b-d154-452a-87fc-b3caf6fac07f; title=사진관 알바? 증명사진 찍으러 왔다 반전!
+G027,K3jHdrfM6l4,e1D9hyrtyek,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,347.65,392.65,,0.88,vpick_shortform_id=0ac7245d-0ca6-433a-ad61-7547418cea82; title=청량에서 섹시까지? 남사친 표정 연기
+G027,K3jHdrfM6l4,e1D9hyrtyek,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,815.5,875.5,,0.8166666666666668,vpick_shortform_id=2709b1e9-3978-46f0-9143-34d3cdeeba7f; title=알바비 정산의 현실 리액션
+G020,KHzVHQipZCg,5HZFbXpM8wM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,381.25,411.25,,0.88,vpick_shortform_id=26281804-0a5d-4bdf-a5de-326357b4c875; title=팬 선물을 과학적으로 분석하면?
+G020,KHzVHQipZCg,5HZFbXpM8wM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,0.0,25.5,,0.88,vpick_shortform_id=1e93c40c-547f-4266-ae49-c90b88d996b4; title=빨간 펜 이름 쓰면 진짜 죽을까?
+G020,KHzVHQipZCg,5HZFbXpM8wM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,416.0,474.2,,0.88,vpick_shortform_id=59c1fcc1-e348-4bc8-aafa-0528963460f4; title=전자파 차단? 궤도의 과학 팩폭
+G020,KHzVHQipZCg,5HZFbXpM8wM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,223.45,253.45,,0.88,vpick_shortform_id=7df81b53-f24f-404b-996f-62cdf4cd77be; title=빨간 펜이 불길한 진짜 이유
+G020,KHzVHQipZCg,5HZFbXpM8wM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,314.0,359.0,,0.85,vpick_shortform_id=fdc0bd9c-c186-4001-b535-be2694a63fc3; title=율무와 고사리의 진실? 정력 논란의 결말
+G020,KHzVHQipZCg,5HZFbXpM8wM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,6,258.2,288.2,,0.8,vpick_shortform_id=536a543c-8be3-4f99-8a6c-6d9b6df8b0dc; title=율무 먹으면 정력 감퇴? 팩트체크
+G014,NU5X-txt9uU,2oG9HS1szAU,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,1370.0,1391.2,,0.92,vpick_shortform_id=c0169572-4324-4c20-b05f-4f63e1c873ba; title=진짜 군대 훈련? 비명 터지는 극한 포복
+G014,NU5X-txt9uU,2oG9HS1szAU,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,997.2,1042.2,,0.92,vpick_shortform_id=c05244f6-98f3-4e49-887a-2ebaaa667c7b; title=겉바속촉 갈치튀김 비결
+G014,NU5X-txt9uU,2oG9HS1szAU,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,486.5,514.201,,0.88,vpick_shortform_id=342fab21-2043-4e95-a7c6-8bba1473d4ab; title=비투비 전과자의 마늘 패대기 기술
+G014,NU5X-txt9uU,2oG9HS1szAU,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,399.8,429.8,,0.88,vpick_shortform_id=30015582-dfe8-427d-8446-65cff5d2fe42; title=중식 고수가 말하는 어향의 뜻
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,33.8,83.3,,0.9,vpick_shortform_id=92366264-4e73-4904-b639-a231816cb476; title=군대 집합 레전드 상황
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,196.601,256.601,,0.8933333333333334,vpick_shortform_id=fcf6dc59-87c1-4dd6-85d6-bb19e75198fb; title=군대 이등병 꺾이면 생기는 일
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,0.0,51.9,,0.89,vpick_shortform_id=f4987653-f9f3-4fd8-95dd-e277c303695b; title=샴푸 거품 충성? 레전드 내무반
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,371.3,431.3,,0.88,vpick_shortform_id=d15370fa-942d-40ce-889a-4a3075d1e938; title=선임들 다 나가라는 일병
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,326.6,386.6,,0.88,vpick_shortform_id=77dfeed2-5e09-4b3e-8d19-b608f4a8a66e; title=군대식 압박 면접 누가 제일 잘생겼냐?
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,6,289.2,349.2,,0.88,vpick_shortform_id=8517cc5a-00ae-416b-854a-ba380c3cb249; title=군대 PX 갈굼 레전드 답변
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,7,159.6,210.3,,0.8733333333333334,vpick_shortform_id=1e83237b-0db7-45d5-ad1b-cec4ed93a4f8; title=이등병 꺾이면 벌어지는 일
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,8,257.7,317.7,,0.865,vpick_shortform_id=e55aa413-18d1-4afc-8b0b-07ddb00594b5; title=군대 기강 잡기? 후임의 반전 대답
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,9,104.5,159.6,,0.865,vpick_shortform_id=a4e1368a-6583-4f9e-a07e-db21d252eea2; title=군대에서 선임한테 찍히는 법
+G001,PbUlNGCqBVw,OnfYDOBjYfM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,10,422.9,482.9,,0.8625,vpick_shortform_id=4f4f6a86-e167-496f-ab04-625a580eeb47; title=선임 기강 잡는 역대급 하극상
+G005,cJiYXnMtYl0,1IDEwu4Jvxw,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,144.5,174.2,,0.92,vpick_shortform_id=10fc8240-6dfc-4f62-8316-b9b3478d2ef2; title=군대 점호 중 터진 대형 사고
+G005,cJiYXnMtYl0,1IDEwu4Jvxw,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,333.9,354.3,,0.88,vpick_shortform_id=7968eb51-19fb-498f-9a15-34a2fc723373; title=공군인데 육군 복무신조?
+G005,cJiYXnMtYl0,1IDEwu4Jvxw,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,0.0,45.0,,0.8166666666666668,vpick_shortform_id=3c18a063-a0f8-47b2-b70c-22f7c3a3886a; title=신병의 레전드 암구호 실수
+G005,cJiYXnMtYl0,1IDEwu4Jvxw,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,29.9,74.9,,0.8066666666666666,vpick_shortform_id=f40da44f-10a8-459c-8973-6d21dbd04c31; title=현실고증 200% 군대 생활관
+G009,gyMxiDXARbI,8QmzdjiuBPo,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,152.4,182.4,,0.95,vpick_shortform_id=c304ef5a-9942-485c-81ee-a782348a7e1c; title=피식쇼 첫 여돌 출연! 멤버들 찐텐션 폭발
+G009,gyMxiDXARbI,8QmzdjiuBPo,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,1067.05,1112.05,,0.9,vpick_shortform_id=ef475dae-41ec-4b30-938d-0b4d387201df; title=아이돌식 명란 입술 셀카 비법
+G009,gyMxiDXARbI,8QmzdjiuBPo,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,1862.4,1922.4,,0.885,vpick_shortform_id=fa3fc7d8-978e-4517-8e99-9e8f40ab797d; title=허윤진 표정 비결? 무대 눈빛 전수!
+G009,gyMxiDXARbI,8QmzdjiuBPo,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,213.1,243.1,,0.88,vpick_shortform_id=dbddd010-5f7e-41fb-8ed3-72404db297b6; title=르세라핌 피식쇼 등판!
+G009,gyMxiDXARbI,8QmzdjiuBPo,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,55.2,85.2,,0.88,vpick_shortform_id=d5f6b1a0-bd44-4c9c-803b-f17ef7e088b3; title=보테가 앰버서더 거절한 이유? (황당)
+G004,iEr0A1pBMKA,8RHTeRZyAms,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,258.4,277.3,,0.92,vpick_shortform_id=dfe9a1ff-2c70-449a-8bc9-983ec883ab88; title=엽떡 vs 허니콤보 배달 레이스
+G004,iEr0A1pBMKA,8RHTeRZyAms,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,136.9,166.9,,0.92,vpick_shortform_id=b3c13bbb-aed8-40df-8dc1-2fea58119da2; title=배달 메뉴 정하는 여자들 특
+G004,iEr0A1pBMKA,8RHTeRZyAms,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,104.05,134.05,,0.92,vpick_shortform_id=e737a28d-f0cc-4a54-9ab0-14b3087794aa; title=두바이 초콜릿 실물 영접 반응
+G004,iEr0A1pBMKA,8RHTeRZyAms,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,325.8,381.3,,0.885,vpick_shortform_id=fcc058e3-5c2b-4143-b2e9-02747b468158; title=미친 텐션! 여자들의 배달 음식 파티
+G004,iEr0A1pBMKA,8RHTeRZyAms,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,10.2,55.2,,0.88,vpick_shortform_id=0b5416e5-c0ce-47de-b527-23a90bb19df8; title=배달비 4만원? 엽떡 주문 국룰
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,135.6,176.5,,0.7849999999999999,vpick_shortform_id=0f79fa28-511c-416f-80f9-7b6c95e7f4cf; title=직원 할인 vs 쿠폰 빌런
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,135.6,176.5,,0.7849999999999999,vpick_shortform_id=581f6866-c017-43b3-89e8-e0666cf52e1c; title=알바할 때 킹받는 순간들
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,60.4,90.4,,0.78,vpick_shortform_id=f456b292-fa16-4ff5-b3ee-29dbf6146182; title=신발 신어보랬더니 축구 고백?
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,60.4,90.4,,0.78,vpick_shortform_id=7732795f-9020-4994-9b4f-3aede3170dc4; title=축구하고 신발가게 가면 생기는 일
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,93.7,153.4,,0.7266666666666667,vpick_shortform_id=ca95c329-3969-4d27-b981-c32cc2dc0a09; title=신발 매장 직원의 찐텐 일상
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,6,93.7,153.4,,0.7266666666666667,vpick_shortform_id=065b406f-215b-4ca3-b4b4-0acd538b51f2; title=신발 매장 직원의 현실 고충
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,7,3.4,33.4,,0.7,vpick_shortform_id=c2b21a07-a189-441c-899e-374cf8b1934d; title=신발 매장 직원의 광기 어린 텐션
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,8,3.4,33.4,,0.7,vpick_shortform_id=14aa7b02-ba1d-4f3d-a96a-12dad5a94486; title=ABC마트 알바의 광기 텐션
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,9,36.8,57.1,,0.62,vpick_shortform_id=b46f0222-72a1-4605-a99b-d13aba7d84e5; title=신상 운동화! 사이즈가 250까지?
+G002,lPl8-Fo4nr8,gQ-nHlRHDaE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,10,36.8,57.1,,0.62,vpick_shortform_id=636c897a-07d3-40e2-928b-178b70b2e190; title=신상 신발 사이즈 주의보! 실물 컬러 확인
+G006,mnGNoGj19Jg,ytkvihe5k1Q,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,21.05,51.05,,0.88,vpick_shortform_id=c285d893-6a29-4991-a2eb-4b0cc8d037f5; title=강형욱 목격담의 충격 반전
+G006,mnGNoGj19Jg,ytkvihe5k1Q,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,159.5,218.0,,0.8633333333333333,vpick_shortform_id=d3ffc1f9-1f88-475a-872d-8eadf3dd9a32; title=특종 잡으려다 들킨 컵라면의 정체
+G006,mnGNoGj19Jg,ytkvihe5k1Q,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,199.0,244.0,,0.855,vpick_shortform_id=ed638da2-2c68-457b-92fd-2b79df140f77; title=식단 중 컵라면 발견? 폭로 현장
+G006,mnGNoGj19Jg,ytkvihe5k1Q,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,137.5,159.5,,0.85,vpick_shortform_id=26b00c87-f330-40db-9cd9-a4ff3ef3d2e3; title=조회수 폭발하는 맞춤법 기믹
+G006,mnGNoGj19Jg,ytkvihe5k1Q,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,0.0,17.2,,0.85,vpick_shortform_id=c818a24f-4a14-4797-85c8-a03291ddebee; title=속보에 뺏긴 내 제목... 현실 오피스
+G006,mnGNoGj19Jg,ytkvihe5k1Q,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,6,59.3,119.3,,0.77,vpick_shortform_id=b2d92bcf-7922-43be-aa61-1177e4adf971; title=눈동자 속 금메달? 기자의 소름돋는 취재력
+G022,mverbGxXN0M,YmMJrhU3NZE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,745.4,775.3,,0.95,vpick_shortform_id=57bbc717-a945-4aa7-9b5c-d4d449ac24aa; title=연남동 찢은 물리학과 댄서
+G022,mverbGxXN0M,YmMJrhU3NZE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,497.55,542.55,,0.9,vpick_shortform_id=9138140b-e71c-49f4-9987-82171e14bf12; title=알바복 입고 신곡 춤? 반전 댄스 대박
+G022,mverbGxXN0M,YmMJrhU3NZE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,102.2,132.2,,0.88,vpick_shortform_id=f86a595c-728e-408e-ae3d-c84dbc8b557c; title=제1의 미아오! 로제와 깜짝 친분?
+G022,mverbGxXN0M,YmMJrhU3NZE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,2.1,62.1,,0.88,vpick_shortform_id=c148cf96-6c2e-49bf-a405-fdecbbeed542; title=미야오 모찌즈 결성? 신곡 스포까지!
+G013,nVJIIWdwx60,viIvggdLF5s,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,979.7,1009.7,,0.88,vpick_shortform_id=e5eb84d9-a01f-4af2-9558-d0584a277cd9; title=무용 용어 발음의 대반전
+G013,nVJIIWdwx60,viIvggdLF5s,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,538.75,598.75,,0.88,vpick_shortform_id=219db2d5-2101-4c0a-8055-ca8b3ff4be4f; title=발레 입시 몸무게 37kg 실화?
+G013,nVJIIWdwx60,viIvggdLF5s,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,385.75,430.75,,0.88,vpick_shortform_id=e8e96be2-c9f6-4eb5-923a-b2e2aabc45d6; title=국민대생이 말하는 이게 진짜 대학이지
+G013,nVJIIWdwx60,viIvggdLF5s,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,172.25,202.25,,0.88,vpick_shortform_id=c847a681-4fe4-431a-a172-632df27be1de; title=입안에서 터지는 역대급 탄산
+G013,nVJIIWdwx60,viIvggdLF5s,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,1107.1,1137.1,,0.85,vpick_shortform_id=0680b056-2254-4c79-95ce-df0bc84a0731; title=발레와 발레파킹의 충격적 관계?
+G008,oIq0h5_FZAw,nLcsPfFQwdM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,178.0,197.2,,0.9,vpick_shortform_id=7fd26eb6-70f5-4d02-913c-7ed2a4633b11; title=날짜도 안 물어보고? 정승환의 칼거절
+G008,oIq0h5_FZAw,nLcsPfFQwdM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,258.8,282.2,,0.88,vpick_shortform_id=3b5ad450-3e07-4a2f-9907-a85e55d0e46d; title=현실 결혼 준비의 매운맛
+G008,oIq0h5_FZAw,nLcsPfFQwdM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,91.4,116.2,,0.88,vpick_shortform_id=0644376f-6212-4104-9346-69d501d80d1f; title=결혼 비용 아끼려다 깍두기만?
+G008,oIq0h5_FZAw,nLcsPfFQwdM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,282.7,312.7,,0.88,vpick_shortform_id=8df0e4b3-04af-4e99-ad02-615ecae51c37; title=덕담 말고 만담? 포복 화동의 등장
+G008,oIq0h5_FZAw,nLcsPfFQwdM,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,424.5,467.6,,0.865,vpick_shortform_id=09bbd1fd-9d34-4c39-b28d-40cadf6f9bc4; title=결혼식보다 더 중요한 '이것'
+G015,p1WHu-Vhjxk,UsC-Mdee1wc,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,1706.0,1729.4,,0.92,vpick_shortform_id=4fff2494-a86c-4d8c-be0f-c7de23eb0d0d; title=조리학과 눈물의 가위질
+G015,p1WHu-Vhjxk,UsC-Mdee1wc,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,1621.2,1651.2,,0.88,vpick_shortform_id=2df0e4bb-3598-4180-977e-eb02c81681d7; title=캠퍼스 댄스 제패하는 법
+G015,p1WHu-Vhjxk,UsC-Mdee1wc,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,1297.4,1357.4,,0.88,vpick_shortform_id=2fdc643d-cd89-4f69-9c0b-2fbf69ac7dce; title=콤부차에서 하이볼 맛이? 최초공개
+G015,p1WHu-Vhjxk,UsC-Mdee1wc,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,1236.6,1281.6,,0.88,vpick_shortform_id=db8081f1-3bc9-4f48-8542-0b5f2051ab55; title=상상초월 캠퍼스 이색 동아리
+G015,p1WHu-Vhjxk,UsC-Mdee1wc,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,906.1,936.1,,0.88,vpick_shortform_id=1767cc8b-491b-4177-a5c9-77738b5bf78c; title=아이돌인 줄? 청자켓 부대 정체
+G028,pH_LU8mMXqU,vkjmsyrvRDI,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,1056.65,1086.65,,0.88,vpick_shortform_id=23d80ae6-df95-43b3-99b2-b54d017fdbe1; title=아동복 알바 힐링인데 기빨려요
+G028,pH_LU8mMXqU,vkjmsyrvRDI,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,580.25,610.25,,0.88,vpick_shortform_id=53e21ee7-3393-4169-b6fc-3ed7294633ff; title=초밥집에서 터진 찐텐 리액션
+G028,pH_LU8mMXqU,vkjmsyrvRDI,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,714.05,774.05,,0.88,vpick_shortform_id=4edfa3f9-e4e8-43ca-a8ce-c6a2fe4bcc5b; title=아이 향기에 취한 삼촌의 옷 영업
+G028,pH_LU8mMXqU,vkjmsyrvRDI,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,641.45,686.45,,0.88,vpick_shortform_id=3df246b3-fbfe-42b1-a2ab-f1da976683da; title=일본인의 충격적인 속마음?
+G028,pH_LU8mMXqU,vkjmsyrvRDI,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,544.65,574.65,,0.88,vpick_shortform_id=36e4a3b7-e40d-4b32-8f44-3961644691c6; title=나랑 똑닮은 변태 캐리커처
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,50.8,74.1,,0.88,vpick_shortform_id=8ffee27f-6ac7-4a7d-b475-642496f380db; title=술 끊는다는 거짓말 1위
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,50.8,74.1,,0.88,vpick_shortform_id=d9eb3d30-57a5-4372-963e-956b6348f998; title=금주 약속은 항상 거짓말?
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,243.2,288.2,,0.87,vpick_shortform_id=b79a5b9f-6d48-4968-9c4c-cb2f9208dfa2; title=매운 라면 먹고 텐션 폭발
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,217.1,247.1,,0.87,vpick_shortform_id=92c61624-3b26-41a2-90f1-386498d49a99; title=한입만 먹다 싸움 난 대참사
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,243.2,288.2,,0.87,vpick_shortform_id=665a9200-7c8e-44e2-b858-acd627f5a2e5; title=매운 라면 먹고 클럽 텐션 폭발
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,6,217.1,247.1,,0.87,vpick_shortform_id=7fc5a353-69e7-4b6f-b0a9-cad88f2f45e6; title=매운 라면 먹고 싸우는 현실 커플
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,7,0.05,30.05,,0.85,vpick_shortform_id=48694099-2246-48ae-94d7-9da7cfa1729d; title=렌즈 밟고 눈 잃은 현실 남매
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,8,0.05,30.05,,0.85,vpick_shortform_id=fb0db9f3-8bb9-4ed4-9a23-3864e95b1859; title=현실 남매 렌즈 대참사
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,9,80.6,140.6,,0.8133333333333334,vpick_shortform_id=f5b4c5c4-98d9-4270-94ab-89cd5de85c8e; title=숙취녀의 수리남 스포와 틈새 라면
+G007,q1cOniSzk9o,KLDQAVHBMgE,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,10,80.6,140.6,,0.8133333333333334,vpick_shortform_id=de447bcb-f81f-4fb6-a706-933b317967d1; title=숙취 스포 틈새 라면
+G019,rORE8KqiWQw,aTUXCOVmf3I,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,829.7,874.7,,0.92,vpick_shortform_id=4e2ef49f-60b6-4ba0-ba7c-15ced2fc26f1; title=주우재vs래퍼들? 선플의 대반전
+G019,rORE8KqiWQw,aTUXCOVmf3I,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,738.1,768.1,,0.92,vpick_shortform_id=89ae57c5-a703-4676-9079-bc748854e580; title=주우재가 인정한 남친룩 정석
+G019,rORE8KqiWQw,aTUXCOVmf3I,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,358.2,418.2,,0.9,vpick_shortform_id=b6fcbb65-0097-442b-8a1d-253bfba21e49; title=샘민수 논란? 패션 복제설의 진실
+G019,rORE8KqiWQw,aTUXCOVmf3I,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,625.75,655.75,,0.88,vpick_shortform_id=eac2d1b9-b22f-4ed5-ae66-72dd0bb92a0b; title=주우재 닉네임 왕꼬추?
+G019,rORE8KqiWQw,aTUXCOVmf3I,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,41.7,71.7,,0.88,vpick_shortform_id=8599738c-e789-434d-867b-532ca2d38b35; title=주우재? 우원재? MC의 역대급 이름 실수
+G018,xQu9l6UtMNk,Z6wHHOxBt_4,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,1128.9,1158.9,,0.93,vpick_shortform_id=91532995-e094-4b0b-b2d0-487276d9ff80; title=역대급 상담원 참교육 반전
+G018,xQu9l6UtMNk,Z6wHHOxBt_4,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,1334.4,1364.4,,0.92,vpick_shortform_id=63fee182-2d04-4f48-8c40-510e28d9fb01; title=업무 성과 칭찬받다 난데없는 청혼?
+G018,xQu9l6UtMNk,Z6wHHOxBt_4,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,1258.1,1318.1,,0.92,vpick_shortform_id=4d8d88b6-1d45-4d5b-9b3b-92edae537ad0; title=AI로 일하다 팀장님께 참교육
+G018,xQu9l6UtMNk,Z6wHHOxBt_4,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,1165.6,1207.3,,0.92,vpick_shortform_id=14c7f9e4-7456-4e82-b72a-6aa070abc431; title=환불하러 왔다가 수치사 당함
+G018,xQu9l6UtMNk,Z6wHHOxBt_4,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,1858.3,1888.3,,0.88,vpick_shortform_id=ad2f8086-0591-4197-ad89-227c6c09d265; title=이름 너무 길어 팬 손절?
+G011,yk3hY55W9nE,PsHAqiAIqEA,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,1454.2,1484.2,,0.92,vpick_shortform_id=e62963bc-a922-423f-b03f-7e447306915b; title=로켓은 사실 폭탄? 누리호의 반전
+G012,yk3hY55W9nE,7B7evgf22sY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,1,1454.2,1484.2,,0.92,vpick_shortform_id=e62963bc-a922-423f-b03f-7e447306915b; title=로켓은 사실 폭탄? 누리호의 반전
+G011,yk3hY55W9nE,PsHAqiAIqEA,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,1367.1,1383.2,,0.89,vpick_shortform_id=7dced7fc-9253-4df3-b71c-e599b6ea33b8; title=역사를 바꾼 로켓 재착륙의 순간
+G012,yk3hY55W9nE,7B7evgf22sY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,2,1367.1,1383.2,,0.89,vpick_shortform_id=7dced7fc-9253-4df3-b71c-e599b6ea33b8; title=역사를 바꾼 로켓 재착륙의 순간
+G011,yk3hY55W9nE,PsHAqiAIqEA,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,432.7,462.7,,0.88,vpick_shortform_id=828b731e-7b90-4032-af11-214e603a03a6; title=우주선 연료는 경유? 교수님의 반전 답변
+G012,yk3hY55W9nE,7B7evgf22sY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,3,432.7,462.7,,0.88,vpick_shortform_id=828b731e-7b90-4032-af11-214e603a03a6; title=우주선 연료는 경유? 교수님의 반전 답변
+G011,yk3hY55W9nE,PsHAqiAIqEA,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,255.25,315.25,,0.88,vpick_shortform_id=3e582758-08a0-4a71-b8b8-2c2290b8658e; title=카이스트 천재가 말하는 대전의 진실
+G012,yk3hY55W9nE,7B7evgf22sY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,4,255.25,315.25,,0.88,vpick_shortform_id=3e582758-08a0-4a71-b8b8-2c2290b8658e; title=카이스트 천재가 말하는 대전의 진실
+G011,yk3hY55W9nE,PsHAqiAIqEA,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,172.8,217.8,,0.88,vpick_shortform_id=db471bfc-4b2d-471c-8ea5-bc874f92059c; title=카이스트 천재들의 반전 실체
+G012,yk3hY55W9nE,7B7evgf22sY,vpick_auto_shortform,vpick_baseline,vpick_auto,vpick,5,172.8,217.8,,0.88,vpick_shortform_id=db471bfc-4b2d-471c-8ea5-bc874f92059c; title=카이스트 천재들의 반전 실체

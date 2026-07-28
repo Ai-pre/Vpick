@@ -1,0 +1,59 @@
+{
+  "experiment3_duplicate_audit": {
+    "historical_vpick": {
+      "pair_count": 23,
+      "prediction_count": 129,
+      "top1_core_hit_rate": 0.043478260869565216,
+      "top1_tight_hit_rate": 0.043478260869565216,
+      "hit_at_3_core_rate": 0.13043478260869565,
+      "hit_at_3_tight_rate": 0.13043478260869565,
+      "best_iou_at_3_mean": 0.07650201142845346,
+      "hit_at_5_core_rate": 0.17391304347826086,
+      "hit_at_5_tight_rate": 0.17391304347826086,
+      "best_iou_at_5_mean": 0.12715391836490325
+    },
+    "deduplicated_vpick": {
+      "pair_count": 23,
+      "prediction_count": 119,
+      "top1_core_hit_rate": 0.043478260869565216,
+      "top1_tight_hit_rate": 0.043478260869565216,
+      "hit_at_3_core_rate": 0.13043478260869565,
+      "hit_at_3_tight_rate": 0.13043478260869565,
+      "best_iou_at_3_mean": 0.07805393581008703,
+      "hit_at_5_core_rate": 0.17391304347826086,
+      "hit_at_5_tight_rate": 0.17391304347826086,
+      "best_iou_at_5_mean": 0.12715391836490325
+    },
+    "ours": {
+      "pair_count": 23,
+      "prediction_count": 108,
+      "top1_core_hit_rate": 0.30434782608695654,
+      "top1_tight_hit_rate": 0.30434782608695654,
+      "hit_at_3_core_rate": 0.4782608695652174,
+      "hit_at_3_tight_rate": 0.4782608695652174,
+      "best_iou_at_3_mean": 0.2808262602486171,
+      "hit_at_5_core_rate": 0.4782608695652174,
+      "hit_at_5_tight_rate": 0.4782608695652174,
+      "best_iou_at_5_mean": 0.29304564075444267
+    },
+    "duplicate_rows_removed": 10,
+    "groups_with_duplicates": 2,
+    "groups_with_fewer_than_5_unique_candidates": 3,
+    "core_at_5_changed": false,
+    "best_iou_at_3_delta": 0.0015519243816335682
+  },
+  "v13_validity_audit": {
+    "channel_centered_spearman_all": 0.31247426113857174,
+    "mid_only_pooled_spearman": -0.06959318763968356,
+    "mid_only_channel_centered_spearman": -0.20840984684050787,
+    "extremes_pos_neg_channel_centered_spearman": 0.3918577222764603,
+    "extremes_pos_neg_auc": 0.7144444444444444,
+    "same_channel_local_pairwise_accuracy": 0.5876777251184834,
+    "within_label_bucket_pairwise_accuracy": 0.4892086330935252
+  },
+  "data_sha256": {
+    "comparable_dataset.csv": "64e5169f360d2fc437e7284f4a1ef7028e83ff2dde0348e0a137e50e322e1d1e",
+    "ours_predictions.csv": "1529253c8cca9b60b19edde62b1ae98abb90ec709e61abf56d8c3659c12af582",
+    "vpick_predictions_original.csv": "42e53cb62a47f98eb27432b0d530cac28f157168f74d344663b824b4f6ab25f7"
+  }
+}
