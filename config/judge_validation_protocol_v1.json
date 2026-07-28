@@ -1,0 +1,81 @@
+{
+  "protocol_id": "judge_validation_protocol_2026_07_28",
+  "judge": {
+    "prompt": "prompts/shortform_judge_v10_ko.md",
+    "config": "config/shortform_judge_v10_opus.json",
+    "runner": "src/run_shortform_judge_v9.py",
+    "input_mode": "one_candidate_per_request",
+    "score_formula": "0.5 * editorial_score_100 + 0.5 * engagement_score_100"
+  },
+  "experiment_1": {
+    "role": "auxiliary_performance_consistency",
+    "candidate_count": 94,
+    "labels": ["neg", "mid", "pos"],
+    "cutoffs": {
+      "neg": "channel percentile 0-20",
+      "mid": "channel percentile 20-80",
+      "pos": "channel percentile 80-100"
+    },
+    "metrics": [
+      "quadratic_weighted_kappa",
+      "three_class_accuracy",
+      "within_channel_centered_spearman",
+      "channel_macro_spearman"
+    ],
+    "controls": [
+      "random",
+      "label_oracle_sanity_only",
+      "transcript_source_shortcut"
+    ],
+    "primary_validity_test": false
+  },
+  "experiment_2": {
+    "role": "primary_within_video_segment_alignment",
+    "candidate_pool": "stored Vpick auto candidates plus published source interval",
+    "maximum_vpick_candidates": 8,
+    "gold_iou_threshold": 0.5,
+    "metrics": ["hit_at_1", "hit_at_3", "mrr"],
+    "controls": [
+      "vpick_original_order",
+      "exact_random_baseline_by_actual_pool_size"
+    ],
+    "primary_validity_test": true,
+    "pilot_result": {
+      "pool_count": 16,
+      "candidate_count": 98,
+      "hit_at_1": 0.125,
+      "hit_at_3": 0.71875,
+      "mrr": 0.4140625,
+      "random_hit_at_1": 0.1658730159,
+      "random_hit_at_3": 0.4976190476,
+      "random_mrr": 0.4061294564,
+      "hit_at_3_one_sided_exact_p": 0.0424001736,
+      "validated_use": "top3_shortlisting_only",
+      "production_equivalent": false,
+      "limitations": [
+        "direct_single_session_not_independent_requests",
+        "all_pools_are_vpick_miss_cases",
+        "only_16_of_94_intervals_evaluable"
+      ]
+    }
+  },
+  "experiment_3": {
+    "role": "pipeline_improvement",
+    "gold_injection": false,
+    "comparison": ["vpick_auto", "ours_reranker", "ours_reranker_plus_judge"],
+    "metrics": ["core_at_1", "core_at_3", "core_at_5", "iou_at_5"]
+  },
+  "leakage_rules": {
+    "forbidden_judge_inputs": [
+      "channel_name",
+      "views",
+      "likes",
+      "performance_label",
+      "performance_percentile",
+      "short_title",
+      "short_url"
+    ],
+    "split_group": "longform_id",
+    "locked_test_reuse": "never tune after opening"
+  }
+}

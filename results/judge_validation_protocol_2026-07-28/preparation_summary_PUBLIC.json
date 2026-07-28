@@ -1,0 +1,63 @@
+{
+  "dataset": {
+    "candidate_count": 94,
+    "longform_count": 85,
+    "label_counts": {
+      "neg": 30,
+      "mid": 34,
+      "pos": 30
+    },
+    "cutoff_definition": "channel percentile: neg 0-20, mid 20-80, pos 80-100"
+  },
+  "group_split": {
+    "version": "judge94_grouped_v1",
+    "dev_candidates": 19,
+    "locked_test_candidates": 75,
+    "dev_longforms": 17,
+    "locked_test_longforms": 68,
+    "longform_overlap": 0
+  },
+  "source_confound_audit": {
+    "mid": {
+      "yt_dlp": 34,
+      "vpick": 0
+    },
+    "neg": {
+      "yt_dlp": 10,
+      "vpick": 20
+    },
+    "pos": {
+      "yt_dlp": 3,
+      "vpick": 27
+    },
+    "source_only_locked_test_three_class_accuracy": 0.64,
+    "source_only_locked_test_qwk": 0.1176470588,
+    "status": "unresolved_confound"
+  },
+  "controls": {
+    "random_three_class_accuracy_mean": 0.3330797872,
+    "random_qwk_95_interval": [
+      -0.2,
+      0.2
+    ],
+    "label_oracle_polar60_spearman": 0.7609928713,
+    "label_oracle_all94_spearman": 0.8970057023,
+    "label_oracle_interpretation": "deliberate leakage upper control; not expected to collapse after adding mid rows"
+  },
+  "within_video_build": {
+    "pool_count": 16,
+    "candidate_count": 98,
+    "pool_size_counts": {
+      "5": 2,
+      "6": 12,
+      "7": 1,
+      "9": 1
+    },
+    "status": "scored_and_evaluated",
+    "result_file": "codex_direct_v10_within_video_98_PUBLIC.json"
+  },
+  "production_equivalence_gate": {
+    "passed": false,
+    "reason": "The 94-row handover input does not contain a uniformly constructed full longform_overview."
+  }
+}

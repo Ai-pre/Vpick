@@ -1,0 +1,49 @@
+{
+  "experiment": "exp1_auxiliary_performance_consistency",
+  "run_id": "codex_direct_shortform_judge_v10_94",
+  "candidate_count": 94,
+  "label_counts": {
+    "neg": 30,
+    "mid": 34,
+    "pos": 30
+  },
+  "split": {
+    "group": "longform_id",
+    "dev_candidates": 19,
+    "locked_test_candidates": 75,
+    "longform_overlap": 0
+  },
+  "locked_test_judge": {
+    "three_class_accuracy": 0.3333333333,
+    "quadratic_weighted_kappa": 0.0416666667,
+    "pooled_spearman": 0.0785407585,
+    "within_channel_centered_spearman": 0.0960955628,
+    "channel_macro_spearman": 0.0139108064
+  },
+  "locked_test_controls": {
+    "random_three_class_accuracy_mean": 0.334568,
+    "random_qwk_mean": 0.0013875,
+    "polar_bucket_shortcut": {
+      "definition": "POS high, NEG low, MID random; no within-bucket skill",
+      "three_class_accuracy_mean": 0.6556053333,
+      "quadratic_weighted_kappa_mean": 0.7309416667,
+      "pooled_spearman_mean": 0.7310351006
+    },
+    "transcript_source_shortcut": {
+      "three_class_accuracy": 0.64,
+      "quadratic_weighted_kappa": 0.1176470588
+    }
+  },
+  "execution": {
+    "label_blind": true,
+    "gpu_used": false,
+    "external_api_used": false,
+    "source_salience_policy": "fixed_neutral_2_no_longform_overview"
+  },
+  "conclusion": "The v10 score does not predict channel-relative Shorts performance. Adding middle examples does not neutralize a shortcut that already knows the polar buckets, so performance consistency remains an auxiliary diagnostic rather than Judge validity evidence.",
+  "limitations": [
+    "Transcript source is strongly confounded with the performance bucket.",
+    "The 94-row input lacks a uniformly constructed compact longform overview.",
+    "The direct run was not used to tune the frozen 50:50 score formula."
+  ]
+}

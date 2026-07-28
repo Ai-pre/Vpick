@@ -17,6 +17,7 @@ tmp/
 data/raw/*
 !data/raw/.gitkeep
 data/interim/
+data/private/
 data/processed/*/
 !data/processed/ready/
 !data/processed/ready/**

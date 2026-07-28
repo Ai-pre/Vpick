@@ -7,20 +7,78 @@ LLM-as-a-Judge를 먼저 검증하고, 검증된 Judge로 하이라이트 선택
 이 레포는 원본 유튜브 영상을 다운로드하거나 mp4 파일을 저장하지 않습니다. 대신 Vpick이 제공하는 scene timestamp, description, transcript, speech timestamp를 활용합니다.
 
 ```text
-Gold 60 published Shorts
--> blind pointwise LLM Judge
--> repeat reliability
--> human reference alignment
--> within-channel performance validity
--> locked test
--> only then Ours vs Vpick improvement experiment
+94 published Shorts -> auxiliary performance-consistency diagnosis
+same-longform Vpick candidates + published interval -> primary segment-alignment test
+Vpick vs Ours vs Ours+Judge -> pipeline improvement test
 ```
 
-## Current Best Judge Pipeline (2026-07-27)
+## Current Validation Protocol (2026-07-28)
+
+현재 Judge의 역할은 **조회수 예측**이 아니라, 같은 롱폼에서 나온 숏폼 후보의
+편집·구간 선택 품질과 텍스트 근거상 콘텐츠 흡인력을 진단하고 최종 순서를
+보정하는 것입니다.
+
+검증은 세 실험으로 분리했습니다.
+
+1. `성과 정합성`: 94개 실제 Shorts와의 대조. 보조 진단이며 낮아도 Judge의
+   구간 진단 능력을 바로 기각하지 않습니다.
+2. `구간 정합성`: 동일 롱폼의 Vpick 자동 후보 사이에서 실제 채택 구간의
+   Hit@1, Hit@3, MRR을 측정합니다. 현재 주 검증입니다.
+3. `파이프라인 비교`: 정답 주입 없이 Vpick, Ours, Ours+Judge를 비교합니다.
+
+94개 데이터는 `neg 30 / mid 34 / pos 30`, 고유 롱폼 85개입니다. 컷 기준은
+상·하위 25%가 아니라 **상위 20% / 중간 60% / 하위 20%**입니다.
+`longform_id` 그룹 분할로 `dev 19 / locked_test 75`, 롱폼 중복 0을
+확정했습니다.
+
+현재 저장된 Vpick 자동 결과로 16개 동일 롱폼 풀, 총 98개 후보의 주 검증
+입력을 구축했습니다. 영상별 자동 후보 수가 일정하지 않아 우연 기준은
+일괄 `1/9`가 아니라 실제 풀 크기별 정확값을 사용합니다.
+
+### Validation Results
+
+멘토 피드백을 반영해 94개 데이터 전체를 그대로 재사용하지 않고
+`longform_id` 기준 `dev 19 / locked_test 75`로 분리했습니다. 잠금 테스트에서
+v10 Judge의 성과 정합성은 3분류 정확도 `0.333`, QWK `0.042`, 채널별 macro
+Spearman `0.014`로 우연 수준이었습니다. 따라서 이 Judge를 조회수 예측기로
+사용하지 않습니다.
+
+`POS는 높게, NEG는 낮게, MID는 무작위`로 점수를 주는 가짜 판정자는 중간군을
+포함한 locked test에서도 pooled Spearman `0.731`, QWK `0.731`을 기록했습니다.
+중간군 추가만으로 극단 라벨 shortcut이 사라지지 않는다는 sanity check이며,
+성과 상관을 Judge 채택 근거로 쓰지 않는 이유입니다.
+
+동일 롱폼 구간 정합성 파일럿은 16개 풀 98개 후보를 라벨 비공개로 채점했습니다.
+실제 채택 구간의 Hit@3은 `0.719`로 풀 크기별 정확 우연 기준 `0.498`보다
+높았고, 정확 우연 위치 검정은 `p=0.0424`였습니다. 그러나 Hit@1은 `0.125`
+(우연 `0.166`), MRR은 `0.414`(우연 `0.406`)로 최종 1등 선정 능력은
+확인되지 않았습니다. 현재 근거가 지지하는 용도는 **Top3 후보 압축**까지입니다.
+
+이 파일럿의 16개 풀은 모두 Vpick 후보가 gold IoU 기준을 통과하지 못해 실제
+구간을 추가한 Vpick-miss 표본입니다. 또한 독립 API 요청이 아니라 한 세션에서
+후보를 한 건씩 직접 평가했으므로 프로덕션 동등 검증으로 과장하지 않습니다.
+
+Claude, Gemini 멀티모달, mR3 비교는 폐기하지 않고 모델·입력 ablation으로
+보존합니다. Gemini 멀티모달은 점수 포화와 반복 불안정이 있어 실험 1에서
+제외하고, 텍스트 baseline 이후 실험 2의 후속 ablation으로만 검토합니다.
+
+- 검증 명세:
+  [`docs/llm_judge_validation_protocol_2026-07-28.md`](docs/llm_judge_validation_protocol_2026-07-28.md)
+- 설정:
+  [`config/judge_validation_protocol_v1.json`](config/judge_validation_protocol_v1.json)
+- 준비 감사:
+  [`results/judge_validation_protocol_2026-07-28/preparation_summary_PUBLIC.json`](results/judge_validation_protocol_2026-07-28/preparation_summary_PUBLIC.json)
+- 94개 성과 정합성:
+  [`results/judge_validation_protocol_2026-07-28/codex_direct_v10_performance_94_PUBLIC.json`](results/judge_validation_protocol_2026-07-28/codex_direct_v10_performance_94_PUBLIC.json)
+- 98개 동일 롱폼 구간 정합성:
+  [`results/judge_validation_protocol_2026-07-28/codex_direct_v10_within_video_98_PUBLIC.json`](results/judge_validation_protocol_2026-07-28/codex_direct_v10_within_video_98_PUBLIC.json)
+
+## Frozen Judge Implementation (2026-07-27)
 
 현재 채택한 평가체계는 **원본 문맥을 포함한 후보 단독 Pointwise
-LLM-as-a-Judge**입니다. 최종 데이터는 6개 채널의 공개 롱폼-숏폼 페어
-60개이며, 채널명·타임스탬프·사용 가능 여부를 확정했습니다.
+LLM-as-a-Judge**입니다. 아래 60개 실행은 v10 루브릭을 확정한 역사적
+기준 실행이며, 2026-07-28부터는 위의 94개/동일 롱폼 검증 프로토콜을
+우선합니다.
 
 ```text
 Final 60 pairs

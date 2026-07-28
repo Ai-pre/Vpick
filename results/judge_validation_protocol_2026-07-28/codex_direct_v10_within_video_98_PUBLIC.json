@@ -1,0 +1,45 @@
+{
+  "experiment": "exp2_primary_within_video_segment_alignment",
+  "run_id": "codex_direct_shortform_judge_v10_within_video_98",
+  "pool_count": 16,
+  "candidate_count": 98,
+  "pool_size_counts": {
+    "5": 2,
+    "6": 12,
+    "7": 1,
+    "9": 1
+  },
+  "judge": {
+    "hit_at_1": 0.125,
+    "hit_at_3": 0.71875,
+    "mrr": 0.4140625
+  },
+  "exact_random_by_pool_size": {
+    "hit_at_1": 0.1658730159,
+    "hit_at_3": 0.4976190476,
+    "mrr": 0.4061294564
+  },
+  "uncertainty": {
+    "hit_at_1_bootstrap_95_ci": [0.0, 0.3125],
+    "hit_at_1_one_sided_exact_p": 0.6791536357,
+    "hit_at_3_bootstrap_95_ci": [0.5, 0.90625],
+    "hit_at_3_one_sided_exact_p": 0.0424001736,
+    "mrr_bootstrap_95_ci": [0.3072916667, 0.546875],
+    "mrr_one_sided_exact_p": 0.4350718862
+  },
+  "execution": {
+    "label_blind": true,
+    "gpu_used": false,
+    "external_api_used": false,
+    "source_salience_policy": "evaluated_from_compact_longform_overview",
+    "mode": "direct_single_session",
+    "production_equivalent": false
+  },
+  "conclusion": "The pilot shows evidence that v10 can recover the published interval into a Top-3 shortlist, but it does not validate final Top-1 selection or overall ranking.",
+  "limitations": [
+    "All 16 pools are selected Vpick-miss cases; Vpick Hit@K is therefore zero by construction and is not an unbiased head-to-head estimate.",
+    "The handover specified one isolated request per candidate, while this pilot used one-candidate-at-a-time direct assessment in a single session.",
+    "Only 16 of 94 published intervals had enough stored contiguous Vpick candidates.",
+    "Fourteen pools are POS and only one each is MID and NEG, so bucket-stratified conclusions are not supported."
+  ]
+}
