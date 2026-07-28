@@ -13,7 +13,29 @@ Codex features + anonymous text -> continuous performance ranker
 new candidate -> shortform_success_potential_0_100
 ```
 
-## Shortform Success Judge v11 (2026-07-28)
+## Current Frozen Candidate: v13 (2026-07-28)
+
+현재 최고 개발 후보는 Codex 7개 특징·익명 설명·자막·경계 문맥을 사용하는
+3개 Pairwise 성과 보정기의 동일 가중치 앙상블입니다. 채널명·조회수·좋아요·
+성과 라벨·백분위·URL·자막 출처는 모델 입력에서 제외했습니다.
+
+롱폼 GroupKFold 10-seed 반복 OOF에서 채널 중심 Spearman `0.3125`, 채널 Macro
+Spearman `0.3203`, 같은 채널 Pairwise 정확도 `0.6146`, Local Pairwise 정확도
+`0.5877`을 기록했습니다. 2,000회 롱폼 bootstrap의 채널 중심 Spearman 95%
+구간은 `[0.0661, 0.5050]`이며, 등록한 내부 게이트 5개를 모두 통과했습니다.
+
+단, 이 구조는 같은 94개 개발 데이터에서 선택했으므로 상태는
+`development_frozen_pending_holdout`입니다. 신규 미공개 holdout에서 구조와
+가중치를 바꾸지 않고 한 번 더 통과해야 최종 성과 Judge로 채택합니다.
+
+- 설계·명령어:
+  [`docs/shortform_success_judge_v13_frozen.md`](docs/shortform_success_judge_v13_frozen.md)
+- 검증 결과:
+  [`results/performance_calibrator_v13/summary_PUBLIC.json`](results/performance_calibrator_v13/summary_PUBLIC.json)
+- 검증 보고서:
+  [`reports/performance_calibrator_v13_2026-07-28.md`](reports/performance_calibrator_v13_2026-07-28.md)
+
+## Prior Shortform Success Judge v11 (2026-07-28)
 
 최종 목표는 신규 후보가 들어왔을 때 채널·조회수·성과 라벨을 보지 않고
 `shortform_success_potential_0_100`을 출력하는 것입니다. 이 값은 실제 조회수

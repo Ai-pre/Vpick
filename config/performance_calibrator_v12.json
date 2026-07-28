@@ -1,0 +1,45 @@
+{
+  "protocol_id": "performance_calibrator_v12_fixed_pairwise_2026_07_28",
+  "objective": "Improve the frozen pairwise performance calibrator without Pos/Neg labels, AUC, channel inputs, or performance metadata leakage.",
+  "target": "channel_performance_percentile_PRIVATE",
+  "group_key": "longform_id",
+  "registered_primary_spec": "registered_v12",
+  "random_seeds": [20260728, 20260729, 20260730],
+  "outer_splits": 5,
+  "inner_splits": 4,
+  "bootstrap_repetitions": 2000,
+  "c_values": [0.03, 0.1, 0.3, 1.0, 3.0],
+  "acceptance_gates": {
+    "channel_centered_spearman_min": 0.3,
+    "channel_macro_spearman_min": 0.2,
+    "same_channel_pairwise_accuracy_min": 0.58,
+    "same_channel_local_pairwise_accuracy_min": 0.55,
+    "bootstrap_primary_ci_lower_min": 0.0
+  },
+  "forbidden_model_inputs": [
+    "channel_name",
+    "views",
+    "likes",
+    "performance_label_PRIVATE",
+    "channel_performance_percentile_PRIVATE",
+    "percentile_bucket",
+    "dataset_role_v2",
+    "dataset_role_v3",
+    "short_video_id",
+    "short_video_url",
+    "long_video_url",
+    "transcript_source"
+  ],
+  "registered_improvements": [
+    "Freeze one pairwise linear ranker family instead of selecting a model family per outer fold.",
+    "Calibrate each fold decision score against its training-score ECDF before OOF aggregation.",
+    "Normalize timestamp and speaker formatting in semantic text.",
+    "Use field-aware character and word TF-IDF for candidate content and boundary context.",
+    "Add predeclared interactions among the seven Codex quality dimensions.",
+    "Balance pair contribution by channel.",
+    "Boost continuous-percentile pairs with gaps from 10 to 40 points.",
+    "Use mapping and timestamp confidence only as training-pair reliability weights.",
+    "Keep all performance, channel, URL, label, source, and split metadata out of model inputs."
+  ],
+  "status_note": "The 94 candidates have complete candidate-level text, but no full longform overview or visual evidence. This is exploratory grouped OOF and still requires a fresh untouched holdout."
+}

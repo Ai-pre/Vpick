@@ -1,0 +1,54 @@
+{
+  "protocol_id": "performance_calibrator_v13_frozen_ensemble_2026_07_28",
+  "objective": "Freeze the strongest development ensemble and estimate its stability with repeated grouped OOF.",
+  "target": "channel_performance_percentile_PRIVATE",
+  "group_key": "longform_id",
+  "ensemble_members": [
+    "numeric_050",
+    "channel_balanced",
+    "numeric_025"
+  ],
+  "ensemble_weights": [0.3333333333, 0.3333333333, 0.3333333334],
+  "random_seeds": [
+    20260728,
+    20260729,
+    20260730,
+    20260731,
+    20260732,
+    20260733,
+    20260734,
+    20260735,
+    20260736,
+    20260737
+  ],
+  "outer_splits": 5,
+  "inner_splits": 4,
+  "bootstrap_repetitions": 2000,
+  "c_values": [0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0],
+  "acceptance_gates": {
+    "channel_centered_spearman_min": 0.3,
+    "channel_macro_spearman_min": 0.2,
+    "same_channel_pairwise_accuracy_min": 0.58,
+    "same_channel_local_pairwise_accuracy_min": 0.55,
+    "bootstrap_primary_ci_lower_min": 0.0
+  },
+  "forbidden_model_inputs": [
+    "channel_name",
+    "views",
+    "likes",
+    "performance_label_PRIVATE",
+    "channel_performance_percentile_PRIVATE",
+    "percentile_bucket",
+    "dataset_role_v2",
+    "dataset_role_v3",
+    "short_video_id",
+    "short_video_url",
+    "long_video_url",
+    "transcript_source"
+  ],
+  "claim_policy": {
+    "internal_gate_pass_is_not_final_validation": true,
+    "accepted_as_performance_judge_requires_fresh_holdout": true,
+    "current_status": "development_frozen_pending_holdout"
+  }
+}

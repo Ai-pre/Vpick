@@ -1,0 +1,7 @@
+candidate_id,longform_id,channel_name,channel_performance_percentile_PRIVATE
+holdout_candidate_001,longform_a,channel_a,82.5
+holdout_candidate_002,longform_b,channel_a,44.0
+holdout_candidate_003,longform_c,channel_a,18.0
+holdout_candidate_004,longform_d,channel_b,88.0
+holdout_candidate_005,longform_e,channel_b,61.5
+holdout_candidate_006,longform_f,channel_b,22.0
