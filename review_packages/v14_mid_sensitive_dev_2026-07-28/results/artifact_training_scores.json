@@ -1,0 +1,852 @@
+{
+  "artifact_id": "shortform_success_judge_v14_dev_text_only",
+  "status": "development_only_not_validated",
+  "results": [
+    {
+      "candidate_id": "C_0c06bb407232ac",
+      "shortform_success_potential_0_100": 62.6316,
+      "batch_rank": 35,
+      "raw_ranker_score": 1.492115,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_0f923917c424de",
+      "shortform_success_potential_0_100": 44.7368,
+      "batch_rank": 53,
+      "raw_ranker_score": -1.006868,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_10942df5b9a611",
+      "shortform_success_potential_0_100": 17.3684,
+      "batch_rank": 78,
+      "raw_ranker_score": -3.698974,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_1687adea0a2c5b",
+      "shortform_success_potential_0_100": 36.3158,
+      "batch_rank": 61,
+      "raw_ranker_score": -1.88286,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_176849361f0c61",
+      "shortform_success_potential_0_100": 45.7895,
+      "batch_rank": 52,
+      "raw_ranker_score": -0.741927,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_1974865883eee0",
+      "shortform_success_potential_0_100": 97.3684,
+      "batch_rank": 2,
+      "raw_ranker_score": 4.834948,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_1bc72ee5d290cc",
+      "shortform_success_potential_0_100": 8.9474,
+      "batch_rank": 86,
+      "raw_ranker_score": -3.858707,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_2275d7bbc3b07c",
+      "shortform_success_potential_0_100": 39.4737,
+      "batch_rank": 57,
+      "raw_ranker_score": -1.64579,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_25663ed5ec5fde",
+      "shortform_success_potential_0_100": 38.4211,
+      "batch_rank": 58,
+      "raw_ranker_score": -1.654563,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_277df4844362e1",
+      "shortform_success_potential_0_100": 0.5263,
+      "batch_rank": 94,
+      "raw_ranker_score": -5.338487,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_27f17466563176",
+      "shortform_success_potential_0_100": 88.9474,
+      "batch_rank": 10,
+      "raw_ranker_score": 3.861577,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_2ac88d7a5dd028",
+      "shortform_success_potential_0_100": 15.2632,
+      "batch_rank": 80,
+      "raw_ranker_score": -3.729869,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_2c6ef4ac5ccb91",
+      "shortform_success_potential_0_100": 11.0526,
+      "batch_rank": 84,
+      "raw_ranker_score": -3.844028,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_316ed9c3bf10ba",
+      "shortform_success_potential_0_100": 11.0526,
+      "batch_rank": 85,
+      "raw_ranker_score": -3.840048,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_3282c045450550",
+      "shortform_success_potential_0_100": 83.6842,
+      "batch_rank": 16,
+      "raw_ranker_score": 3.520913,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_359c5677ec565b",
+      "shortform_success_potential_0_100": 22.6316,
+      "batch_rank": 73,
+      "raw_ranker_score": -3.51398,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_39a82e243f2103",
+      "shortform_success_potential_0_100": 60.5263,
+      "batch_rank": 38,
+      "raw_ranker_score": 1.268072,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_39e9ad74b67fff",
+      "shortform_success_potential_0_100": 86.8421,
+      "batch_rank": 12,
+      "raw_ranker_score": 3.860695,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_3b4ab99fff5f32",
+      "shortform_success_potential_0_100": 75.2632,
+      "batch_rank": 24,
+      "raw_ranker_score": 3.251065,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_3eb40628d9953e",
+      "shortform_success_potential_0_100": 90.0,
+      "batch_rank": 9,
+      "raw_ranker_score": 3.917416,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_4168d190df4080",
+      "shortform_success_potential_0_100": 17.3684,
+      "batch_rank": 79,
+      "raw_ranker_score": -3.63949,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_41ce293c074988",
+      "shortform_success_potential_0_100": 61.5789,
+      "batch_rank": 37,
+      "raw_ranker_score": 1.319819,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_4479c41b6aa80d",
+      "shortform_success_potential_0_100": 30.0,
+      "batch_rank": 66,
+      "raw_ranker_score": -2.6149,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_4ef5f86240b3b8",
+      "shortform_success_potential_0_100": 32.1053,
+      "batch_rank": 64,
+      "raw_ranker_score": -2.139396,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_510cbfc1c2b8bb",
+      "shortform_success_potential_0_100": 78.4211,
+      "batch_rank": 21,
+      "raw_ranker_score": 3.35381,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_519202486aef76",
+      "shortform_success_potential_0_100": 79.4737,
+      "batch_rank": 19,
+      "raw_ranker_score": 3.385959,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_51db5755c011b6",
+      "shortform_success_potential_0_100": 55.2632,
+      "batch_rank": 43,
+      "raw_ranker_score": 1.071525,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_5650522e7238b1",
+      "shortform_success_potential_0_100": 26.8421,
+      "batch_rank": 70,
+      "raw_ranker_score": -3.296252,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_5c7fcb3d3f4514",
+      "shortform_success_potential_0_100": 56.3158,
+      "batch_rank": 41,
+      "raw_ranker_score": 1.113107,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_5e40d4cd1b96d9",
+      "shortform_success_potential_0_100": 92.1053,
+      "batch_rank": 8,
+      "raw_ranker_score": 3.944203,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_6151485ea53157",
+      "shortform_success_potential_0_100": 19.4737,
+      "batch_rank": 77,
+      "raw_ranker_score": -3.635261,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_659cef21638a4e",
+      "shortform_success_potential_0_100": 48.9474,
+      "batch_rank": 48,
+      "raw_ranker_score": -0.166234,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_690684f222062e",
+      "shortform_success_potential_0_100": 32.1053,
+      "batch_rank": 65,
+      "raw_ranker_score": -2.175297,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_6cf2a108cf394e",
+      "shortform_success_potential_0_100": 37.3684,
+      "batch_rank": 60,
+      "raw_ranker_score": -1.792742,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_6d1508f47e83f3",
+      "shortform_success_potential_0_100": 93.1579,
+      "batch_rank": 6,
+      "raw_ranker_score": 4.18015,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_6d29fcb898db1b",
+      "shortform_success_potential_0_100": 20.5263,
+      "batch_rank": 75,
+      "raw_ranker_score": -3.621248,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_6dcfd006a3b838",
+      "shortform_success_potential_0_100": 8.9474,
+      "batch_rank": 87,
+      "raw_ranker_score": -3.879643,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_6e8b8a5db34331",
+      "shortform_success_potential_0_100": 41.5789,
+      "batch_rank": 55,
+      "raw_ranker_score": -1.114246,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_71fff5aa4444f6",
+      "shortform_success_potential_0_100": 24.7368,
+      "batch_rank": 71,
+      "raw_ranker_score": -3.408402,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_752c5a1a81ff94",
+      "shortform_success_potential_0_100": 80.5263,
+      "batch_rank": 18,
+      "raw_ranker_score": 3.468967,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_772236c026ac0c",
+      "shortform_success_potential_0_100": 46.8421,
+      "batch_rank": 50,
+      "raw_ranker_score": -0.639767,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_785c002322dbc7",
+      "shortform_success_potential_0_100": 64.7368,
+      "batch_rank": 33,
+      "raw_ranker_score": 1.542286,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_7cfa0a88337df6",
+      "shortform_success_potential_0_100": 56.3158,
+      "batch_rank": 42,
+      "raw_ranker_score": 1.083656,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_848f271df1072b",
+      "shortform_success_potential_0_100": 95.2632,
+      "batch_rank": 4,
+      "raw_ranker_score": 4.414783,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_86ec19dffd0205",
+      "shortform_success_potential_0_100": 22.6316,
+      "batch_rank": 74,
+      "raw_ranker_score": -3.534668,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_8745eb5a0719a3",
+      "shortform_success_potential_0_100": 47.8947,
+      "batch_rank": 49,
+      "raw_ranker_score": -0.619327,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_87c2f9c2d22522",
+      "shortform_success_potential_0_100": 95.2632,
+      "batch_rank": 5,
+      "raw_ranker_score": 4.51156,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_88926face12336",
+      "shortform_success_potential_0_100": 50.0,
+      "batch_rank": 47,
+      "raw_ranker_score": 0.058397,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_88efb28987c87c",
+      "shortform_success_potential_0_100": 81.5789,
+      "batch_rank": 17,
+      "raw_ranker_score": 3.488547,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_8bcb45246410f1",
+      "shortform_success_potential_0_100": 64.7368,
+      "batch_rank": 34,
+      "raw_ranker_score": 1.862909,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_8c5c28ef7a8d25",
+      "shortform_success_potential_0_100": 72.1053,
+      "batch_rank": 27,
+      "raw_ranker_score": 2.489072,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_8f62a6194404c2",
+      "shortform_success_potential_0_100": 73.1579,
+      "batch_rank": 25,
+      "raw_ranker_score": 3.037533,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_946257cbfa23f9",
+      "shortform_success_potential_0_100": 46.8421,
+      "batch_rank": 51,
+      "raw_ranker_score": -0.62853,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_947db9c531bc4c",
+      "shortform_success_potential_0_100": 54.2105,
+      "batch_rank": 44,
+      "raw_ranker_score": 0.969791,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_95b3f76511987c",
+      "shortform_success_potential_0_100": 20.5263,
+      "batch_rank": 76,
+      "raw_ranker_score": -3.615931,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_978ec671514f85",
+      "shortform_success_potential_0_100": 52.1053,
+      "batch_rank": 46,
+      "raw_ranker_score": 0.06185,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_9852c4563a8afd",
+      "shortform_success_potential_0_100": 67.8947,
+      "batch_rank": 30,
+      "raw_ranker_score": 2.286786,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_9da417f1ef3561",
+      "shortform_success_potential_0_100": 30.0,
+      "batch_rank": 67,
+      "raw_ranker_score": -2.304359,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_9dec2b4bead825",
+      "shortform_success_potential_0_100": 65.7895,
+      "batch_rank": 32,
+      "raw_ranker_score": 2.076103,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_a19afcf67ff1c7",
+      "shortform_success_potential_0_100": 43.6842,
+      "batch_rank": 54,
+      "raw_ranker_score": -1.080581,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_a4b87cdb250646",
+      "shortform_success_potential_0_100": 93.1579,
+      "batch_rank": 7,
+      "raw_ranker_score": 3.961943,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_b0e29ac062bee8",
+      "shortform_success_potential_0_100": 5.7895,
+      "batch_rank": 90,
+      "raw_ranker_score": -4.947921,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_b14489ea01c297",
+      "shortform_success_potential_0_100": 41.5789,
+      "batch_rank": 56,
+      "raw_ranker_score": -1.591917,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_b8e9377348a4d1",
+      "shortform_success_potential_0_100": 53.1579,
+      "batch_rank": 45,
+      "raw_ranker_score": 0.145209,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_baa3092bf3740e",
+      "shortform_success_potential_0_100": 3.6842,
+      "batch_rank": 92,
+      "raw_ranker_score": -5.121699,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_bd265b157d0146",
+      "shortform_success_potential_0_100": 79.4737,
+      "batch_rank": 20,
+      "raw_ranker_score": 3.448289,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_bdb61bcc855d1b",
+      "shortform_success_potential_0_100": 13.1579,
+      "batch_rank": 83,
+      "raw_ranker_score": -3.808387,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_c0b26784941e91",
+      "shortform_success_potential_0_100": 88.9474,
+      "batch_rank": 11,
+      "raw_ranker_score": 3.904829,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_c1fbadec73b4bb",
+      "shortform_success_potential_0_100": 84.7368,
+      "batch_rank": 14,
+      "raw_ranker_score": 3.522973,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_c3f86bdf30fa21",
+      "shortform_success_potential_0_100": 6.8421,
+      "batch_rank": 88,
+      "raw_ranker_score": -4.907962,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_c42679c7b946fc",
+      "shortform_success_potential_0_100": 97.3684,
+      "batch_rank": 3,
+      "raw_ranker_score": 4.596301,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_c7ca72128f4b08",
+      "shortform_success_potential_0_100": 59.4737,
+      "batch_rank": 39,
+      "raw_ranker_score": 1.230765,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_d0ff00317e20b0",
+      "shortform_success_potential_0_100": 35.2632,
+      "batch_rank": 62,
+      "raw_ranker_score": -1.917359,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_d1155bf44e11df",
+      "shortform_success_potential_0_100": 2.6316,
+      "batch_rank": 93,
+      "raw_ranker_score": -5.162111,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_d28e1489f145b8",
+      "shortform_success_potential_0_100": 28.9474,
+      "batch_rank": 68,
+      "raw_ranker_score": -2.761392,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_da0b2ff5d3f7d3",
+      "shortform_success_potential_0_100": 77.3684,
+      "batch_rank": 22,
+      "raw_ranker_score": 3.353754,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_e1d06dcd792841",
+      "shortform_success_potential_0_100": 62.6316,
+      "batch_rank": 36,
+      "raw_ranker_score": 1.50942,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_e2ac6ed9f42799",
+      "shortform_success_potential_0_100": 98.4211,
+      "batch_rank": 1,
+      "raw_ranker_score": 4.898683,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_e4c2efd45e27dd",
+      "shortform_success_potential_0_100": 24.7368,
+      "batch_rank": 72,
+      "raw_ranker_score": -3.366657,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_e5d94dcfd123c3",
+      "shortform_success_potential_0_100": 84.7368,
+      "batch_rank": 15,
+      "raw_ranker_score": 3.661934,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_e6191f6820bdb7",
+      "shortform_success_potential_0_100": 71.0526,
+      "batch_rank": 28,
+      "raw_ranker_score": 2.382601,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_e6e490427ee78c",
+      "shortform_success_potential_0_100": 34.2105,
+      "batch_rank": 63,
+      "raw_ranker_score": -2.032426,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_e7426acca34adc",
+      "shortform_success_potential_0_100": 15.2632,
+      "batch_rank": 81,
+      "raw_ranker_score": -3.724051,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_e8221b95e409a4",
+      "shortform_success_potential_0_100": 57.3684,
+      "batch_rank": 40,
+      "raw_ranker_score": 1.190851,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_ef1eb9f418973d",
+      "shortform_success_potential_0_100": 73.1579,
+      "batch_rank": 26,
+      "raw_ranker_score": 3.001535,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_efa86f1b807ef1",
+      "shortform_success_potential_0_100": 14.2105,
+      "batch_rank": 82,
+      "raw_ranker_score": -3.743012,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_f042310a37676d",
+      "shortform_success_potential_0_100": 86.8421,
+      "batch_rank": 13,
+      "raw_ranker_score": 3.680661,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_f0c8d907c9715e",
+      "shortform_success_potential_0_100": 4.7368,
+      "batch_rank": 91,
+      "raw_ranker_score": -4.970186,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_f172381d095fcf",
+      "shortform_success_potential_0_100": 6.8421,
+      "batch_rank": 89,
+      "raw_ranker_score": -4.112346,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_f779f7e6f45455",
+      "shortform_success_potential_0_100": 70.0,
+      "batch_rank": 29,
+      "raw_ranker_score": 2.308876,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_f9645ed47107f3",
+      "shortform_success_potential_0_100": 38.4211,
+      "batch_rank": 59,
+      "raw_ranker_score": -1.65098,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_fa384f55cffc55",
+      "shortform_success_potential_0_100": 67.8947,
+      "batch_rank": 31,
+      "raw_ranker_score": 2.145603,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_fb81a9fbf8ede3",
+      "shortform_success_potential_0_100": 76.3158,
+      "batch_rank": 23,
+      "raw_ranker_score": 3.33405,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    },
+    {
+      "candidate_id": "C_fb9d53c40ca373",
+      "shortform_success_potential_0_100": 27.8947,
+      "batch_rank": 69,
+      "raw_ranker_score": -3.285176,
+      "judge_status": "development_only_not_validated",
+      "score_interpretation": "Content-only relative performance potential against the 94-item development reference; not a view-count prediction.",
+      "warning": "Development candidate only. A fresh mid-enriched holdout has not validated this score."
+    }
+  ]
+}

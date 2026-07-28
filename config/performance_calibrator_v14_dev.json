@@ -1,0 +1,77 @@
+{
+  "protocol_id": "performance_calibrator_v14_mid_sensitive_nested_dev_2026_07_28",
+  "status": "development_only_not_validated",
+  "objective": "Select a leakage-safe pairwise ranker for the ambiguous middle performance range without letting easy pos-vs-neg pairs dominate.",
+  "target": "channel_performance_percentile_PRIVATE",
+  "group_key": "longform_id",
+  "candidate_specs": [
+    "normalized_char_clean_numeric025",
+    "field_aware_clean_numeric025",
+    "field_aware_clean_text_only"
+  ],
+  "pair_weighting": {
+    "minimum_gap": 0.03,
+    "local_gap_min": 0.10,
+    "local_gap_max": 0.40,
+    "local_pair_boost": 2.0,
+    "mid_percentile_min": 0.20,
+    "mid_percentile_max": 0.80,
+    "mid_pair_boost": 3.0,
+    "opposite_extreme_pair_weight": 0.25,
+    "channel_balanced_pairs": true
+  },
+  "inner_selection_weights": {
+    "mid_channel_centered_spearman": 0.5,
+    "mid_pairwise_skill": 0.3,
+    "same_channel_local_pairwise_skill": 0.2
+  },
+  "excluded_proxy_features": [
+    "transcript_timed_line_count",
+    "speaker_marker_count",
+    "bracket_count",
+    "transcript_line_count"
+  ],
+  "random_seeds": [
+    20260728,
+    20260729,
+    20260730,
+    20260731,
+    20260732,
+    20260733,
+    20260734,
+    20260735,
+    20260736,
+    20260737
+  ],
+  "outer_splits": 5,
+  "inner_splits": 4,
+  "c_values": [0.03, 0.1, 0.3, 1.0, 3.0],
+  "frozen_deployment_candidate": {
+    "spec": "field_aware_clean_text_only",
+    "c_value": 3.0,
+    "selection_method": "highest mean inner-CV selection score across the 10 registered seeds on all 94 development candidates",
+    "mean_inner_selection_score": 0.20607481216823603,
+    "accepted_as_performance_judge": false
+  },
+  "bootstrap_repetitions": 2000,
+  "forbidden_model_inputs": [
+    "channel_name",
+    "views",
+    "likes",
+    "performance_label_PRIVATE",
+    "channel_performance_percentile_PRIVATE",
+    "percentile_bucket",
+    "dataset_role_v2",
+    "dataset_role_v3",
+    "short_video_id",
+    "short_video_url",
+    "long_video_url",
+    "transcript_source"
+  ],
+  "claim_policy": {
+    "architecture_and_pair_weighting_were_designed_after_v13_audit": true,
+    "current_94_items_are_development_data": true,
+    "accepted_as_performance_judge": false,
+    "fresh_mid_enriched_holdout_required": true
+  }
+}

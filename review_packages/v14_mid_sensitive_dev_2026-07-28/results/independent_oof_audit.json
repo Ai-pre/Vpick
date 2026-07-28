@@ -1,0 +1,15 @@
+{
+  "candidate_count": 94,
+  "mid_candidate_count": 34,
+  "pooled_spearman": 0.3314980232979938,
+  "channel_centered_spearman": 0.33545753492422187,
+  "mid_only_pooled_spearman": 0.30835135446505946,
+  "mid_only_channel_centered_spearman": 0.24954135733214147,
+  "mid_only_pairwise_accuracy": 0.6,
+  "mid_only_pair_count": 60,
+  "same_channel_local_pairwise_accuracy": 0.5213270142180095,
+  "same_channel_local_pair_count": 211,
+  "within_label_pairwise_accuracy": 0.5535714285714286,
+  "within_label_pair_count": 112,
+  "extremes_pos_neg_auc": 0.7366666666666667
+}

@@ -1,0 +1,15 @@
+{
+  "README.md": "8d5d0b548c12aaba3ca3b30bfa31fc7f60228b16209ef5a2f93d87c769e56b5b",
+  "CLAUDE_REVIEW_PROMPT_KO.md": "4dbdd5bcb250bd92082ed8c642ba46c91a7ed29a327273e643a4d382ed4923de",
+  "independent_oof_audit.py": "02c2de78760a3bd33b0639a3f5ea56d7211cc10c4f2ac6228c79c0e84badb248",
+  "verify_package.py": "110d2967384b677fd57429e61d0c89a75f4ce1a5df69c107b31bb284a46a9c22",
+  "data/oof_predictions_PRIVATE.csv": "b7f49d8be87b4a21309ab4a9158449d0b3e543a2c9f41dbb08de5e046678fb38",
+  "data/nested_tuning_log_PRIVATE.json": "36ca7cf543ee9e540d74a1020d99d4b7ac087454d5bdbd987c8c8db2efd6f56b",
+  "results/v14_summary_PUBLIC.json": "8803d94f9bdd37d50279772a5eabbe4be2b52f0dedc90da98a05c5347e0af0d3",
+  "results/v14_model_comparison_PUBLIC.csv": "871bdce230242ba948209d12b602430579c1cfbb76a3a493b931357e2327a7d5",
+  "results/weighting_ablation_summary.json": "d0f79003f6826b28f2188216e2da1151f6982228225cc5c6e22340b4eb20fdcc",
+  "results/local_preserving_summary_PUBLIC.json": "3b2508cf03dc5a81c29f57c02a33f00a101b800f9fe86ce8bed8dca696bce93a",
+  "results/deployment_artifact_METADATA.json": "74ce396b51c58d94a09bbb6de3757310f3ae76cce3b80797857bb3a1238a3fbb",
+  "results/artifact_training_scores.json": "dda39b97fb87959f03f6eebea75678626d09226ad0b9395cf05794c26f21c4ef",
+  "results/independent_oof_audit.json": "e1229e82b02675a8a82a4e761012be67122324bf7e693ad14b94bd4d99aed382"
+}

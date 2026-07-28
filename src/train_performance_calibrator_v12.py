@@ -69,6 +69,12 @@ class RankerSpec:
     char_ngram_min: int = 2
     char_ngram_max: int = 5
     char_max_features: int = 4000
+    local_gap_min: float = 0.10
+    local_gap_max: float = 0.40
+    mid_percentile_min: float = 0.20
+    mid_percentile_max: float = 0.80
+    mid_pair_boost: float = 1.0
+    extreme_pair_weight: float = 1.0
 
 
 SPECS = [
@@ -454,6 +460,33 @@ def build_feature_matrices(
     )
 
 
+def pair_region_weight(
+    left_target: float,
+    right_target: float,
+    gap: float,
+    spec: RankerSpec,
+) -> float:
+    weight = spec.local_boost if (
+        spec.local_gap_min <= gap <= spec.local_gap_max
+    ) else 1.0
+    both_mid = (
+        spec.mid_percentile_min < left_target < spec.mid_percentile_max
+        and spec.mid_percentile_min < right_target < spec.mid_percentile_max
+    )
+    opposite_extremes = (
+        left_target <= spec.mid_percentile_min
+        and right_target >= spec.mid_percentile_max
+    ) or (
+        right_target <= spec.mid_percentile_min
+        and left_target >= spec.mid_percentile_max
+    )
+    if both_mid:
+        weight *= spec.mid_pair_boost
+    if opposite_extremes:
+        weight *= spec.extreme_pair_weight
+    return weight
+
+
 def pair_infos(
     y: np.ndarray,
     channels: np.ndarray,
@@ -469,9 +502,12 @@ def pair_infos(
                 gap = abs(float(y[left] - y[right]))
                 if gap < spec.min_gap:
                     continue
-                weight = 1.0
-                if 0.10 <= gap <= 0.40:
-                    weight *= spec.local_boost
+                weight = pair_region_weight(
+                    float(y[left]),
+                    float(y[right]),
+                    gap,
+                    spec,
+                )
                 if spec.reliability_weighting:
                     weight *= math.sqrt(
                         float(reliability[left]) * float(reliability[right])
@@ -502,9 +538,12 @@ def pair_infos(
                 gap = abs(float(y[left] - y[right]))
                 if gap < spec.min_gap:
                     continue
-                weight = 1.0
-                if 0.10 <= gap <= 0.40:
-                    weight *= spec.local_boost
+                weight = pair_region_weight(
+                    float(y[left]),
+                    float(y[right]),
+                    gap,
+                    spec,
+                )
                 if spec.reliability_weighting:
                     weight *= math.sqrt(
                         float(reliability[left]) * float(reliability[right])

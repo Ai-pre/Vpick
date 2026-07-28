@@ -12,8 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from train_performance_calibrator_v12 import (  # noqa: E402
+    RankerSpec,
     SPECS,
     normalize_semantic_text,
+    pair_region_weight,
     pair_infos,
 )
 
@@ -89,6 +91,36 @@ class PerformanceCalibratorV12Tests(unittest.TestCase):
             totals.setdefault(info["channel"], 0.0)
             totals[info["channel"]] += float(info["weight"])
         self.assertAlmostEqual(totals["a"], totals["b"], places=8)
+
+    def test_default_pair_region_weight_preserves_v13_behavior(self) -> None:
+        spec = RankerSpec(
+            "default",
+            "concat_raw_char",
+            "raw",
+            False,
+            False,
+            0.05,
+            2.0,
+            False,
+        )
+        self.assertEqual(pair_region_weight(0.3, 0.5, 0.2, spec), 2.0)
+        self.assertEqual(pair_region_weight(0.1, 0.9, 0.8, spec), 1.0)
+
+    def test_mid_sensitive_pair_region_weights(self) -> None:
+        spec = RankerSpec(
+            "mid_sensitive",
+            "concat_normalized_char",
+            "train_ecdf",
+            False,
+            True,
+            0.03,
+            2.0,
+            False,
+            mid_pair_boost=3.0,
+            extreme_pair_weight=0.25,
+        )
+        self.assertEqual(pair_region_weight(0.3, 0.5, 0.2, spec), 6.0)
+        self.assertEqual(pair_region_weight(0.1, 0.9, 0.8, spec), 0.25)
 
 
 if __name__ == "__main__":

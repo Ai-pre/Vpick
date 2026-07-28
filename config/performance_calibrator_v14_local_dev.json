@@ -1,0 +1,68 @@
+{
+  "protocol_id": "performance_calibrator_v14_local_preserving_fixed_text_dev_2026_07_28",
+  "status": "development_only_not_validated",
+  "objective": "Preserve similar-performance pair ordering with a fixed normalized text representation while retaining moderate mid-pair emphasis.",
+  "target": "channel_performance_percentile_PRIVATE",
+  "group_key": "longform_id",
+  "candidate_specs": [
+    "field_aware_clean_text_only"
+  ],
+  "pair_weighting": {
+    "minimum_gap": 0.03,
+    "local_gap_min": 0.10,
+    "local_gap_max": 0.40,
+    "local_pair_boost": 4.0,
+    "mid_percentile_min": 0.20,
+    "mid_percentile_max": 0.80,
+    "mid_pair_boost": 2.0,
+    "opposite_extreme_pair_weight": 0.5,
+    "channel_balanced_pairs": true
+  },
+  "inner_selection_weights": {
+    "mid_channel_centered_spearman": 0.3,
+    "mid_pairwise_skill": 0.15,
+    "same_channel_local_pairwise_skill": 0.55
+  },
+  "excluded_proxy_features": [
+    "transcript_timed_line_count",
+    "speaker_marker_count",
+    "bracket_count",
+    "transcript_line_count"
+  ],
+  "random_seeds": [
+    20260728,
+    20260729,
+    20260730,
+    20260731,
+    20260732,
+    20260733,
+    20260734,
+    20260735,
+    20260736,
+    20260737
+  ],
+  "outer_splits": 5,
+  "inner_splits": 4,
+  "c_values": [0.03, 0.1, 0.3, 1.0, 3.0],
+  "bootstrap_repetitions": 2000,
+  "forbidden_model_inputs": [
+    "channel_name",
+    "views",
+    "likes",
+    "performance_label_PRIVATE",
+    "channel_performance_percentile_PRIVATE",
+    "percentile_bucket",
+    "dataset_role_v2",
+    "dataset_role_v3",
+    "short_video_id",
+    "short_video_url",
+    "long_video_url",
+    "transcript_source"
+  ],
+  "claim_policy": {
+    "configuration_selected_after_same_data_ablation": true,
+    "current_94_items_are_development_data": true,
+    "accepted_as_performance_judge": false,
+    "fresh_mid_enriched_holdout_required": true
+  }
+}

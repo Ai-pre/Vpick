@@ -1,0 +1,66 @@
+{
+  "artifact_id": "shortform_success_judge_v14_dev_text_only",
+  "status": "development_only_not_validated",
+  "protocol_id": "performance_calibrator_v14_mid_sensitive_nested_dev_2026_07_28",
+  "score_definition": "Empirical percentile of the fixed pairwise text ranker against the 94-candidate development reference score distribution.",
+  "required_input_fields": [
+    "candidate_id",
+    "description",
+    "transcript",
+    "before_context",
+    "after_context"
+  ],
+  "forbidden_inputs": [
+    "channel_name",
+    "views",
+    "likes",
+    "performance_label_PRIVATE",
+    "channel_performance_percentile_PRIVATE",
+    "percentile_bucket",
+    "dataset_role_v2",
+    "dataset_role_v3",
+    "short_video_id",
+    "short_video_url",
+    "long_video_url",
+    "transcript_source"
+  ],
+  "normalization": "normalize_semantic_text",
+  "c_value": 3.0,
+  "training_candidate_count": 94,
+  "training_longform_count": 85,
+  "training_pair_count": 632,
+  "same_channel_pair_count": 632,
+  "cross_channel_pair_count": 0,
+  "accepted_as_performance_judge": false,
+  "spec": {
+    "name": "field_aware_clean_text_only",
+    "representation": "field_aware_char_word",
+    "score_calibration": "train_ecdf",
+    "mid_pair_boost": 3.0,
+    "local_pair_boost": 2.0,
+    "extreme_pair_weight": 0.25
+  },
+  "excluded_proxy_features": [
+    "transcript_timed_line_count",
+    "speaker_marker_count",
+    "bracket_count",
+    "transcript_line_count"
+  ],
+  "kept_structure_features_for_audit_only": [
+    "duration_sec_feature",
+    "transcript_char_count",
+    "description_char_count",
+    "before_context_char_count",
+    "after_context_char_count",
+    "question_count",
+    "exclamation_count",
+    "hangul_ratio",
+    "transcript_chars_per_sec",
+    "description_chars_per_sec",
+    "visual_evidence_available_feature",
+    "description_missing",
+    "transcript_missing"
+  ],
+  "artifact_private_path": "data/private/judge_validation_94/performance_calibrator_v14_dev/shortform_success_judge_v14_dev.joblib",
+  "warning": "This artifact is a development candidate. It must be scored once on a fresh mid-enriched holdout before any performance-judge claim."
+}
