@@ -92,16 +92,21 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_scenes_for_group(group_rows: list[dict[str, str]]) -> list[dict[str, Any]]:
+def load_scenes_for_group(
+    group_rows: list[dict[str, str]],
+    raw_dir: Path = RAW_DIR,
+) -> list[dict[str, Any]]:
     first = group_rows[0]
     pair_id = first["pair_id"]
     long_video_id = first.get("long_video_id", "").strip()
     candidates = [
-        RAW_DIR / f"{pair_id}_scenes.json",
-        RAW_DIR / f"{long_video_id}_scenes.json" if long_video_id else RAW_DIR / "__missing__.json",
+        raw_dir / f"{pair_id}_scenes.json",
+        raw_dir / f"{long_video_id}_scenes.json"
+        if long_video_id
+        else raw_dir / "__missing__.json",
     ]
     if not long_video_id:
-        candidates.append(RAW_DIR / "scenes.json")
+        candidates.append(raw_dir / "scenes.json")
     for path in candidates:
         if path.exists():
             return extract_scene_list(load_json(path))
@@ -375,6 +380,12 @@ def rows_for_group(
 def main() -> int:
     parser = argparse.ArgumentParser(description="Select a diverse no-API slate from Vpick scene candidates.")
     parser.add_argument("--dataset", default=str(ROOT / "data" / "processed" / "pilot_dataset_pairs.csv"))
+    parser.add_argument(
+        "--raw-dir",
+        type=Path,
+        default=RAW_DIR,
+        help="Directory containing <long_video_id>_scenes.json files.",
+    )
     parser.add_argument("--output", required=True)
     parser.add_argument("--strategy", choices=["timeline_bins", "timeline_bins_bridge", "mmr"], default="timeline_bins")
     parser.add_argument("--run-id", default="")
@@ -400,7 +411,7 @@ def main() -> int:
     )
 
     for group_id, group_rows in group_dataset(dataset):
-        scenes = load_scenes_for_group(group_rows)
+        scenes = load_scenes_for_group(group_rows, args.raw_dir)
         candidates = build_adjacent_candidates(
             scenes,
             min_duration_sec=args.min_duration_sec,

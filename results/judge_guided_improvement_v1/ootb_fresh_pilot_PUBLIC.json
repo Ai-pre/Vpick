@@ -1,0 +1,51 @@
+{
+  "protocol_id": "judge_guided_improvement_v1_2026_07_29",
+  "status": "pipeline_implemented_validation_pending",
+  "fresh_longform_count": 1,
+  "fresh_gold_pair_count": 1,
+  "candidate_count": 14,
+  "gold_was_in_candidate_pool": true,
+  "oracle_best_iou": 0.580983333333334,
+  "variants": [
+    {
+      "variant": "deterministic_baseline",
+      "gold_candidate_rank": 7,
+      "core_at_5": 0,
+      "tight_at_5": 0,
+      "best_iou_at_5": 0.0
+    },
+    {
+      "variant": "pointwise_only",
+      "gold_candidate_rank": 8,
+      "core_at_5": 0,
+      "tight_at_5": 0,
+      "best_iou_at_5": 0.0
+    },
+    {
+      "variant": "v14_only",
+      "gold_candidate_rank": 14,
+      "core_at_5": 0,
+      "tight_at_5": 0,
+      "best_iou_at_5": 0.0
+    },
+    {
+      "variant": "hybrid_50_50",
+      "gold_candidate_rank": 12,
+      "core_at_5": 0,
+      "tight_at_5": 0,
+      "best_iou_at_5": 0.0
+    }
+  ],
+  "claim": {
+    "pointwise_judge_validated_for_improvement": false,
+    "v14_validated_for_within_video_reranking": false,
+    "hybrid_validated_for_improvement": false,
+    "reason": "All four selectors missed the fresh gold interval at Top5; n=1 is diagnostic only."
+  },
+  "leakage_policy": {
+    "gold_excluded_from_candidate_generation": true,
+    "performance_metadata_excluded_from_model_input": true,
+    "gold_joined_after_scoring": true,
+    "weights_tuned_on_pilot": false
+  }
+}

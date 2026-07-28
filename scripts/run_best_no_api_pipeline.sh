@@ -12,9 +12,11 @@ RERANK_DIR="$OUT_ROOT/final_rerank"
 SLATE_DIR="$OUT_ROOT/longform_slate_top5"
 LLM_DIR="$OUT_ROOT/llm_rerank_top5"
 LLM_RERANK_DRY_RUN="${LLM_RERANK_DRY_RUN:-1}"
+RAW_DIR="${RAW_DIR:-data/raw/vpick}"
 
 "$PYTHON_BIN" src/select_diverse_candidates.py \
   --dataset "$DATASET" \
+  --raw-dir "$RAW_DIR" \
   --output "$STAGE1_DIR/predictions.csv" \
   --strategy timeline_bins_bridge \
   --run-id timeline_bins_bridge_k12_b12_max130 \
@@ -30,6 +32,7 @@ LLM_RERANK_DRY_RUN="${LLM_RERANK_DRY_RUN:-1}"
 
 "$PYTHON_BIN" src/expand_trim_windows.py \
   --stage1-predictions "$STAGE1_DIR/predictions.csv" \
+  --raw-dir "$RAW_DIR" \
   --output "$TRIM_DIR/predictions.csv" \
   --source-rank 20 \
   --source-run-id timeline_bins_bridge_k12_b12_max130 \
@@ -57,6 +60,7 @@ LLM_RERANK_DRY_RUN="${LLM_RERANK_DRY_RUN:-1}"
 
 "$PYTHON_BIN" src/rerank_trim_candidates.py \
   --dataset "$DATASET" \
+  --raw-dir "$RAW_DIR" \
   --predictions "$TRIM_DIR/predictions.csv" \
   --output "$RERANK_DIR/predictions.csv" \
   --top-k 80 \
@@ -70,6 +74,7 @@ LLM_RERANK_DRY_RUN="${LLM_RERANK_DRY_RUN:-1}"
 
 "$PYTHON_BIN" src/build_longform_slate.py \
   --predictions "$RERANK_DIR/predictions.csv" \
+  --raw-dir "$RAW_DIR" \
   --output "$SLATE_DIR/slate.csv" \
   --top-k 5 \
   --selection-strategy adaptive_coverage \

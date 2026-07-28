@@ -1,0 +1,54 @@
+{
+  "protocol_id": "judge_guided_improvement_v1_2026_07_29",
+  "candidate_pool": {
+    "generator_frozen": true,
+    "gold_injection_in_final_experiment": false,
+    "same_candidates_for_all_variants": true
+  },
+  "selectors": {
+    "deterministic_baseline": "existing rerank score",
+    "pointwise_only": "Shortform Judge v10 group rank percentile",
+    "v14_only": "v14 raw ranker score group rank percentile",
+    "hybrid_50_50": {
+      "pointwise_weight": 0.5,
+      "v14_weight": 0.5,
+      "weight_tuning_allowed": false
+    }
+  },
+  "primary_validation": {
+    "target": "high-performance published-short source interval",
+    "metrics": [
+      "core_at_1",
+      "core_at_3",
+      "core_at_5",
+      "tight_at_5",
+      "best_iou_at_5"
+    ],
+    "required_contrasts": [
+      "pointwise_only_vs_deterministic_baseline",
+      "hybrid_50_50_vs_v14_only",
+      "hybrid_50_50_vs_deterministic_baseline"
+    ]
+  },
+  "interpretation": {
+    "pointwise_value_supported_when": "pointwise_only beats deterministic baseline",
+    "incremental_pointwise_value_supported_when": "hybrid_50_50 beats v14_only",
+    "performance_calibrator_value_supported_when": "v14_only beats deterministic baseline",
+    "forbidden_claim": "Judge score itself is not a validation target"
+  },
+  "leakage_rules": {
+    "forbidden_model_inputs": [
+      "channel_name",
+      "views",
+      "likes",
+      "performance_label",
+      "performance_percentile",
+      "short_title",
+      "short_url",
+      "gold_start_sec",
+      "gold_end_sec"
+    ],
+    "evaluation_join_after_scoring": true,
+    "split_group": "longform_id"
+  }
+}

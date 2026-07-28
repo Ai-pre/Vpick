@@ -13,9 +13,33 @@ Codex features + anonymous text -> continuous performance ranker
 new candidate -> shortform_success_potential_0_100
 ```
 
-## Current Frozen Candidate: v13 (2026-07-28)
+## Judge-Guided Highlight Improvement v1 (2026-07-29)
 
-현재 최고 개발 후보는 Codex 7개 특징·익명 설명·자막·경계 문맥을 사용하는
+현재 개선 파이프라인은 **Shortform Judge v10 + Performance Calibrator v14**를
+사용합니다. v10은 편집·구간 선택 품질을 진단하고, v14는 익명 텍스트·구조
+기반의 상대 성과 잠재력을 보정합니다. 두 점수를 각 롱폼 후보군 안에서
+tie-aware 순위 백분위로 변환한 뒤, 사전 고정 `50:50`으로 결합합니다.
+
+검증은 같은 고정 후보군에 대해 `deterministic / pointwise-only / v14-only /
+hybrid` 네 방식을 비교합니다. Judge 점수를 정답으로 삼지 않고, 모든 채점이
+끝난 후에만 성과가 확인된 실제 숏폼의 원본 구간을 결합해 Core@K, Tight@K,
+IoU@K를 계산합니다.
+
+첫 신규 OOTB 1건에서는 gold 후보가 14개 후보군 안에 있었지만 순위가
+deterministic 7위, Pointwise 8위, v14 14위, hybrid 12위여서 모두 Top5를
+놓쳤습니다. 따라서 상태는 **`pipeline_implemented_validation_pending`**이며,
+결과를 보고 가중치를 다시 맞추지 않았습니다.
+
+- 알고리즘·해석:
+  [`reports/judge_guided_improvement_v1_2026-07-29.md`](reports/judge_guided_improvement_v1_2026-07-29.md)
+- 고정 프로토콜:
+  [`config/judge_guided_improvement_v1.json`](config/judge_guided_improvement_v1.json)
+- 공개 파일럿:
+  [`results/judge_guided_improvement_v1/ootb_fresh_pilot_PUBLIC.json`](results/judge_guided_improvement_v1/ootb_fresh_pilot_PUBLIC.json)
+
+## Prior Frozen Candidate: v13 (2026-07-28)
+
+이전 개발 후보 v13은 Codex 7개 특징·익명 설명·자막·경계 문맥을 사용하는
 3개 Pairwise 성과 보정기의 동일 가중치 앙상블입니다. 채널명·조회수·좋아요·
 성과 라벨·백분위·URL·자막 출처는 모델 입력에서 제외했습니다.
 

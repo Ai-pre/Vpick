@@ -1,0 +1,5 @@
+variant,candidate_count,gold_candidate_rank,core_at_5,tight_at_5,best_iou_at_5,oracle_best_iou
+deterministic_baseline,14,7,0,0,0.0,0.580983
+pointwise_only,14,8,0,0,0.0,0.580983
+v14_only,14,14,0,0,0.0,0.580983
+hybrid_50_50,14,12,0,0,0.0,0.580983

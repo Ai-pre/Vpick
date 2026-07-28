@@ -33,8 +33,11 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_scenes(long_video_id: str) -> list[dict[str, Any]]:
-    path = RAW_DIR / f"{long_video_id}_scenes.json"
+def load_scenes(
+    long_video_id: str,
+    raw_dir: Path = RAW_DIR,
+) -> list[dict[str, Any]]:
+    path = raw_dir / f"{long_video_id}_scenes.json"
     if not path.exists():
         return []
     return extract_scene_list(load_json(path))
@@ -504,6 +507,7 @@ def build_slate(
     context_pad_sec: float,
     coverage_bin_count: int | None = None,
     coverage_per_bin: int = 1,
+    raw_dir: Path = RAW_DIR,
 ) -> list[dict[str, Any]]:
     output: list[dict[str, Any]] = []
     for long_video_id, long_rows in sorted(group_by_long(rows).items()):
@@ -516,7 +520,7 @@ def build_slate(
             seen.add(key)
             unique_rows.append(row)
 
-        scenes = load_scenes(long_video_id)
+        scenes = load_scenes(long_video_id, raw_dir)
         if selection_strategy == "timeline":
             selected_rows = select_timeline_diverse(unique_rows, top_k)
         elif selection_strategy == "timeline_score":
@@ -568,6 +572,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build one long-form to many short-form candidate slate.")
     parser.add_argument("--predictions", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument(
+        "--raw-dir",
+        type=Path,
+        default=RAW_DIR,
+        help="Directory containing <long_video_id>_scenes.json files.",
+    )
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--coverage-bin-count", type=int, default=0)
     parser.add_argument("--coverage-per-bin", type=int, default=1)
@@ -586,6 +596,7 @@ def main() -> int:
         args.context_pad_sec,
         args.coverage_bin_count or None,
         args.coverage_per_bin,
+        args.raw_dir,
     )
     write_csv(Path(args.output), rows)
     print(json.dumps({"slate": args.output, "rows": len(rows)}, ensure_ascii=False, indent=2))

@@ -63,8 +63,11 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_scenes(long_video_id: str) -> list[dict[str, Any]]:
-    path = RAW_DIR / f"{long_video_id}_scenes.json"
+def load_scenes(
+    long_video_id: str,
+    raw_dir: Path = RAW_DIR,
+) -> list[dict[str, Any]]:
+    path = raw_dir / f"{long_video_id}_scenes.json"
     if not path.exists():
         return []
     return extract_scene_list(load_json(path))
@@ -294,6 +297,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Expand stage-1 scene candidates into deterministic sliding trim windows.")
     parser.add_argument("--stage1-predictions", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument(
+        "--raw-dir",
+        type=Path,
+        default=RAW_DIR,
+        help="Directory containing <long_video_id>_scenes.json files.",
+    )
     parser.add_argument("--source-rank", type=int, default=10)
     parser.add_argument("--source-run-id", action="append")
     parser.add_argument("--duration-sec", action="append", type=float)
@@ -327,7 +336,7 @@ def main() -> int:
     for long_video_id, source_groups in group_source_rows_by_long(stage1_rows):
         rank_offset = 0
         if args.include_scene_boundary_windows or args.include_speech_boundary_windows:
-            scenes_by_long[long_video_id] = load_scenes(long_video_id)
+            scenes_by_long[long_video_id] = load_scenes(long_video_id, args.raw_dir)
         for compact_source_rank, (_, group_rows) in enumerate(source_groups, start=1):
             source = group_rows[0]
             source_rank = int(float(source["rank"]))

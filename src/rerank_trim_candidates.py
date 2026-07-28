@@ -166,8 +166,11 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_scenes(long_video_id: str) -> list[dict[str, Any]]:
-    path = RAW_DIR / f"{long_video_id}_scenes.json"
+def load_scenes(
+    long_video_id: str,
+    raw_dir: Path = RAW_DIR,
+) -> list[dict[str, Any]]:
+    path = raw_dir / f"{long_video_id}_scenes.json"
     if not path.exists():
         raise FileNotFoundError(f"No scene JSON for long_video_id={long_video_id}: {path}")
     return extract_scene_list(load_json(path))
@@ -424,6 +427,12 @@ def main() -> int:
     parser.add_argument("--dataset", default=str(ROOT / "data" / "processed" / "pilot_dataset_pairs.csv"))
     parser.add_argument("--predictions", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument(
+        "--raw-dir",
+        type=Path,
+        default=RAW_DIR,
+        help="Directory containing <long_video_id>_scenes.json files.",
+    )
     parser.add_argument("--top-k", type=int, default=10)
     parser.add_argument("--max-overlap", type=float, default=0.45)
     parser.add_argument("--source-band-count", type=int, default=12)
@@ -438,7 +447,7 @@ def main() -> int:
     for long_video_id, pair_rows in sorted(dataset_by_long.items()):
         if long_video_id not in predictions_by_long:
             continue
-        scenes = load_scenes(long_video_id)
+        scenes = load_scenes(long_video_id, args.raw_dir)
         scene_texts = [
             "\n".join([str(scene.get("description", "")), str(scene.get("transcript", ""))])
             for scene in scenes
