@@ -1,0 +1,19 @@
+{
+  "judge_run_id": "codex_direct_shortform_judge_v10_94",
+  "candidate_count": 94,
+  "scored_count": 94,
+  "abstain_count": 0,
+  "label_blind": true,
+  "gpu_used": false,
+  "external_api_used": false,
+  "prompt_id": "shortform_judge_v10_ko",
+  "score_formula": "0.5 * editorial_score_100 + 0.5 * engagement_score_100",
+  "source_salience_policy": "fixed_neutral_2_no_longform_overview",
+  "production_equivalent": false,
+  "production_equivalent_limitation": "All 94 candidates lack a compact longform_overview, so source_salience was fixed at neutral 2. The run validates transcript-context pointwise scoring, not full source-relative salience.",
+  "judge_score_mean": 72.6396,
+  "judge_score_min": 21.875,
+  "judge_score_max": 93.75,
+  "unique_judge_scores": 21,
+  "largest_tie_group": 11
+}

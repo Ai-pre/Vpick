@@ -1,0 +1,208 @@
+{
+  "protocol_id": "performance_calibrator_v12_fixed_pairwise_2026_07_28",
+  "registered_primary_spec": "registered_v12",
+  "accepted_as_performance_judge": false,
+  "registered_primary_metrics": {
+    "spec": "registered_v12",
+    "pooled_spearman": 0.19426862231112652,
+    "channel_centered_spearman": 0.21080163343921035,
+    "channel_macro_spearman": 0.2222246439331058,
+    "same_channel_pairwise_accuracy": 0.5705614567526556,
+    "same_channel_pair_count": 659,
+    "same_channel_local_pairwise_accuracy": 0.5971563981042654,
+    "same_channel_local_pair_count": 211,
+    "top_quintile_precision": 0.2857142857142857,
+    "channel_macro_ndcg": 0.8511678794262153,
+    "robust_rank_score": 0.1921154967715395,
+    "selection_score": 0.20130340301269214
+  },
+  "best_development_spec": "baseline_v11_raw",
+  "best_development_metrics": {
+    "spec": "baseline_v11_raw",
+    "pooled_spearman": 0.2622257893436395,
+    "channel_centered_spearman": 0.2733716274611312,
+    "channel_macro_spearman": 0.2680309206303257,
+    "same_channel_pairwise_accuracy": 0.6115326251896813,
+    "same_channel_pair_count": 659,
+    "same_channel_local_pairwise_accuracy": 0.6161137440758294,
+    "same_channel_local_pair_count": 211,
+    "top_quintile_precision": 0.3333333333333333,
+    "channel_macro_ndcg": 0.8632939999638012,
+    "robust_rank_score": 0.24917382165561958,
+    "selection_score": 0.2580518379532034
+  },
+  "leave_one_channel_out_metrics": {
+    "pooled_spearman": 0.1796784952211687,
+    "channel_centered_spearman": 0.15899705550221482,
+    "channel_macro_spearman": 0.10972860060996968,
+    "same_channel_pairwise_accuracy": 0.5735963581183612,
+    "same_channel_pair_count": 659,
+    "same_channel_local_pairwise_accuracy": 0.580568720379147,
+    "same_channel_local_pair_count": 211,
+    "top_quintile_precision": 0.2857142857142857,
+    "channel_macro_ndcg": 0.8090236439312707,
+    "robust_rank_score": 0.1442639532768002,
+    "selection_score": 0.14276692593312929
+  },
+  "acceptance_gates": [
+    {
+      "gate": "channel_centered_spearman",
+      "observed": 0.21080163343921035,
+      "required_minimum": 0.3,
+      "passed": false
+    },
+    {
+      "gate": "channel_macro_spearman",
+      "observed": 0.2222246439331058,
+      "required_minimum": 0.2,
+      "passed": true
+    },
+    {
+      "gate": "same_channel_pairwise_accuracy",
+      "observed": 0.5705614567526556,
+      "required_minimum": 0.58,
+      "passed": false
+    },
+    {
+      "gate": "same_channel_local_pairwise_accuracy",
+      "observed": 0.5971563981042654,
+      "required_minimum": 0.55,
+      "passed": true
+    },
+    {
+      "gate": "bootstrap_primary_ci_lower",
+      "observed": -0.027242998951512217,
+      "required_minimum": 0.0,
+      "passed": false
+    }
+  ],
+  "bootstrap_registered_primary": {
+    "channel_centered_spearman": {
+      "lower_95": -0.027242998951512217,
+      "median": 0.19889256668111344,
+      "upper_95": 0.40888092927266617,
+      "valid_repetitions": 2000
+    },
+    "channel_macro_spearman": {
+      "lower_95": -0.05922030685602609,
+      "median": 0.21601503322992383,
+      "upper_95": 0.44237760801774295,
+      "valid_repetitions": 2000
+    },
+    "same_channel_pairwise_accuracy": {
+      "lower_95": 0.4728084848766103,
+      "median": 0.5688061377245509,
+      "upper_95": 0.6681275473071324,
+      "valid_repetitions": 2000
+    },
+    "same_channel_local_pairwise_accuracy": {
+      "lower_95": 0.4449148218609478,
+      "median": 0.5936947879858657,
+      "upper_95": 0.7200045871559633,
+      "valid_repetitions": 2000
+    },
+    "robust_rank_score": {
+      "lower_95": -0.011079508571840816,
+      "median": 0.18587572740479863,
+      "upper_95": 0.3641813565823673,
+      "valid_repetitions": 2000
+    }
+  },
+  "candidate_input_audit": {
+    "candidate_count": 94,
+    "longform_count": 85,
+    "channel_count": 6,
+    "complete_description_count": 94,
+    "complete_transcript_count": 94,
+    "complete_before_context_count": 94,
+    "complete_after_context_count": 94,
+    "nonempty_longform_overview_count": 0,
+    "nonempty_scene_ids_count": 0,
+    "visual_evidence_candidate_count": 0,
+    "longform_candidate_multiplicity": {
+      "1": 79,
+      "2": 3,
+      "3": 3
+    }
+  },
+  "specifications": [
+    {
+      "name": "baseline_v11_raw",
+      "representation": "concat_raw_char",
+      "score_calibration": "raw",
+      "engineered_numeric": false,
+      "channel_balanced_pairs": false,
+      "min_gap": 0.05,
+      "local_boost": 1.0,
+      "reliability_weighting": false,
+      "cross_channel_weight": 0.0
+    },
+    {
+      "name": "baseline_v11_ecdf",
+      "representation": "concat_raw_char",
+      "score_calibration": "train_ecdf",
+      "engineered_numeric": false,
+      "channel_balanced_pairs": false,
+      "min_gap": 0.05,
+      "local_boost": 1.0,
+      "reliability_weighting": false,
+      "cross_channel_weight": 0.0
+    },
+    {
+      "name": "normalized_char_ecdf",
+      "representation": "concat_normalized_char",
+      "score_calibration": "train_ecdf",
+      "engineered_numeric": true,
+      "channel_balanced_pairs": false,
+      "min_gap": 0.05,
+      "local_boost": 1.0,
+      "reliability_weighting": false,
+      "cross_channel_weight": 0.0
+    },
+    {
+      "name": "field_aware_ecdf",
+      "representation": "field_aware_char_word",
+      "score_calibration": "train_ecdf",
+      "engineered_numeric": true,
+      "channel_balanced_pairs": false,
+      "min_gap": 0.05,
+      "local_boost": 1.0,
+      "reliability_weighting": false,
+      "cross_channel_weight": 0.0
+    },
+    {
+      "name": "field_channel_balanced",
+      "representation": "field_aware_char_word",
+      "score_calibration": "train_ecdf",
+      "engineered_numeric": true,
+      "channel_balanced_pairs": true,
+      "min_gap": 0.05,
+      "local_boost": 1.0,
+      "reliability_weighting": false,
+      "cross_channel_weight": 0.0
+    },
+    {
+      "name": "registered_v12",
+      "representation": "field_aware_char_word",
+      "score_calibration": "train_ecdf",
+      "engineered_numeric": true,
+      "channel_balanced_pairs": true,
+      "min_gap": 0.03,
+      "local_boost": 1.5,
+      "reliability_weighting": true,
+      "cross_channel_weight": 0.0
+    },
+    {
+      "name": "registered_v12_cross",
+      "representation": "field_aware_char_word",
+      "score_calibration": "train_ecdf",
+      "engineered_numeric": true,
+      "channel_balanced_pairs": true,
+      "min_gap": 0.03,
+      "local_boost": 1.5,
+      "reliability_weighting": true,
+      "cross_channel_weight": 0.1
+    }
+  ],
+  "status_note": "The 94 candidates have complete candidate-level text, but no full longform overview or visual evidence. This is exploratory grouped OOF and still requires a fresh untouched holdout."
+}

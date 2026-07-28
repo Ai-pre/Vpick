@@ -1,0 +1,100 @@
+{
+  "dataset_version": "judge_validation_94_v1",
+  "candidate_count": 94,
+  "longform_count": 85,
+  "label_counts_PRIVATE": {
+    "mid": 34,
+    "neg": 30,
+    "pos": 30
+  },
+  "channel_counts": {
+    "BDNS": 10,
+    "OOTB": 17,
+    "숏박스": 21,
+    "안원잘부": 15,
+    "워크맨": 21,
+    "피식대학": 10
+  },
+  "transcript_source_by_label_PRIVATE": {
+    "mid": {
+      "yt_dlp_transcript_fallback": 34
+    },
+    "neg": {
+      "vpick_scene_api": 20,
+      "yt_dlp_transcript_fallback": 10
+    },
+    "pos": {
+      "vpick_scene_api": 27,
+      "yt_dlp_transcript_fallback": 3
+    }
+  },
+  "context_policy": {
+    "before": "rightmost 200 characters",
+    "after": "leftmost 200 characters"
+  },
+  "raw_context_mean_chars_PRIVATE": {
+    "before_context": {
+      "mid": 277.12,
+      "neg": 143.23,
+      "pos": 136.4
+    },
+    "after_context": {
+      "mid": 296.85,
+      "neg": 140.87,
+      "pos": 131.57
+    }
+  },
+  "normalized_context_mean_chars_PRIVATE": {
+    "before_context": {
+      "mid": 179.74,
+      "neg": 135.83,
+      "pos": 134.03
+    },
+    "after_context": {
+      "mid": 186.41,
+      "neg": 136.1,
+      "pos": 125.0
+    }
+  },
+  "split": {
+    "split_lock_version": "judge94_grouped_v1",
+    "seed": "20260728",
+    "dev_fraction_target": 0.2,
+    "dev_candidate_count": 19,
+    "locked_test_candidate_count": 75,
+    "dev_longform_count": 17,
+    "locked_test_longform_count": 68,
+    "longform_overlap_count": 0,
+    "dev_label_counts": {
+      "mid": 7,
+      "neg": 6,
+      "pos": 6
+    },
+    "locked_test_label_counts": {
+      "mid": 27,
+      "neg": 24,
+      "pos": 24
+    },
+    "dev_channel_counts": {
+      "BDNS": 2,
+      "OOTB": 3,
+      "숏박스": 4,
+      "안원잘부": 4,
+      "워크맨": 4,
+      "피식대학": 2
+    },
+    "group_assignment_reasons": {
+      "deterministic_group_stratified_expansion": 5,
+      "deterministic_group_stratified_holdout": 26,
+      "preserve_existing_dev_group": 12,
+      "preserve_existing_locked_test_group": 42
+    }
+  },
+  "blind_input_private_key_count": 0,
+  "production_equivalent": false,
+  "blocking_issue": "The 94-row handover input has no full longform_overview. The normalized file is valid for the auxiliary performance-consistency experiment, but it must not be reported as an exact production-equivalent v10 validation until overviews are rebuilt uniformly.",
+  "source_sha256": {
+    "labels": "b896f16175dcbd41667453ded90d2e5b24a918b496caf0c3e2b467822a0df292",
+    "texts": "94d6ef42b9a69e79952fd49a8fd913feb7a0494f7591f2514300723e56dd4661"
+  }
+}

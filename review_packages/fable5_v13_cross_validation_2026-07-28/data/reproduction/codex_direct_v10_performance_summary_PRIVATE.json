@@ -1,0 +1,296 @@
+{
+  "experiment": "exp1_auxiliary_performance_consistency",
+  "target_candidate_count": 94,
+  "dev_candidate_count": 19,
+  "locked_test_candidate_count": 75,
+  "score_field": "judge_score_100",
+  "interpretation": "This is an auxiliary performance-consistency diagnostic, not the primary validity test for the segment-selection Judge.",
+  "split_policy": "Split by longform_id. Development metrics may guide diagnosis; locked_test metrics must not be used to tune the prompt or weights.",
+  "controls_full_94": {
+    "candidate_count": 94,
+    "random": {
+      "simulations": 5000,
+      "seed": 20260728,
+      "three_class_accuracy": {
+        "mean": 0.3334063829787234,
+        "p2_5": 0.23404255319148937,
+        "p97_5": 0.425531914893617
+      },
+      "quadratic_weighted_kappa": {
+        "mean": 0.0008400000000001247,
+        "p2_5": -0.19999999999999996,
+        "p97_5": 0.20000000000000007
+      },
+      "within_channel_centered_spearman": {
+        "mean": 0.0012482381449437287,
+        "p2_5": -0.20185686985963322,
+        "p97_5": 0.2074058023548798
+      },
+      "channel_macro_spearman": {
+        "mean": 0.0008303134579791406,
+        "p2_5": -0.2167103703115192,
+        "p97_5": 0.21935914954265626
+      }
+    },
+    "label_oracle_sanity_only": {
+      "warning": "Deliberate label-leakage upper control. It is not a deployable Judge and exists only to expose how label-aware metrics remain inflated. Adding mid examples cannot make a label oracle collapse by itself.",
+      "polar_60_metrics": {
+        "candidate_count": 60,
+        "three_class_accuracy": 0.6333333333333333,
+        "quadratic_weighted_kappa": 0.7755102040816326,
+        "pooled_spearman_score_percentile": 0.7609928712801283,
+        "within_channel_centered_spearman": 0.8362095398213578,
+        "channel_macro_spearman": 0.8194932529322076,
+        "channel_spearman": {
+          "BDNS": 0.872081599272381,
+          "OOTB": 0.8486125923208183,
+          "숏박스": 0.7546759242171566,
+          "안원잘부": 0.6181818181818182,
+          "워크맨": 0.8234075836010718,
+          "피식대학": 1.0
+        },
+        "unique_score_count": 60,
+        "largest_tie_group": 1
+      },
+      "all_94_metrics": {
+        "candidate_count": 94,
+        "three_class_accuracy": 1.0,
+        "quadratic_weighted_kappa": 1.0,
+        "pooled_spearman_score_percentile": 0.8970057022594609,
+        "within_channel_centered_spearman": 0.9073660657331297,
+        "channel_macro_spearman": 0.8485511506744139,
+        "channel_spearman": {
+          "BDNS": 0.8632258720256917,
+          "OOTB": 0.8985905984970893,
+          "숏박스": 0.8721962749644412,
+          "안원잘부": 0.8107142857142857,
+          "워크맨": 0.9414094421761009,
+          "피식대학": 0.7051704306688749
+        },
+        "unique_score_count": 94,
+        "largest_tie_group": 1
+      }
+    },
+    "polar_bucket_shortcut_sanity": {
+      "simulations": 5000,
+      "seed": 20270728,
+      "definition": "POS receives a random score in [2,3), NEG in [0,1), and MID receives a random score across [0,3). This deliberately shallow control knows only the polar buckets and has no within-bucket skill.",
+      "three_class_accuracy": {
+        "mean": 0.6535617021276596,
+        "p2_5": 0.5531914893617021,
+        "p97_5": 0.7446808510638298
+      },
+      "quadratic_weighted_kappa": {
+        "mean": 0.7286233333333334,
+        "p2_5": 0.65,
+        "p97_5": 0.8
+      },
+      "pooled_spearman_score_percentile": {
+        "mean": 0.730052517068089,
+        "p2_5": 0.6533136857428704,
+        "p97_5": 0.802385914668737
+      },
+      "within_channel_centered_spearman": {
+        "mean": 0.7518881476220229,
+        "p2_5": 0.6759726906123403,
+        "p97_5": 0.8240237007166336
+      },
+      "channel_macro_spearman": {
+        "mean": 0.7023301282580169,
+        "p2_5": 0.6023765877845292,
+        "p97_5": 0.794340631084709
+      }
+    }
+  },
+  "controls_locked_test": {
+    "candidate_count": 75,
+    "random": {
+      "simulations": 5000,
+      "seed": 20260828,
+      "three_class_accuracy": {
+        "mean": 0.334568,
+        "p2_5": 0.22666666666666666,
+        "p97_5": 0.44
+      },
+      "quadratic_weighted_kappa": {
+        "mean": 0.0013875000000000014,
+        "p2_5": -0.22916666666666674,
+        "p97_5": 0.22916666666666663
+      },
+      "within_channel_centered_spearman": {
+        "mean": 0.0017325831570782432,
+        "p2_5": -0.23383219136593159,
+        "p97_5": 0.2372464230339868
+      },
+      "channel_macro_spearman": {
+        "mean": 0.0009893816399124348,
+        "p2_5": -0.2440364211324102,
+        "p97_5": 0.2486712100392252
+      }
+    },
+    "label_oracle_sanity_only": {
+      "warning": "Deliberate label-leakage upper control. It is not a deployable Judge and exists only to expose how label-aware metrics remain inflated. Adding mid examples cannot make a label oracle collapse by itself.",
+      "polar_60_metrics": {
+        "candidate_count": 48,
+        "three_class_accuracy": 0.625,
+        "quadratic_weighted_kappa": 0.7692307692307692,
+        "pooled_spearman_score_percentile": 0.7373280007612842,
+        "within_channel_centered_spearman": 0.8411595573250015,
+        "channel_macro_spearman": 0.8600488708621574,
+        "channel_spearman": {
+          "BDNS": 1.0,
+          "OOTB": 0.7865999889816444,
+          "숏박스": 0.704029100680038,
+          "안원잘부": 0.9666666666666667,
+          "워크맨": 0.7029974688445952,
+          "피식대학": 1.0
+        },
+        "unique_score_count": 48,
+        "largest_tie_group": 1
+      },
+      "all_94_metrics": {
+        "candidate_count": 75,
+        "three_class_accuracy": 1.0,
+        "quadratic_weighted_kappa": 1.0,
+        "pooled_spearman_score_percentile": 0.886822799175152,
+        "within_channel_centered_spearman": 0.8965061062048818,
+        "channel_macro_spearman": 0.7461753573447559,
+        "channel_spearman": {
+          "BDNS": 0.6666666666666666,
+          "OOTB": 0.9361256188911932,
+          "숏박스": 0.855566424834438,
+          "안원잘부": 0.8181818181818182,
+          "워크맨": 0.8771525247778393,
+          "피식대학": 0.3233590907165799
+        },
+        "unique_score_count": 75,
+        "largest_tie_group": 1
+      }
+    },
+    "polar_bucket_shortcut_sanity": {
+      "simulations": 5000,
+      "seed": 20270828,
+      "definition": "POS receives a random score in [2,3), NEG in [0,1), and MID receives a random score across [0,3). This deliberately shallow control knows only the polar buckets and has no within-bucket skill.",
+      "three_class_accuracy": {
+        "mean": 0.6556053333333334,
+        "p2_5": 0.5466666666666666,
+        "p97_5": 0.76
+      },
+      "quadratic_weighted_kappa": {
+        "mean": 0.7309416666666667,
+        "p2_5": 0.6458333333333333,
+        "p97_5": 0.8125
+      },
+      "pooled_spearman_score_percentile": {
+        "mean": 0.7310351005696688,
+        "p2_5": 0.6448753793048966,
+        "p97_5": 0.8073497727494643
+      },
+      "within_channel_centered_spearman": {
+        "mean": 0.7621260078407205,
+        "p2_5": 0.6777392120742439,
+        "p97_5": 0.8362449172637073
+      },
+      "channel_macro_spearman": {
+        "mean": 0.659739916715191,
+        "p2_5": 0.5261519790490488,
+        "p97_5": 0.7784643982872241
+      }
+    }
+  },
+  "transcript_source_shortcut_control_PRIVATE": {
+    "available": true,
+    "warning": "This control uses transcript_source only. The source field is not passed to the Judge, but source-specific text formatting can act as a proxy, so above-random performance indicates a confounding risk.",
+    "dev_count": 19,
+    "locked_test_count": 75,
+    "source_rules_PRIVATE": {
+      "yt_dlp_transcript_fallback": {
+        "predicted_label_PRIVATE": "mid",
+        "mean_percentile_PRIVATE": 34.53333333333333,
+        "dev_count": 9
+      },
+      "vpick_scene_api": {
+        "predicted_label_PRIVATE": "pos",
+        "mean_percentile_PRIVATE": 60.71,
+        "dev_count": 10
+      }
+    },
+    "three_class_accuracy": 0.64,
+    "quadratic_weighted_kappa": 0.11764705882352944,
+    "score_metrics": {
+      "candidate_count": 75,
+      "three_class_accuracy": 0.4266666666666667,
+      "quadratic_weighted_kappa": 0.20833333333333337,
+      "pooled_spearman_score_percentile": 0.1207467715794345,
+      "within_channel_centered_spearman": 0.16357520825000846,
+      "channel_macro_spearman": 0.10274670400685855,
+      "channel_spearman": {
+        "BDNS": 0.2817180849095055,
+        "OOTB": 0.37678932930152986,
+        "숏박스": 0.3024393595287011,
+        "안원잘부": 0.34641016151377546,
+        "워크맨": -0.11005884166084501,
+        "피식대학": -0.5808178695515156
+      },
+      "unique_score_count": 2,
+      "largest_tie_group": 38
+    }
+  },
+  "judge_full_94_descriptive_only": {
+    "candidate_count": 94,
+    "three_class_accuracy": 0.3191489361702128,
+    "quadratic_weighted_kappa": 0.01666666666666683,
+    "pooled_spearman_score_percentile": 0.01311475219913521,
+    "within_channel_centered_spearman": 0.008017748209400377,
+    "channel_macro_spearman": -0.026861940380095,
+    "channel_spearman": {
+      "BDNS": -0.03058118275329542,
+      "OOTB": -0.23859432799013564,
+      "숏박스": -0.02815091216370962,
+      "안원잘부": -0.1257886513566569,
+      "워크맨": 0.32984984175288684,
+      "피식대학": -0.06790640976965928
+    },
+    "unique_score_count": 21,
+    "largest_tie_group": 11
+  },
+  "judge_dev_diagnostic": {
+    "candidate_count": 19,
+    "three_class_accuracy": 0.15789473684210525,
+    "quadratic_weighted_kappa": -0.16666666666666674,
+    "pooled_spearman_score_percentile": -0.27998508489448404,
+    "within_channel_centered_spearman": -0.3941945661758156,
+    "channel_macro_spearman": -0.20631079789543696,
+    "channel_spearman": {
+      "BDNS": -1.0,
+      "OOTB": -0.5,
+      "숏박스": -0.4,
+      "안원잘부": 0.4,
+      "워크맨": -0.7378647873726218,
+      "피식대학": 1.0
+    },
+    "unique_score_count": 12,
+    "largest_tie_group": 3
+  },
+  "judge_locked_test_primary": {
+    "candidate_count": 75,
+    "three_class_accuracy": 0.3333333333333333,
+    "quadratic_weighted_kappa": 0.04166666666666663,
+    "pooled_spearman_score_percentile": 0.0785407585454745,
+    "within_channel_centered_spearman": 0.09609556276238178,
+    "channel_macro_spearman": 0.013910806396507205,
+    "channel_spearman": {
+      "BDNS": 0.2515015150017844,
+      "OOTB": -0.17829555760633395,
+      "숏박스": -0.11688367566828724,
+      "안원잘부": -0.11009637651263605,
+      "워크맨": 0.47040726265957866,
+      "피식대학": -0.2331683294950626
+    },
+    "unique_score_count": 19,
+    "largest_tie_group": 11
+  },
+  "scored_candidate_count": 94,
+  "abstain_or_unscored_count": 0,
+  "missing_score_candidate_ids": []
+}

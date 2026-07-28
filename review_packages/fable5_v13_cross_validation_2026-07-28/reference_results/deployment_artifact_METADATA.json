@@ -1,0 +1,84 @@
+{
+  "artifact_id": "shortform_success_judge_v13_frozen_ensemble",
+  "status": "development_frozen_pending_holdout",
+  "target_definition": "continuous within-channel Shorts view percentile",
+  "training_candidate_count": 94,
+  "training_longform_count": 85,
+  "quality_columns": [
+    "self_contained_clarity",
+    "progression_payoff",
+    "boundary_integrity",
+    "opening_pull",
+    "change_or_surprise",
+    "emotional_or_information_gain",
+    "memorable_specificity"
+  ],
+  "structure_columns": [
+    "duration_sec_feature",
+    "transcript_char_count",
+    "description_char_count",
+    "before_context_char_count",
+    "after_context_char_count",
+    "transcript_timed_line_count",
+    "transcript_line_count",
+    "speaker_marker_count",
+    "question_count",
+    "exclamation_count",
+    "bracket_count",
+    "hangul_ratio",
+    "transcript_chars_per_sec",
+    "description_chars_per_sec",
+    "visual_evidence_available_feature",
+    "description_missing",
+    "transcript_missing"
+  ],
+  "forbidden_inputs": [
+    "channel_name",
+    "views",
+    "likes",
+    "view_count",
+    "like_count",
+    "performance_label",
+    "performance_label_PRIVATE",
+    "performance_percentile",
+    "channel_performance_percentile_PRIVATE",
+    "percentile_bucket",
+    "dataset_role_v2",
+    "dataset_role_v3",
+    "short_url",
+    "short_video_url",
+    "short_video_id",
+    "long_video_url",
+    "transcript_source"
+  ],
+  "members": [
+    {
+      "name": "numeric_050",
+      "weight": 0.3333333333,
+      "numeric_scale": 0.5,
+      "channel_balanced_pairs": false,
+      "selected_c": 3.0,
+      "training_pair_count": 619
+    },
+    {
+      "name": "channel_balanced",
+      "weight": 0.3333333333,
+      "numeric_scale": 1.0,
+      "channel_balanced_pairs": true,
+      "selected_c": 10.0,
+      "training_pair_count": 619
+    },
+    {
+      "name": "numeric_025",
+      "weight": 0.3333333334,
+      "numeric_scale": 0.25,
+      "channel_balanced_pairs": false,
+      "selected_c": 1.0,
+      "training_pair_count": 619
+    }
+  ],
+  "internal_acceptance_gates_passed": true,
+  "accepted_as_performance_judge": false,
+  "artifact_private_path": "data/private/judge_validation_94/performance_calibrator_v13/shortform_success_judge_v13_pending_holdout.joblib",
+  "warning": "The architecture passed internal OOF gates but was selected on the same development dataset. A fresh holdout is required."
+}

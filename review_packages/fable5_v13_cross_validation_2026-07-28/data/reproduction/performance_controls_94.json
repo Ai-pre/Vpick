@@ -1,0 +1,107 @@
+{
+  "experiment": "exp1_auxiliary_performance_consistency",
+  "target_candidate_count": 94,
+  "score_field": "judge_score_100",
+  "interpretation": "This is an auxiliary performance-consistency diagnostic, not the primary validity test for the segment-selection Judge.",
+  "random_control": {
+    "simulations": 2000,
+    "seed": 20260728,
+    "three_class_accuracy": {
+      "mean": 0.3330797872340426,
+      "p2_5": 0.23404255319148937,
+      "p97_5": 0.425531914893617
+    },
+    "quadratic_weighted_kappa": {
+      "mean": -0.001058333333333208,
+      "p2_5": -0.19999999999999996,
+      "p97_5": 0.20000000000000007
+    },
+    "within_channel_centered_spearman": {
+      "mean": 0.00033205086608111147,
+      "p2_5": -0.19935696016776433,
+      "p97_5": 0.20443625644922048
+    },
+    "channel_macro_spearman": {
+      "mean": 0.0008903475370742305,
+      "p2_5": -0.2226771148675168,
+      "p97_5": 0.22286483228348603
+    }
+  },
+  "label_oracle_sanity_control": {
+    "warning": "Deliberate label-leakage upper control. It is not a deployable Judge and exists only to expose how label-aware metrics remain inflated. Adding mid examples cannot make a label oracle collapse by itself.",
+    "polar_60_metrics": {
+      "candidate_count": 60,
+      "three_class_accuracy": 0.6333333333333333,
+      "quadratic_weighted_kappa": 0.7755102040816326,
+      "pooled_spearman_score_percentile": 0.7609928712801283,
+      "within_channel_centered_spearman": 0.8362095398213578,
+      "channel_macro_spearman": 0.8194932529322076,
+      "channel_spearman": {
+        "BDNS": 0.872081599272381,
+        "OOTB": 0.8486125923208183,
+        "숏박스": 0.7546759242171566,
+        "안원잘부": 0.6181818181818182,
+        "워크맨": 0.8234075836010718,
+        "피식대학": 1.0
+      },
+      "unique_score_count": 60,
+      "largest_tie_group": 1
+    },
+    "all_94_metrics": {
+      "candidate_count": 94,
+      "three_class_accuracy": 1.0,
+      "quadratic_weighted_kappa": 1.0,
+      "pooled_spearman_score_percentile": 0.8970057022594609,
+      "within_channel_centered_spearman": 0.9073660657331297,
+      "channel_macro_spearman": 0.8485511506744139,
+      "channel_spearman": {
+        "BDNS": 0.8632258720256917,
+        "OOTB": 0.8985905984970893,
+        "숏박스": 0.8721962749644412,
+        "안원잘부": 0.8107142857142857,
+        "워크맨": 0.9414094421761009,
+        "피식대학": 0.7051704306688749
+      },
+      "unique_score_count": 94,
+      "largest_tie_group": 1
+    }
+  },
+  "transcript_source_shortcut_control_PRIVATE": {
+    "available": true,
+    "warning": "This control uses transcript_source only. The source field is not passed to the Judge, but source-specific text formatting can act as a proxy, so above-random performance indicates a confounding risk.",
+    "dev_count": 19,
+    "locked_test_count": 75,
+    "source_rules_PRIVATE": {
+      "yt_dlp_transcript_fallback": {
+        "predicted_label_PRIVATE": "mid",
+        "mean_percentile_PRIVATE": 34.53333333333333,
+        "dev_count": 9
+      },
+      "vpick_scene_api": {
+        "predicted_label_PRIVATE": "pos",
+        "mean_percentile_PRIVATE": 60.71,
+        "dev_count": 10
+      }
+    },
+    "three_class_accuracy": 0.64,
+    "quadratic_weighted_kappa": 0.11764705882352944,
+    "score_metrics": {
+      "candidate_count": 75,
+      "three_class_accuracy": 0.4266666666666667,
+      "quadratic_weighted_kappa": 0.20833333333333337,
+      "pooled_spearman_score_percentile": 0.1207467715794345,
+      "within_channel_centered_spearman": 0.16357520825000846,
+      "channel_macro_spearman": 0.10274670400685855,
+      "channel_spearman": {
+        "BDNS": 0.2817180849095055,
+        "OOTB": 0.37678932930152986,
+        "숏박스": 0.3024393595287011,
+        "안원잘부": 0.34641016151377546,
+        "워크맨": -0.11005884166084501,
+        "피식대학": -0.5808178695515156
+      },
+      "unique_score_count": 2,
+      "largest_tie_group": 38
+    }
+  }
+}
