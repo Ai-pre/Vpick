@@ -5,6 +5,16 @@
 예측을 직접 대조하여 방법론적으로 유효한지 반박 가능한 형태로 검증해
 주세요.
 
+```text
+Repository: https://github.com/Ai-pre/Vpick
+Branch: main
+Review package:
+review_packages/fable5_v13_cross_validation_2026-07-28
+```
+
+검토를 시작할 때 `git rev-parse HEAD`를 기록하고, 최종 답변에 사용한 commit
+hash를 명시하세요.
+
 ## 0. 가장 중요한 태도
 
 - 기존 README와 보고서의 수치를 정답으로 전제하지 마세요.
