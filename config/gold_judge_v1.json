@@ -1,0 +1,18 @@
+{
+  "candidate_prompt_id": "shortform_candidate_judge_v2_ko",
+  "candidate_weights": {
+    "opening_strength": 0.20,
+    "standalone": 0.20,
+    "completeness": 0.20,
+    "engagement_value": 0.20,
+    "boundary_naturalness": 0.10,
+    "titleability": 0.10
+  },
+  "runs": [
+    {
+      "run_id": "gpt_4o_mini_gold_judge_v1",
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  ]
+}

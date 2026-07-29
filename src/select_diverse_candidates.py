@@ -401,17 +401,42 @@ def main() -> int:
     parser.add_argument("--diversity-weight", type=float, default=2.0)
     parser.add_argument("--overlap-penalty", type=float, default=5.0)
     parser.add_argument("--bridge-reserve", type=int, default=0, help="Max bridge candidates to add. 0 means add one valid left-bridge per selected source.")
+    parser.add_argument(
+        "--skip-missing-scenes",
+        action="store_true",
+        help="Skip longforms without a scene JSON instead of stopping the run.",
+    )
+    parser.add_argument(
+        "--missing-scenes-report",
+        type=Path,
+        default=None,
+        help="Optional CSV audit of skipped longforms.",
+    )
     args = parser.parse_args()
 
     dataset = read_csv(Path(args.dataset))
     prediction_rows: list[dict[str, Any]] = []
+    missing_rows: list[dict[str, Any]] = []
     run_id = args.run_id or (
         f"{args.strategy}_k{args.top_k}_b{args.bins}_max{int(args.max_duration_sec)}_"
         f"ov{int(args.max_overlap_ratio * 100)}"
     )
 
     for group_id, group_rows in group_dataset(dataset):
-        scenes = load_scenes_for_group(group_rows, args.raw_dir)
+        try:
+            scenes = load_scenes_for_group(group_rows, args.raw_dir)
+        except FileNotFoundError:
+            if not args.skip_missing_scenes:
+                raise
+            missing_rows.append(
+                {
+                    "long_video_id": group_rows[0].get("long_video_id", ""),
+                    "pair_ids": "|".join(row["pair_id"] for row in group_rows),
+                    "pair_count": len(group_rows),
+                    "reason": "missing_scene_json",
+                }
+            )
+            continue
         candidates = build_adjacent_candidates(
             scenes,
             min_duration_sec=args.min_duration_sec,
@@ -452,7 +477,26 @@ def main() -> int:
         )
 
     write_csv(Path(args.output), prediction_rows)
-    print(json.dumps({"predictions": args.output, "rows": len(prediction_rows), "run_id": run_id}, ensure_ascii=False, indent=2))
+    if args.missing_scenes_report is not None:
+        write_csv(args.missing_scenes_report, missing_rows)
+    print(
+        json.dumps(
+            {
+                "predictions": args.output,
+                "rows": len(prediction_rows),
+                "run_id": run_id,
+                "skipped_longforms": len(missing_rows),
+                "skipped_pairs": sum(int(row["pair_count"]) for row in missing_rows),
+                "missing_scenes_report": (
+                    str(args.missing_scenes_report)
+                    if args.missing_scenes_report is not None
+                    else ""
+                ),
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
     return 0
 
 

@@ -1,0 +1,30 @@
+{
+  "candidate_prompt_id": "shortform_candidate_judge_v1_ko",
+  "set_prompt_id": "shortform_set_judge_v1_ko",
+  "candidate_weights": {
+    "hook_clarity": 0.20,
+    "standalone": 0.20,
+    "completeness": 0.20,
+    "engagement_value": 0.20,
+    "boundary_naturalness": 0.10,
+    "titleability": 0.10
+  },
+  "set_weights": {
+    "redundancy_control": 0.25,
+    "event_diversity": 0.25,
+    "timeline_coverage": 0.20,
+    "portfolio_quality": 0.30
+  },
+  "runs": [
+    {
+      "run_id": "gpt_4o_mini_judge_v1",
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "run_id": "claude_haiku45_judge_v1",
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001"
+    }
+  ]
+}

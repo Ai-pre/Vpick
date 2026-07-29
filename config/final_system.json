@@ -1,0 +1,44 @@
+{
+  "release_id": "vpick_final_2026_07_30",
+  "status": "development_release_requires_external_holdout",
+  "dataset": {
+    "channels": 6,
+    "longforms": 85,
+    "shorts": 94,
+    "performance_tiers": {
+      "high": 30,
+      "mid": 34,
+      "low": 30
+    },
+    "private_gold_in_repository": false
+  },
+  "evaluation_track": {
+    "config": "config/best_judge_pipeline.json",
+    "pointwise_prompt": "prompts/package_success_judge_v1_ko.md",
+    "report": "reports/package_success_improvements_2026-07-29.md",
+    "public_metrics": "results/final/judge_metrics.json"
+  },
+  "selection_track": {
+    "config": "config/best_improvement_pipeline.json",
+    "listwise_prompt": "prompts/hierarchical_multislate_listwise_v2_ko.md",
+    "report": "reports/improvement_pipeline_v2_2026-07-29.md",
+    "public_metrics": "results/final/improvement_metrics.csv"
+  },
+  "release_validation": {
+    "script": "src/validate_final_release.py",
+    "test": "tests/test_final_release_manifest.py"
+  },
+  "claims": {
+    "allowed": [
+      "The blind Pointwise Judge separates content and package quality from channel-conditioned reach.",
+      "The final selection pipeline improved common18 development Core@5 from 0.500 to 0.556.",
+      "The selected 40:15:45 formula is the best observed formula on the available 94-candidate development dataset."
+    ],
+    "forbidden": [
+      "The 40:15:45 formula is externally validated.",
+      "The 25% selection Judge weight is generally optimal.",
+      "The common18 result represents all 94 candidates.",
+      "The text-only selection Judge directly observes facial expression, audio tone, or caption effects."
+    ]
+  }
+}

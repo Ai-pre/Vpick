@@ -1,0 +1,45 @@
+{
+  "evaluation_id": "vpick_evaluation_system_v1",
+  "dataset": {
+    "candidates_blind": "deliverables/2026-07-24/performance_judge_v1/candidates_blind.jsonl",
+    "candidate_targets": "deliverables/2026-07-24/performance_judge_v1/candidate_targets_PRIVATE.csv",
+    "gold_metadata": "data/processed/goldlabel_60_replaced_v6_channel_normalized_2026-07-23.csv",
+    "channel_cohorts": "data/processed/channel_short_cohorts_2026-07-23.csv",
+    "channel_name_map": "data/processed/channel_name_normalization_map_v1.csv"
+  },
+  "historical_results": {
+    "standalone_pointwise": "results/gold_pointwise_judge_v4/terra/scores/pointwise_judge_scores.csv",
+    "standalone_pointwise_sources": "results/gold_pointwise_judge_v4/input/candidate_sources_private.csv",
+    "source_pointwise": "results/shortform_judge_v9/shortform_judge_v9_scores_partial.csv",
+    "source_pairwise": "results/highlight_quality_judge_v1_full/pairwise_scored_PRIVATE.csv",
+    "source_pairwise_summary": "results/highlight_quality_judge_v1_full/evaluation_summary.json"
+  },
+  "direct_results": {
+    "standalone_pointwise": "results/evaluation_system_v1/case_2_codex_direct_judgments.csv"
+  },
+  "output_dir": "results/evaluation_system_v1",
+  "annotation_dir": "deliverables/2026-07-24/evaluation_system_v1",
+  "performance": {
+    "view_field": "short_views",
+    "fixed_window_fields": ["view_count_7d", "view_count_30d"],
+    "bootstrap_iterations": 1000,
+    "top_percentile": 75.0,
+    "bottom_percentile": 25.0
+  },
+  "split": {
+    "group_key": "longform_id",
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2,
+    "seed": "vpick-evaluation-v1"
+  },
+  "hybrid": {
+    "alphas": [0.3, 0.5, 0.7]
+  },
+  "judge": {
+    "provider": "anthropic",
+    "model": "claude-opus-4-8",
+    "repeat_count": 2,
+    "temperature": 0,
+    "max_tokens": 2400
+  }
+}

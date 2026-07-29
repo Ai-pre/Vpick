@@ -1,0 +1,13 @@
+{
+  "prompt_id": "shortform_reference_judge_v7_ko",
+  "input_modality": "vpick_scene_description_transcript_structurally_blind",
+  "primary_score": "checklist_score_100",
+  "runs": [
+    {
+      "run_id": "claude_opus_4_8_performance_judge_v7",
+      "provider": "anthropic",
+      "model": "claude-opus-4-8",
+      "judge_role": "blind_pointwise_market_signal_extractor"
+    }
+  ]
+}

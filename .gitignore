@@ -21,11 +21,26 @@ data/private/
 data/processed/*/
 !data/processed/ready/
 !data/processed/ready/**
+data/processed/*
+!data/processed/README.md
+!data/processed/channel_name_normalization_map_v1.csv
+!data/processed/ready/
 
 # Large or regenerated artifacts
 outputs/
+output/
 raw_responses/
 prompts/*_generated/
+results/**
+!results/README.md
+!results/final/
+!results/final/**
+deliverables/**/*.zip
+deliverables/**/*.inspection.json
+deliverables/**/slide-*.png
+deliverables/2026-07-23/
+deliverables/2026-07-24/
+deliverables/2026-07-28/
 
 # Video files are intentionally not versioned.
 *.mp4

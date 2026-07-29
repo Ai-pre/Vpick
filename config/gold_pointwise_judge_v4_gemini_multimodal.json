@@ -1,0 +1,38 @@
+{
+  "prompt_id": "shortform_pointwise_judge_v4_ko",
+  "input_modality": "public_youtube_video_scene_description_transcript",
+  "video_fps": 2.0,
+  "batch_size": 5,
+  "editorial_weights": {
+    "context_clarity": 0.15,
+    "event_progression": 0.15,
+    "completeness": 0.25,
+    "boundary_naturalness": 0.20,
+    "content_density": 0.15,
+    "standalone": 0.10
+  },
+  "performance_weights": {
+    "emotional_intensity": 0.20,
+    "change_or_surprise": 0.20,
+    "specificity_novelty": 0.20,
+    "relatability_shareability": 0.15,
+    "payoff_strength": 0.15,
+    "hook_title_potential": 0.10
+  },
+  "gates": {
+    "min_candidate_coverage": 0.80,
+    "min_repeat_spearman": 0.80,
+    "min_human_coverage": 1.00,
+    "required_human_annotators": 3,
+    "min_human_spearman": 0.70,
+    "min_pos_over_neg_auc": 0.65
+  },
+  "runs": [
+    {
+      "run_id": "gemini_31_flash_lite_gold_pointwise_video_v4",
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-lite",
+      "judge_role": "diagnostic_multimodal_pointwise"
+    }
+  ]
+}

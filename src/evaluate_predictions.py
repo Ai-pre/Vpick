@@ -26,6 +26,17 @@ def to_int(value: Any, default: int = 1) -> int:
     return int(float(text))
 
 
+def first_float(
+    row: dict[str, Any],
+    fields: tuple[str, ...],
+) -> float | None:
+    for field in fields:
+        value = to_float(row.get(field))
+        if value is not None:
+            return value
+    return None
+
+
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
@@ -119,8 +130,14 @@ def score_prediction(
     tight_iou_threshold: float,
     start_tolerance_sec: float,
 ) -> dict[str, Any]:
-    gold_start = to_float(gold["gold_start_sec"])
-    gold_end = to_float(gold["gold_end_sec"])
+    gold_start = first_float(
+        gold,
+        ("gold_start_sec", "start_sec", "gold_span_start_sec"),
+    )
+    gold_end = first_float(
+        gold,
+        ("gold_end_sec", "end_sec", "gold_span_end_sec"),
+    )
     pred_start = to_float(pred.get("pred_start_sec"))
     pred_end = to_float(pred.get("pred_end_sec"))
     if gold_start is None or gold_end is None:

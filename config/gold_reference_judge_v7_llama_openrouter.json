@@ -1,0 +1,13 @@
+{
+  "prompt_id": "shortform_reference_judge_v7_ko",
+  "input_modality": "yt_dlp_transcript_only_structurally_blind",
+  "primary_score": "checklist_score_100",
+  "runs": [
+    {
+      "run_id": "llama4_maverick_reference_judge_v7",
+      "provider": "openrouter",
+      "model": "meta-llama/llama-4-maverick",
+      "judge_role": "blind_cross_model_reference_judge"
+    }
+  ]
+}

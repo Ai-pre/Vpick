@@ -1,0 +1,5 @@
+method,pair_count,core_at_1,core_at_3,core_at_5,tight_at_5,best_iou_at_5,status
+vpick_baseline,18,0.000000,0.055556,0.055556,0.055556,0.059677,baseline
+judge_only,18,0.111111,0.111111,0.222222,0.222222,0.181107,ablation
+adaptive_coverage,18,0.166667,0.444444,0.500000,0.500000,0.361258,structural_baseline
+ac_top4_plus_blended_supplement,18,0.166667,0.444444,0.555556,0.555556,0.404980,selected_development

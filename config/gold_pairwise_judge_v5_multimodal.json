@@ -1,0 +1,39 @@
+{
+  "pairwise_prompt_id": "shortform_pairwise_judge_v4_ko",
+  "multimodal_addendum_id": "shortform_pairwise_judge_v5_multimodal_ko",
+  "input_modality": "public_youtube_video_clips",
+  "video_fps": 2.0,
+  "editorial_weights": {
+    "context_clarity": 0.15,
+    "event_progression": 0.15,
+    "completeness": 0.25,
+    "boundary_naturalness": 0.20,
+    "content_density": 0.15,
+    "standalone": 0.10
+  },
+  "performance_weights": {
+    "emotional_intensity": 0.20,
+    "change_or_surprise": 0.20,
+    "specificity_novelty": 0.20,
+    "relatability_shareability": 0.15,
+    "payoff_strength": 0.15,
+    "hook_title_potential": 0.10
+  },
+  "gates": {
+    "min_scoring_coverage": 0.80,
+    "min_repeat_agreement": 0.80,
+    "min_human_coverage": 1.00,
+    "required_human_annotators": 3,
+    "min_human_agreement": 0.70,
+    "min_human_fleiss_kappa": 0.40,
+    "min_pos_preference_accuracy": 0.65
+  },
+  "runs": [
+    {
+      "run_id": "gemini_35_flash_video_pairwise_v5",
+      "provider": "gemini",
+      "model": "gemini-3.5-flash",
+      "judge_role": "primary_multimodal_correlated"
+    }
+  ]
+}

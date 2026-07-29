@@ -12,11 +12,15 @@
     "name": "b2_anchor4_intrinsic_v2_augment",
     "steps": [
       "Run B2 adaptive coverage and preserve ranks 1 through 4.",
-      "Split the scored candidate pool into five timeline bins.",
-      "Within each bin, combine hierarchical candidate prior 75% and intrinsic Listwise Judge 25%.",
-      "Add the highest-ranked non-overlapping intrinsic candidate as rank 5.",
+      "Score the compressed candidate pool with hierarchical candidate prior 75% and completion-gated intrinsic Listwise Judge 25%.",
+      "Reject supplement candidates whose overlap ratio with any preserved candidate exceeds 0.58.",
+      "Add the highest-ranked eligible blended candidate as rank 5.",
       "If no candidate is eligible, refill from the remaining B2 candidates."
     ],
+    "overlap_ratio": {
+      "definition": "intersection_duration / shorter_candidate_duration",
+      "reject_above": 0.58
+    },
     "prompt": "prompts/hierarchical_multislate_listwise_v2_ko.md",
     "judge_dimensions": {
       "opening_clarity_pull": 0.15,

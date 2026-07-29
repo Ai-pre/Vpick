@@ -1,27 +1,61 @@
 {
-  "pipeline_id": "vpick_best_judge_2026_07_27",
-  "status": "intrinsic_quality_judge_only",
-  "dataset": "data/processed/goldlabel_60_replaced_v6_channel_normalized_2026-07-23.csv",
-  "blind_input": "results/judge_evaluation_v2_2026-07-27/short_candidate_descriptions_codex/candidates_blind_short_description_60.jsonl",
-  "validation_targets": "data/processed/judge_validation_targets_60.csv",
-  "prompt": "prompts/shortform_judge_v10_ko.md",
-  "scoring_config": "config/shortform_judge_v10_opus.json",
-  "runner": "src/run_shortform_judge_v9.py",
-  "normalizer": "src/shortform_judge_v9.py",
-  "validator": "src/evaluate_shortform_judge_v9.py",
-  "package_audit": "src/audit_best_judge_pipeline.py",
-  "reference_result": "results/judge_evaluation_v2_2026-07-27/codex_judge_v10_blind/codex_judge_v10_scores.csv",
-  "reference_summary": "results/judge_evaluation_v2_2026-07-27/codex_judge_v10_blind/codex_judge_v10_summary.json",
-  "official_interpretation": {
-    "allowed": [
-      "candidate editorial quality diagnosis",
-      "candidate intrinsic engagement-potential diagnosis",
-      "explainable pointwise comparison under the same evidence policy"
+  "pipeline_id": "vpick_best_success_judge_2026_07_29",
+  "status": "development_selected_requires_external_holdout",
+  "candidate_count": 94,
+  "pointwise_input": {
+    "candidate_description_and_transcript": true,
+    "generated_title": true,
+    "youtube_thumbnail": true,
+    "source_salience_diagnostic_only": true
+  },
+  "pointwise_dimensions": {
+    "change_or_surprise": {
+      "weight": 0.4,
+      "scale": "0_to_4"
+    },
+    "title_packaging": {
+      "weight": 0.15,
+      "scale": "0_to_4"
+    },
+    "thumbnail_packaging": {
+      "weight": 0.45,
+      "scale": "0_to_4"
+    },
+    "source_salience": {
+      "weight": 0.0,
+      "scale": "0_to_4",
+      "role": "diagnostic_only"
+    }
+  },
+  "pointwise_formula": "(0.40 * change_or_surprise + 0.15 * title_packaging + 0.45 * thumbnail_packaging) / 4",
+  "performance_postprocessor": {
+    "model": "ridge_regression",
+    "features": [
+      "pointwise_score",
+      "log1p(independent_channel_historical_median_views)",
+      "log1p(upload_age_days)"
     ],
-    "not_allowed": [
-      "predicting views or likes",
-      "claiming validated within-channel performance ranking",
-      "using POS/NEG or performance percentile as model input"
-    ]
+    "target": "log1p(short_views)",
+    "validation": "nested_GroupKFold_grouped_by_longform_id",
+    "role": "postprocess_editorial_score_into_channel_conditioned_expected_reach"
+  },
+  "evaluation": {
+    "all94_group_oof_spearman_raw_views": 0.430229,
+    "fixed_split75_diagnostic_spearman_raw_views": 0.44575,
+    "all94_pairwise_ranking_agreement": 0.643707,
+    "baseline_50_25_25_all94_group_oof_spearman": 0.409531,
+    "baseline_50_25_25_locked75_spearman": 0.430032
+  },
+  "selection_note": "The 40:15:45 weights were selected after comparing formulas on the available 94-candidate dataset. Report the result as the selected development formula, not as an untouched external-holdout estimate.",
+  "score_semantics": {
+    "editorial_success_score": "Blind content and package quality score without channel performance input.",
+    "expected_reach_score": "Channel-conditioned relative reach estimate after Ridge calibration."
+  },
+  "artifacts": {
+    "evaluator": "src/evaluate_package_and_context_v1.py",
+    "salience_evaluator": "src/evaluate_salience_augmented_judge_v1.py",
+    "salience_weight_search": "src/tune_salience_augmented_weights_v1.py",
+    "formula_comparison": "results/salience_augmented_judge_v1_2026-07-29/salience_formula_comparison_PRIVATE.csv",
+    "weight_search_summary": "results/salience_augmented_weight_search_v1_2026-07-29/weight_search_summary_PRIVATE.json"
   }
 }

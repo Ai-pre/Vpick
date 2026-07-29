@@ -1,0 +1,24 @@
+{
+  "rubric_id": "highlight_quality_judge_v1",
+  "pointwise_prompt_id": "highlight_quality_pointwise_v1_ko",
+  "pairwise_prompt_id": "highlight_quality_pairwise_v1_ko",
+  "weights": {
+    "source_salience": 0.2,
+    "hook": 0.2,
+    "payoff": 0.2,
+    "self_contained": 0.15,
+    "density": 0.15,
+    "boundary": 0.1
+  },
+  "score_min": 0,
+  "score_max": 4,
+  "fatal_flags": [
+    "missing_context",
+    "abrupt_start",
+    "abrupt_end",
+    "no_payoff",
+    "duplicate_content",
+    "insufficient_information"
+  ],
+  "seed": 20260724
+}

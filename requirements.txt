@@ -1,2 +1,19 @@
-# The core pipeline uses Python standard library only.
 # Recommended: Python >= 3.10
+
+# YouTube subtitle-only collection and transcript alignment audit.
+yt-dlp>=2026.7.4
+rapidfuzz>=3.14.0
+
+# Small regularized calibration model and cross-validation metrics.
+numpy>=2.0.0
+pandas>=2.2.0
+scipy>=1.14.0
+scikit-learn>=1.5.0
+joblib>=1.4.0
+
+# Fallback frame alignment when YouTube captions are missing or unusable.
+opencv-python-headless>=5.0.0
+google-genai>=1.0.0
+
+# Test suite.
+pytest>=8.0.0

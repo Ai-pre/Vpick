@@ -1,0 +1,28 @@
+{
+  "dataset": {
+    "channels": 6,
+    "longforms": 85,
+    "candidates": 94,
+    "high": 30,
+    "mid": 34,
+    "low": 30
+  },
+  "selected_pointwise_formula": {
+    "change_or_surprise": 0.4,
+    "title_packaging": 0.15,
+    "thumbnail_packaging": 0.45,
+    "source_salience": 0.0
+  },
+  "metrics": {
+    "pointwise_only_spearman_raw_views": 0.212,
+    "group_oof_calibrated_spearman_raw_views": 0.430229,
+    "fixed_split75_diagnostic_spearman_raw_views": 0.44575,
+    "all94_pairwise_ranking_agreement": 0.643707,
+    "fixed_formula_50_25_25_group_oof_spearman": 0.409531
+  },
+  "interpretation": {
+    "selected_formula": "Selected after comparison on the available 94-candidate dataset.",
+    "fixed_split75": "Diagnostic result; do not present the selected 40:15:45 formula as an untouched external holdout.",
+    "pairwise_ranking_agreement": "Derived from Pointwise score order, not from direct LLM pairwise calls."
+  }
+}

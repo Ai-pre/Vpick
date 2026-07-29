@@ -49,6 +49,18 @@ class VpickClient:
     def get_asset(self, project_id: str, asset_id: str) -> Any:
         return self.request("GET", f"/projects/{project_id}/assets/{asset_id}")
 
+    def list_projects(self, offset: int = 0, limit: int = 100) -> Any:
+        return self.request("GET", f"/projects?offset={offset}&limit={limit}")
+
+    def get_project(self, project_id: str) -> Any:
+        return self.request("GET", f"/projects/{project_id}")
+
+    def list_assets(self, project_id: str, offset: int = 0, limit: int = 100) -> Any:
+        return self.request(
+            "GET",
+            f"/projects/{project_id}/assets?offset={offset}&limit={limit}",
+        )
+
     def get_scenes(self, project_id: str, asset_id: str) -> Any:
         return self.request("GET", f"/projects/{project_id}/assets/{asset_id}/scenes")
 

@@ -1,0 +1,25 @@
+{
+  "prompt_id": "shortform_reference_judge_v6_ko",
+  "input_modality": "yt_dlp_longform_gold_interval_with_context",
+  "score_aggregation": {
+    "saliency_score_100": "(highlight_saliency_1_5 - 1) * 25",
+    "checklist_score_100": "unweighted mean of 8 binary checklist items * 100",
+    "reference_score_100": "0.5 * saliency_score_100 + 0.5 * checklist_score_100"
+  },
+  "gates": {
+    "min_candidate_coverage": 0.8,
+    "min_repeat_spearman": 0.8,
+    "min_repeat_binary_agreement": 0.8,
+    "required_human_annotators": 3,
+    "min_human_spearman": 0.7,
+    "min_human_binary_accuracy": 0.7
+  },
+  "runs": [
+    {
+      "run_id": "gpt_56_terra_reference_judge_balanced_30_30",
+      "provider": "openai",
+      "model": "gpt-5.6-terra",
+      "judge_role": "primary_reference_centered_pointwise"
+    }
+  ]
+}
