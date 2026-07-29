@@ -1,0 +1,6 @@
+method,pair_count,core_at_1,core_at_3,core_at_5,tight_at_5,best_iou_at_5,role
+vpick_baseline,18,0.000000,0.055556,0.055556,0.055556,0.059677,baseline
+b2_adaptive_coverage,18,0.166667,0.444444,0.500000,0.500000,0.361258,automatic_selector
+codex_intrinsic_only_mmr,18,0.111111,0.111111,0.222222,0.222222,0.181107,ablation
+five_bin_prior75_judge25,18,0.222222,0.277778,0.444444,0.444444,0.307248,ablation
+b2_anchor4_plus_five_bin_prior75_judge25,18,0.166667,0.444444,0.555556,0.555556,0.404980,selected_development_pipeline

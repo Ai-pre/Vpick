@@ -1,0 +1,40 @@
+{
+  "pipeline_id": "hierarchical_multislate_v1_2026_07_29",
+  "timeline": {
+    "minutes_per_bin": 3.0,
+    "minimum_bins": 5,
+    "maximum_bins": 13,
+    "candidates_per_bin": 3,
+    "local_keep_per_bin": 2
+  },
+  "structured_proxy": {
+    "change_or_surprise": 0.4,
+    "titleability": 0.15,
+    "thumbnailability_proxy": 0.45,
+    "thumbnailability_proxy_formula": {
+      "titleability": 0.5,
+      "content_volume": 0.3,
+      "speech_density": 0.2
+    }
+  },
+  "hierarchical_score": {
+    "success_score": 0.85,
+    "completeness_score": 0.15
+  },
+  "completeness": {
+    "speech_boundary": 0.35,
+    "duration": 0.25,
+    "speech_density": 0.2,
+    "content_volume": 0.1,
+    "inverse_filler_penalty": 0.1
+  },
+  "mmr": {
+    "overlap_penalty": 0.3,
+    "timeline_diversity_bonus": 0.15,
+    "maximum_overlap": 0.58
+  },
+  "interpretation": {
+    "structured_proxy": "Scalable no-API development proxy. It is not the validated LLM Judge.",
+    "pointwise_scores": "When supplied, external fixed-Judge scores replace the structured proxy without changing candidate generation."
+  }
+}

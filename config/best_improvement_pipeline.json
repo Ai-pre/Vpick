@@ -1,0 +1,74 @@
+{
+  "pipeline_id": "vpick_highlight_improvement_v2_2026_07_29",
+  "status": "development_best_nonblind_common18",
+  "candidate_source": "Vpick scenes, descriptions, transcripts, and timestamps",
+  "candidate_generation": [
+    "timeline scene seeds",
+    "scene_i and scene_i-1 plus scene_i bridges",
+    "30, 45, 60, and 75 second trim windows",
+    "scene and speech boundary windows"
+  ],
+  "selector": {
+    "name": "b2_anchor4_intrinsic_v2_augment",
+    "steps": [
+      "Run B2 adaptive coverage and preserve ranks 1 through 4.",
+      "Split the scored candidate pool into five timeline bins.",
+      "Within each bin, combine hierarchical candidate prior 75% and intrinsic Listwise Judge 25%.",
+      "Add the highest-ranked non-overlapping intrinsic candidate as rank 5.",
+      "If no candidate is eligible, refill from the remaining B2 candidates."
+    ],
+    "prompt": "prompts/hierarchical_multislate_listwise_v2_ko.md",
+    "judge_dimensions": {
+      "opening_clarity_pull": 0.15,
+      "event_reaction_change": 0.25,
+      "progression_payoff": 0.2,
+      "self_contained": 0.15,
+      "boundary_integrity": 0.15,
+      "titleability": 0.1
+    },
+    "completion_gate": {
+      "any_completion_axis_zero": 0.5,
+      "two_or_more_completion_axes_at_most_one": 0.65,
+      "one_completion_axis_at_most_one": 0.8,
+      "otherwise": 1.0
+    },
+    "implementation": [
+      "src/apply_hierarchical_listwise_results_v1.py",
+      "src/select_intrinsic_v2_coverage.py",
+      "src/augment_b2_with_intrinsic.py"
+    ]
+  },
+  "development_evaluation": {
+    "universe": "17 longforms and 18 common Gold pairs with Vpick baseline",
+    "scored_candidates": 328,
+    "vpick": {
+      "core_at_1": 0.0,
+      "core_at_3": 0.055556,
+      "core_at_5": 0.055556,
+      "tight_at_5": 0.055556,
+      "best_iou_at_5": 0.059677
+    },
+    "b2_adaptive_coverage": {
+      "core_at_1": 0.166667,
+      "core_at_3": 0.444444,
+      "core_at_5": 0.5,
+      "tight_at_5": 0.5,
+      "best_iou_at_5": 0.361258
+    },
+    "selected_pipeline": {
+      "core_at_1": 0.166667,
+      "core_at_3": 0.444444,
+      "core_at_5": 0.555556,
+      "tight_at_5": 0.555556,
+      "best_iou_at_5": 0.40498,
+      "new_hit_without_lost_hits": "G016"
+    }
+  },
+  "validation_limit": "Development-only and non-blind because the current Codex thread had previously seen some Gold timestamps. A new-longform blind holdout is required before a final performance claim.",
+  "forbidden_claims": [
+    "This is a blind holdout result.",
+    "The 25% Judge weight is generally optimal.",
+    "The text-only Judge directly evaluates thumbnail, facial expression, audio tone, or caption effects.",
+    "The Vpick comparison covers every Gold pair."
+  ]
+}
