@@ -386,7 +386,7 @@ def gemini_generate_content(
 def transcribe_youtube_audio_gemini(video_url: str) -> str:
     model = os.getenv(
         "GEMINI_TRANSCRIBE_MODEL",
-        os.getenv("GEMINI_JUDGE_MODEL", "gemini-2.5-flash"),
+        os.getenv("GEMINI_JUDGE_MODEL", "gemini-3.6-flash"),
     )
     schema = {
         "type": "object",
@@ -713,7 +713,7 @@ def call_gemini_json(
     image_url: str = "",
 ) -> tuple[dict[str, Any], str]:
     del schema_name
-    model = os.getenv("GEMINI_JUDGE_MODEL", "gemini-2.5-flash")
+    model = os.getenv("GEMINI_JUDGE_MODEL", "gemini-3.6-flash")
     parts: list[dict[str, Any]] = [{"text": text_input}]
     image_part = gemini_inline_image(image_url)
     if image_part:
@@ -1496,7 +1496,7 @@ class VpickBetaHandler(BaseHTTPRequestHandler):
             model = (
                 os.getenv("OPENAI_JUDGE_MODEL", "gpt-5.6-sol")
                 if openai_ready
-                else os.getenv("GEMINI_JUDGE_MODEL", "gemini-2.5-flash")
+                else os.getenv("GEMINI_JUDGE_MODEL", "gemini-3.6-flash")
             )
             self.send_json(
                 {
