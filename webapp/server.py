@@ -327,6 +327,18 @@ def gemini_api_key() -> str:
     return os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or ""
 
 
+def gemini_response_schema(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {
+            key: gemini_response_schema(item)
+            for key, item in value.items()
+            if key != "additionalProperties"
+        }
+    if isinstance(value, list):
+        return [gemini_response_schema(item) for item in value]
+    return value
+
+
 def extract_gemini_text(response: dict[str, Any]) -> str:
     chunks: list[str] = []
     for candidate in response.get("candidates", []):
@@ -432,7 +444,7 @@ def transcribe_youtube_audio_gemini(video_url: str) -> str:
         ],
         "generationConfig": {
             "responseMimeType": "application/json",
-            "responseSchema": schema,
+            "responseSchema": gemini_response_schema(schema),
             "temperature": 0,
         },
     }
@@ -723,7 +735,7 @@ def call_gemini_json(
         "contents": [{"role": "user", "parts": parts}],
         "generationConfig": {
             "responseMimeType": "application/json",
-            "responseSchema": schema,
+            "responseSchema": gemini_response_schema(schema),
             "temperature": 0,
         },
     }

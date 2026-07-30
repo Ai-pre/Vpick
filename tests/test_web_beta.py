@@ -155,6 +155,7 @@ def test_gemini_judge_uses_structured_json_and_inline_thumbnail(monkeypatch) -> 
         assert timeout == 180
         assert payload["generationConfig"]["responseMimeType"] == "application/json"
         assert payload["generationConfig"]["responseSchema"]["required"] == ["score"]
+        assert "additionalProperties" not in payload["generationConfig"]["responseSchema"]
         assert payload["contents"][0]["parts"][1]["inlineData"]["data"] == "encoded"
         return {
             "candidates": [
@@ -169,6 +170,7 @@ def test_gemini_judge_uses_structured_json_and_inline_thumbnail(monkeypatch) -> 
         schema_name="demo",
         schema={
             "type": "object",
+            "additionalProperties": False,
             "required": ["score"],
             "properties": {"score": {"type": "integer"}},
         },
