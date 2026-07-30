@@ -149,7 +149,7 @@ main {
   display: grid;
   grid-template-columns: minmax(390px, 0.83fr) minmax(460px, 1.17fr);
   gap: 20px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .input-panel,
@@ -347,14 +347,76 @@ textarea:focus {
   margin-top: 20px;
 }
 
+.judge-url-field input {
+  height: 52px;
+  padding: 0 14px;
+  border-color: #b9c4d4;
+  font-size: 15px;
+}
+
+.judge-primary-actions {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.judge-primary-actions .button {
+  height: 44px;
+}
+
+.auto-source-strip {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.auto-source-strip span {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 7px;
+  background: var(--surface-soft);
+}
+
+.auto-source-strip strong {
+  margin-left: auto;
+  color: var(--success);
+  font-size: 11px;
+}
+
+.advanced-options {
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.advanced-options summary {
+  padding: 15px 2px 0;
+  color: #4d5869;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+  user-select: none;
+}
+
+.advanced-options summary::marker {
+  color: var(--blue);
+}
+
+.advanced-options-body {
+  padding-top: 4px;
+}
+
 .result-panel {
-  min-height: 730px;
+  min-height: 620px;
   overflow: hidden;
 }
 
 .empty-state {
   height: 100%;
-  min-height: 730px;
+  min-height: 620px;
   display: grid;
   align-content: center;
   justify-items: center;
@@ -475,6 +537,13 @@ textarea:focus {
   border-radius: 7px;
   object-fit: cover;
   background: #edf1f6;
+}
+
+.collected-title {
+  margin: 11px 0 0;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
 .result-tags {

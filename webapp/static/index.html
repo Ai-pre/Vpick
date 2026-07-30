@@ -40,53 +40,68 @@
                 <p class="eyebrow">POINTWISE JUDGE</p>
                 <h1>숏폼 성공 잠재력 평가</h1>
               </div>
-              <button class="button button-secondary" id="judge-sample" type="button">샘플 입력</button>
             </div>
 
-            <label class="field field-wide">
-              <span>YouTube URL</span>
-              <input id="judge-video-url" name="video_url" type="url" placeholder="https://youtube.com/shorts/..." />
+            <label class="field field-wide judge-url-field">
+              <span>Shorts URL</span>
+              <input id="judge-video-url" name="video_url" type="url" required placeholder="https://youtube.com/shorts/..." />
             </label>
 
-            <div class="field-row">
-              <label class="field">
-                <span>시작</span>
-                <input name="start_time" type="text" placeholder="10:19" />
-              </label>
-              <label class="field">
-                <span>종료</span>
-                <input name="end_time" type="text" placeholder="11:04" />
-              </label>
+            <div class="judge-primary-actions">
+              <button class="button button-secondary" id="judge-sample" type="button">샘플</button>
+              <button class="button button-primary" type="submit">주소로 자동 평가</button>
             </div>
 
-            <label class="field field-wide">
+            <div class="auto-source-strip">
               <span>제목</span>
-              <input name="title" type="text" placeholder="후보 제목" />
-            </label>
+              <span>썸네일</span>
+              <span>길이</span>
+              <span>자막</span>
+              <strong>자동 수집</strong>
+            </div>
 
-            <label class="field field-wide">
-              <span>후보 장면 설명</span>
-              <textarea name="description" rows="4" placeholder="Vpick 장면 설명 또는 후보 요약"></textarea>
-            </label>
+            <details class="advanced-options">
+              <summary>고급 입력 수정</summary>
+              <div class="advanced-options-body">
+                <div class="field-row">
+                  <label class="field">
+                    <span>시작</span>
+                    <input name="start_time" type="text" placeholder="0:00" />
+                  </label>
+                  <label class="field">
+                    <span>종료</span>
+                    <input name="end_time" type="text" placeholder="0:53" />
+                  </label>
+                </div>
 
-            <label class="field field-wide">
-              <span>후보 자막</span>
-              <textarea name="transcript" rows="7" placeholder="타임스탬프가 포함된 후보 자막"></textarea>
-            </label>
+                <label class="field field-wide">
+                  <span>제목</span>
+                  <input name="title" type="text" placeholder="YouTube에서 자동 수집" />
+                </label>
 
-            <label class="field field-wide">
-              <span>썸네일 URL</span>
-              <input id="judge-thumbnail-url" name="thumbnail_url" type="url" placeholder="비워두면 YouTube 썸네일 자동 사용" />
-            </label>
+                <label class="field field-wide">
+                  <span>후보 장면 설명</span>
+                  <textarea name="description" rows="3" placeholder="Shorts 설명에서 자동 수집"></textarea>
+                </label>
 
-            <fieldset class="mode-control">
-              <legend>실행 모드</legend>
-              <label><input type="radio" name="mode" value="auto" checked /><span>자동</span></label>
-              <label><input type="radio" name="mode" value="live" /><span>LLM</span></label>
-              <label><input type="radio" name="mode" value="preview" /><span>프리뷰</span></label>
-            </fieldset>
+                <label class="field field-wide">
+                  <span>후보 자막</span>
+                  <textarea name="transcript" rows="6" placeholder="YouTube 공식·자동 자막에서 수집"></textarea>
+                </label>
 
-            <button class="button button-primary submit-button" type="submit">Judge 실행</button>
+                <label class="field field-wide">
+                  <span>썸네일 URL</span>
+                  <input id="judge-thumbnail-url" name="thumbnail_url" type="url" placeholder="YouTube에서 자동 수집" />
+                </label>
+
+                <fieldset class="mode-control">
+                  <legend>실행 모드</legend>
+                  <label><input type="radio" name="mode" value="auto" checked /><span>자동</span></label>
+                  <label><input type="radio" name="mode" value="live" /><span>LLM</span></label>
+                  <label><input type="radio" name="mode" value="preview" /><span>프리뷰</span></label>
+                </fieldset>
+              </div>
+            </details>
           </form>
 
           <section class="result-panel" aria-live="polite">
@@ -95,11 +110,11 @@
                 <img id="judge-thumbnail-preview" alt="" />
                 <div class="thumbnail-placeholder">THUMBNAIL</div>
               </div>
-              <p>후보 정보를 입력하면 평가 결과가 여기에 표시됩니다.</p>
+              <p>Shorts 주소를 입력하면 제목·썸네일·자막을 수집해 평가합니다.</p>
             </div>
             <div id="judge-loading" class="loading-state" hidden>
               <span class="spinner"></span>
-              <strong>후보 근거를 평가하고 있습니다</strong>
+              <strong>Shorts 정보와 자막을 수집해 평가하고 있습니다</strong>
             </div>
             <div id="judge-result" hidden></div>
           </section>

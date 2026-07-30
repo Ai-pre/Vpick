@@ -7,8 +7,10 @@ import math
 import os
 import re
 import sys
+import tempfile
 import urllib.error
 import urllib.request
+import uuid
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -121,6 +123,319 @@ def stable_id(prefix: str, *parts: Any) -> str:
 def youtube_thumbnail(video_url: str) -> str:
     video_id = extract_youtube_id(video_url)
     return f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg" if video_id else ""
+
+
+def parse_json3_transcript(payload: dict[str, Any]) -> str:
+    lines: list[str] = []
+    previous_text = ""
+    for event in payload.get("events", []):
+        segments = event.get("segs") or []
+        text = "".join(str(segment.get("utf8", "")) for segment in segments)
+        text = re.sub(r"\s+", " ", text).strip()
+        if not text or text == previous_text:
+            continue
+        start = number(event.get("tStartMs")) / 1000.0
+        duration = number(event.get("dDurationMs")) / 1000.0
+        end = start + max(duration, 0.1)
+        lines.append(f"[{seconds_to_clock(start)}-{seconds_to_clock(end)}] {text}")
+        previous_text = text
+    return "\n".join(lines)
+
+
+def preferred_caption(
+    tracks: dict[str, list[dict[str, Any]]],
+) -> tuple[str, dict[str, Any]] | None:
+    if not tracks:
+        return None
+    language_order = ("ko-orig", "ko", "ko-KR", "en-orig", "en")
+    languages = list(tracks)
+    ordered_languages = [
+        *[language for language in language_order if language in tracks],
+        *[language for language in languages if language.startswith("ko") and language not in language_order],
+        *[language for language in languages if language.startswith("en") and language not in language_order],
+    ]
+    for language in ordered_languages:
+        entries = tracks.get(language) or []
+        for extension in ("json3", "vtt", "srt"):
+            entry = next(
+                (
+                    item
+                    for item in entries
+                    if item.get("ext") == extension and item.get("url")
+                ),
+                None,
+            )
+            if entry:
+                return language, entry
+    return None
+
+
+def fetch_caption(entry: dict[str, Any]) -> str:
+    request = urllib.request.Request(
+        str(entry["url"]),
+        headers={"User-Agent": "Mozilla/5.0", "Accept-Language": "ko-KR,ko;q=0.9"},
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        raw = response.read()
+    extension = str(entry.get("ext", ""))
+    if extension == "json3":
+        return parse_json3_transcript(json.loads(raw.decode("utf-8", errors="replace")))
+    text = raw.decode("utf-8", errors="replace")
+    output: list[str] = []
+    for line in text.splitlines():
+        stripped = re.sub(r"<[^>]+>", "", line).strip()
+        if (
+            not stripped
+            or stripped.startswith(("WEBVTT", "Kind:", "Language:", "NOTE"))
+            or "-->" in stripped
+            or stripped.isdigit()
+        ):
+            continue
+        if not output or stripped != output[-1]:
+            output.append(stripped)
+    return "\n".join(output)
+
+
+def multipart_body(
+    fields: dict[str, str],
+    *,
+    file_field: str,
+    file_path: Path,
+) -> tuple[bytes, str]:
+    boundary = f"vpick-{uuid.uuid4().hex}"
+    chunks: list[bytes] = []
+    for name, value in fields.items():
+        chunks.extend(
+            [
+                f"--{boundary}\r\n".encode(),
+                f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode(),
+                str(value).encode("utf-8"),
+                b"\r\n",
+            ]
+        )
+    chunks.extend(
+        [
+            f"--{boundary}\r\n".encode(),
+            (
+                f'Content-Disposition: form-data; name="{file_field}"; '
+                f'filename="{file_path.name}"\r\n'
+            ).encode(),
+            b"Content-Type: application/octet-stream\r\n\r\n",
+            file_path.read_bytes(),
+            b"\r\n",
+            f"--{boundary}--\r\n".encode(),
+        ]
+    )
+    return b"".join(chunks), boundary
+
+
+def transcribe_youtube_audio(video_url: str) -> str:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return ""
+    try:
+        import yt_dlp
+    except ImportError:
+        return ""
+    with tempfile.TemporaryDirectory(prefix="vpick-short-") as temp_dir:
+        output_template = str(Path(temp_dir) / "%(id)s.%(ext)s")
+        options = {
+            "format": "bestaudio[filesize<24M]/bestaudio",
+            "outtmpl": output_template,
+            "quiet": True,
+            "no_warnings": True,
+            "noplaylist": True,
+            "socket_timeout": 30,
+        }
+        try:
+            with yt_dlp.YoutubeDL(options) as downloader:
+                downloader.extract_info(video_url, download=True)
+        except Exception:
+            return ""
+        files = [
+            path
+            for path in Path(temp_dir).iterdir()
+            if path.is_file() and path.suffix not in {".part", ".ytdl"}
+        ]
+        if not files:
+            return ""
+        audio_path = max(files, key=lambda path: path.stat().st_size)
+        if audio_path.stat().st_size > 25 * 1024 * 1024:
+            return ""
+        body, boundary = multipart_body(
+            {
+                "model": os.getenv("OPENAI_TRANSCRIBE_MODEL", "gpt-4o-mini-transcribe"),
+                "response_format": "json",
+                "language": "ko",
+            },
+            file_field="file",
+            file_path=audio_path,
+        )
+        request = urllib.request.Request(
+            "https://api.openai.com/v1/audio/transcriptions",
+            data=body,
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": f"multipart/form-data; boundary={boundary}",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=180) as response:
+                result = json.load(response)
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError):
+            return ""
+    segments = result.get("segments") or []
+    if segments:
+        return "\n".join(
+            (
+                f"[{seconds_to_clock(number(segment.get('start')))}-"
+                f"{seconds_to_clock(number(segment.get('end')))}] "
+                f"{str(segment.get('text', '')).strip()}"
+            )
+            for segment in segments
+            if str(segment.get("text", "")).strip()
+        )
+    return str(result.get("text", "")).strip()
+
+
+def clean_short_description(value: str) -> str:
+    text = re.sub(r"https?://\S+", "", value)
+    text = re.sub(r"(?<!\w)#[^\s#]+", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:700]
+
+
+def collect_youtube_short(video_url: str) -> dict[str, Any]:
+    video_id = extract_youtube_id(video_url)
+    if not video_id:
+        raise AppError("올바른 YouTube 또는 Shorts 주소를 입력해 주세요.")
+    try:
+        import yt_dlp
+    except ImportError as exc:
+        raise AppError(
+            "자동 수집에 필요한 yt-dlp가 설치되지 않았습니다.",
+            status=503,
+            code="yt_dlp_missing",
+        ) from exc
+    options = {
+        "quiet": True,
+        "no_warnings": True,
+        "skip_download": True,
+        "noplaylist": True,
+        "socket_timeout": 30,
+    }
+    try:
+        with yt_dlp.YoutubeDL(options) as downloader:
+            info = downloader.extract_info(video_url, download=False)
+    except Exception as exc:
+        raise AppError(
+            f"YouTube 정보를 가져오지 못했습니다: {str(exc)[:300]}",
+            status=502,
+            code="youtube_metadata_error",
+        ) from exc
+
+    transcript = ""
+    transcript_source = ""
+    caption_language = ""
+    for source_name, tracks in (
+        ("youtube_subtitles", info.get("subtitles") or {}),
+        ("youtube_auto_captions", info.get("automatic_captions") or {}),
+    ):
+        selected = preferred_caption(tracks)
+        if not selected:
+            continue
+        language, entry = selected
+        try:
+            transcript = fetch_caption(entry)
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            transcript = ""
+        if transcript:
+            transcript_source = source_name
+            caption_language = language
+            break
+
+    if not transcript:
+        transcript = transcribe_youtube_audio(video_url)
+        if transcript:
+            transcript_source = "openai_audio_asr"
+            caption_language = "auto"
+    if not transcript:
+        raise AppError(
+            "이 Shorts에서 자막을 찾지 못했고 자동 ASR도 사용할 수 없습니다. 고급 수정에서 자막을 직접 넣어 주세요.",
+            status=422,
+            code="transcript_unavailable",
+        )
+
+    duration = number(info.get("duration"))
+    return {
+        "video_id": str(info.get("id") or video_id),
+        "title": str(info.get("title") or "").strip(),
+        "description": clean_short_description(str(info.get("description") or "")),
+        "transcript": transcript[:12000],
+        "thumbnail_url": str(info.get("thumbnail") or youtube_thumbnail(video_url)),
+        "duration_sec": duration,
+        "start_time": "0:00",
+        "end_time": seconds_to_clock(duration) if duration else "",
+        "transcript_source": transcript_source,
+        "caption_language": caption_language,
+        "metadata_source": "yt_dlp",
+    }
+
+
+def bool_value(value: Any, default: bool = True) -> bool:
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() not in {"0", "false", "no", "off"}
+
+
+def autofill_short_candidate(
+    payload: dict[str, Any],
+    collector: Any = collect_youtube_short,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    enriched = dict(payload)
+    video_url = str(enriched.get("video_url", "")).strip()
+    if not video_url:
+        raise AppError("Shorts 주소를 입력해 주세요.")
+    required_missing = not str(enriched.get("title", "")).strip() or not str(
+        enriched.get("transcript", "")
+    ).strip()
+    collected: dict[str, Any] = {}
+    if bool_value(enriched.get("auto_enrich"), True) and required_missing:
+        collected = collector(video_url)
+        for field in (
+            "title",
+            "description",
+            "transcript",
+            "thumbnail_url",
+            "start_time",
+            "end_time",
+        ):
+            if not str(enriched.get(field, "")).strip() and collected.get(field):
+                enriched[field] = collected[field]
+    if not str(enriched.get("transcript", "")).strip():
+        raise AppError(
+            "평가 근거가 될 자막을 확보하지 못했습니다.",
+            status=422,
+            code="transcript_required",
+        )
+    if not str(enriched.get("title", "")).strip():
+        enriched["title"] = "제목 없음"
+    summary = {
+        "metadata_source": collected.get("metadata_source") or "manual_override",
+        "transcript_source": collected.get("transcript_source") or "manual_input",
+        "caption_language": collected.get("caption_language") or "",
+        "duration_sec": collected.get("duration_sec")
+        or max(
+            0.0,
+            number(enriched.get("end_time")) - number(enriched.get("start_time")),
+        ),
+        "auto_filled": bool(collected),
+        "title": enriched["title"],
+    }
+    return enriched, summary
 
 
 def score_package_formula(scores: dict[str, int]) -> float:
@@ -299,6 +614,7 @@ def offline_package_judge(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def run_package_judge(payload: dict[str, Any]) -> dict[str, Any]:
+    payload, input_summary = autofill_short_candidate(payload)
     video_url = str(payload.get("video_url", "")).strip()
     thumbnail_url = str(payload.get("thumbnail_url", "")).strip() or youtube_thumbnail(video_url)
     mode = str(payload.get("mode", "auto")).strip()
@@ -342,6 +658,7 @@ def run_package_judge(payload: dict[str, Any]) -> dict[str, Any]:
         "editorial_success_score": score,
         "formula": "40% 변화·반전 + 15% 제목 패키징 + 45% 썸네일 패키징",
         "thumbnail_url": thumbnail_url,
+        "input_summary": input_summary,
         "warning": warning,
         **result,
     }

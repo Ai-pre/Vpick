@@ -102,6 +102,13 @@ function renderJudge(result) {
   const live = result.mode === "live_llm";
   const strengths = result.strengths?.length ? result.strengths : ["뚜렷한 강점 신호 없음"];
   const risks = result.risks?.length ? result.risks : ["뚜렷한 감점 신호 없음"];
+  const input = result.input_summary || {};
+  const transcriptSource = {
+    youtube_subtitles: "YouTube 공식 자막",
+    youtube_auto_captions: "YouTube 자동 자막",
+    openai_audio_asr: "OpenAI 음성 인식",
+    manual_input: "직접 입력 자막",
+  }[input.transcript_source] || input.transcript_source || "자막";
   $("#judge-result").innerHTML = `
     <div class="judge-result-shell">
       <div class="result-topline">
@@ -111,10 +118,13 @@ function renderJudge(result) {
         </div>
         <div class="result-thumbnail">
           <img src="${escapeHtml(result.thumbnail_url)}" alt="평가 대상 썸네일" />
+          <h2 class="collected-title">${escapeHtml(input.title || "제목 없음")}</h2>
           <div class="result-tags">
             <span class="tag ${live ? "live" : "preview"}">${live ? "LIVE LLM" : "OFFLINE PREVIEW"}</span>
             <span class="tag">${escapeHtml(result.model)}</span>
             <span class="tag">신뢰도 ${escapeHtml(result.confidence_1_5)}/5</span>
+            <span class="tag">${escapeHtml(transcriptSource)}</span>
+            ${input.duration_sec ? `<span class="tag">${escapeHtml(Math.round(input.duration_sec))}초</span>` : ""}
           </div>
         </div>
       </div>
@@ -214,6 +224,7 @@ $("#judge-sample").addEventListener("click", () => {
   form.elements.transcript.value = "[8:41-8:55] 첫 손님이 한입 먹은 뒤 아무 말도 하지 않습니다.\n[8:55-9:05] 왜 아무 말씀도 없으세요? 혹시 너무 매워요?\n[9:05-9:20] 생각보다 너무 맛있어서 놀랐어요. 하나 더 주세요.\n[9:20-9:30] 종료 20초를 남기고 목표를 달성했습니다.";
   form.elements.thumbnail_url.value = "";
   updateJudgeThumbnail();
+  showToast("샘플 입력을 불러왔습니다.");
 });
 
 $("#judge-form").addEventListener("submit", async (event) => {
