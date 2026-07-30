@@ -220,12 +220,13 @@ Judge 점수와 숏폼 Top5 생성 흐름은 별도 웹 프레임워크 없이 �
 python -m webapp.server --port 8765
 ```
 
-브라우저에서 `http://127.0.0.1:8765`를 엽니다. `OPENAI_API_KEY`가 있으면
-실제 Pointwise/Listwise Judge를 호출하고, 키가 없으면 동일한 입출력과 선택
-흐름을 확인하는 오프라인 프리뷰로 자동 전환합니다. Judge 탭은 Shorts URL만
-입력하면 제목, 설명, 길이, 썸네일과 한국어 자막을 자동 수집합니다. YouTube
-자막이 없는 경우에는 OpenAI 키가 있을 때 오디오 ASR을 시도합니다. 새 롱폼의
-Top5 생성에는 Vpick 장면 JSON 또는 Vpick asset 주소가 필요합니다.
+브라우저에서 `http://127.0.0.1:8765`를 엽니다. Judge 공급자는
+`OpenAI → Gemini → 오프라인 프리뷰` 순서로 자동 선택합니다. 따라서
+`OPENAI_API_KEY`가 없더라도 `GEMINI_API_KEY`가 있으면 실제
+Pointwise/Listwise Judge를 호출합니다. Judge 탭은 Shorts URL만 입력하면 제목,
+설명, 길이, 썸네일과 한국어 자막을 자동 수집합니다. YouTube 자막이 없는
+경우에도 사용 가능한 공급자로 음성 전사를 시도합니다. 새 롱폼의 Top5
+생성에는 Vpick 장면 JSON 또는 Vpick asset 주소가 필요합니다.
 
 ### 환경
 

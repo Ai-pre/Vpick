@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import webapp.server as server
 from webapp.server import (
     SAMPLE_SCENES,
     autofill_short_candidate,
@@ -74,6 +75,107 @@ def test_json3_captions_are_converted_to_timestamped_transcript() -> None:
 
     assert "[0:01-0:03] 첫 번째 문장" in transcript
     assert "[0:04-0:05] 결국 성공했습니다" in transcript
+
+
+def test_judge_router_uses_gemini_when_openai_key_is_missing(monkeypatch) -> None:
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.setenv("GEMINI_API_KEY", "test-gemini-key")
+
+    def fake_gemini(**kwargs):
+        assert kwargs["text_input"] == '{"candidate":"demo"}'
+        return {"score": 4}, "Gemini · test-model"
+
+    monkeypatch.setattr(server, "call_gemini_json", fake_gemini)
+    result, model = server.call_judge_json(
+        instructions="judge",
+        text_input='{"candidate":"demo"}',
+        schema_name="demo",
+        schema={"type": "object"},
+    )
+
+    assert result == {"score": 4}
+    assert model == "Gemini · test-model"
+
+
+def test_judge_router_falls_back_to_gemini_after_openai_error(monkeypatch) -> None:
+    monkeypatch.setenv("OPENAI_API_KEY", "test-openai-key")
+    monkeypatch.setenv("GEMINI_API_KEY", "test-gemini-key")
+
+    def failed_openai(**kwargs):
+        del kwargs
+        raise server.AppError("OpenAI unavailable", status=502)
+
+    monkeypatch.setattr(server, "call_openai_json", failed_openai)
+    monkeypatch.setattr(
+        server,
+        "call_gemini_json",
+        lambda **kwargs: ({"score": 3}, "Gemini · fallback-model"),
+    )
+    result, model = server.call_judge_json(
+        instructions="judge",
+        text_input="demo",
+        schema_name="demo",
+        schema={"type": "object"},
+    )
+
+    assert result == {"score": 3}
+    assert model == "Gemini · fallback-model"
+
+
+def test_gemini_judge_uses_structured_json_and_inline_thumbnail(monkeypatch) -> None:
+    monkeypatch.setenv("GEMINI_JUDGE_MODEL", "gemini-test")
+    monkeypatch.setattr(
+        server,
+        "gemini_inline_image",
+        lambda image_url: {
+            "inlineData": {"mimeType": "image/jpeg", "data": "encoded"}
+        },
+    )
+
+    def fake_generate(payload, *, model, timeout=180):
+        assert model == "gemini-test"
+        assert timeout == 180
+        assert payload["generationConfig"]["responseMimeType"] == "application/json"
+        assert payload["generationConfig"]["responseSchema"]["required"] == ["score"]
+        assert payload["contents"][0]["parts"][1]["inlineData"]["data"] == "encoded"
+        return {
+            "candidates": [
+                {"content": {"parts": [{"text": '{"score": 4}'}]}}
+            ]
+        }
+
+    monkeypatch.setattr(server, "gemini_generate_content", fake_generate)
+    result, model = server.call_gemini_json(
+        instructions="judge",
+        text_input="demo",
+        schema_name="demo",
+        schema={
+            "type": "object",
+            "required": ["score"],
+            "properties": {"score": {"type": "integer"}},
+        },
+        image_url="https://example.com/thumb.jpg",
+    )
+
+    assert result == {"score": 4}
+    assert model == "Gemini · gemini-test"
+
+
+def test_transcription_router_uses_gemini_without_openai(monkeypatch) -> None:
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.setenv("GEMINI_API_KEY", "test-gemini-key")
+    monkeypatch.setattr(
+        server,
+        "transcribe_youtube_audio_gemini",
+        lambda video_url: "[0:00-0:04] 자동 전사",
+    )
+
+    transcript, source = server.transcribe_youtube_audio(
+        "https://youtube.com/shorts/demo"
+    )
+
+    assert transcript == "[0:00-0:04] 자동 전사"
+    assert source == "gemini_youtube_asr"
 
 
 def test_demo_scenes_generate_a_diverse_candidate_pool() -> None:

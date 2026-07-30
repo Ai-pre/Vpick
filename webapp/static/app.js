@@ -107,6 +107,7 @@ function renderJudge(result) {
     youtube_subtitles: "YouTube 공식 자막",
     youtube_auto_captions: "YouTube 자동 자막",
     openai_audio_asr: "OpenAI 음성 인식",
+    gemini_youtube_asr: "Gemini 영상 음성 인식",
     manual_input: "직접 입력 자막",
   }[input.transcript_source] || input.transcript_source || "자막";
   $("#judge-result").innerHTML = `
@@ -201,7 +202,10 @@ async function loadHealth() {
   try {
     state.health = await api("/api/health");
     status.classList.add("is-ready");
-    status.innerHTML = `<span class="status-dot"></span>${state.health.openai_ready ? `LLM · ${escapeHtml(state.health.model)}` : "프리뷰 모드"} · ${state.health.library_count} videos`;
+    const llmLabel = state.health.llm_ready
+      ? `${escapeHtml(state.health.provider)} · ${escapeHtml(state.health.model)}`
+      : "프리뷰 모드";
+    status.innerHTML = `<span class="status-dot"></span>${llmLabel} · ${state.health.library_count} videos`;
   } catch {
     status.innerHTML = `<span class="status-dot"></span>서버 연결 실패`;
   }

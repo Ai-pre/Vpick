@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import math
@@ -9,6 +10,7 @@ import re
 import sys
 import tempfile
 import urllib.error
+import urllib.parse
 import urllib.request
 import uuid
 from http import HTTPStatus
@@ -229,7 +231,7 @@ def multipart_body(
     return b"".join(chunks), boundary
 
 
-def transcribe_youtube_audio(video_url: str) -> str:
+def transcribe_youtube_audio_openai(video_url: str) -> str:
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         return ""
@@ -299,6 +301,147 @@ def transcribe_youtube_audio(video_url: str) -> str:
     return str(result.get("text", "")).strip()
 
 
+def gemini_api_key() -> str:
+    return os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or ""
+
+
+def extract_gemini_text(response: dict[str, Any]) -> str:
+    chunks: list[str] = []
+    for candidate in response.get("candidates", []):
+        for part in candidate.get("content", {}).get("parts", []):
+            text = str(part.get("text", "")).strip()
+            if text:
+                chunks.append(text)
+    if not chunks:
+        raise ValueError("Gemini 응답에서 텍스트를 찾지 못했습니다.")
+    return "\n".join(chunks)
+
+
+def gemini_generate_content(
+    payload: dict[str, Any],
+    *,
+    model: str,
+    timeout: int = 180,
+) -> dict[str, Any]:
+    api_key = gemini_api_key()
+    if not api_key:
+        raise AppError(
+            "GEMINI_API_KEY가 설정되지 않았습니다.",
+            status=503,
+            code="missing_gemini_key",
+        )
+    encoded_model = urllib.parse.quote(model, safe="-_.")
+    request = urllib.request.Request(
+        (
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            f"{encoded_model}:generateContent"
+        ),
+        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+        headers={
+            "x-goog-api-key": api_key,
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return json.load(response)
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise AppError(
+            f"Gemini 호출 실패: HTTP {exc.code} {detail[:400]}",
+            status=502,
+            code="gemini_error",
+        ) from exc
+    except (urllib.error.URLError, TimeoutError) as exc:
+        raise AppError(
+            f"Gemini 연결 실패: {exc}",
+            status=502,
+            code="gemini_error",
+        ) from exc
+
+
+def transcribe_youtube_audio_gemini(video_url: str) -> str:
+    model = os.getenv(
+        "GEMINI_TRANSCRIBE_MODEL",
+        os.getenv("GEMINI_JUDGE_MODEL", "gemini-2.5-flash"),
+    )
+    schema = {
+        "type": "object",
+        "additionalProperties": False,
+        "required": ["segments"],
+        "properties": {
+            "segments": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "required": ["start_sec", "end_sec", "text"],
+                    "properties": {
+                        "start_sec": {"type": "number", "minimum": 0},
+                        "end_sec": {"type": "number", "minimum": 0},
+                        "text": {"type": "string"},
+                    },
+                },
+            }
+        },
+    }
+    payload = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {
+                        "fileData": {
+                            "fileUri": video_url,
+                            "mimeType": "video/mp4",
+                        }
+                    },
+                    {
+                        "text": (
+                            "이 공개 YouTube Shorts의 음성을 한국어로 정확히 전사하세요. "
+                            "발화가 바뀌거나 의미 단위가 끝날 때마다 구간을 나누고, "
+                            "각 구간의 시작·종료 초와 발화 원문만 반환하세요. "
+                            "화면 자막을 임의로 요약하거나 내용을 만들어내지 마세요."
+                        )
+                    },
+                ],
+            }
+        ],
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "responseSchema": schema,
+            "temperature": 0,
+        },
+    }
+    try:
+        response = gemini_generate_content(payload, model=model, timeout=240)
+        result = json.loads(extract_gemini_text(response))
+    except (AppError, ValueError, json.JSONDecodeError):
+        return ""
+    return "\n".join(
+        (
+            f"[{seconds_to_clock(number(segment.get('start_sec')))}-"
+            f"{seconds_to_clock(number(segment.get('end_sec')))}] "
+            f"{str(segment.get('text', '')).strip()}"
+        )
+        for segment in result.get("segments", [])
+        if str(segment.get("text", "")).strip()
+    )
+
+
+def transcribe_youtube_audio(video_url: str) -> tuple[str, str]:
+    if os.getenv("OPENAI_API_KEY"):
+        transcript = transcribe_youtube_audio_openai(video_url)
+        if transcript:
+            return transcript, "openai_audio_asr"
+    if gemini_api_key():
+        transcript = transcribe_youtube_audio_gemini(video_url)
+        if transcript:
+            return transcript, "gemini_youtube_asr"
+    return "", ""
+
+
 def clean_short_description(value: str) -> str:
     text = re.sub(r"https?://\S+", "", value)
     text = re.sub(r"(?<!\w)#[^\s#]+", "", text)
@@ -356,9 +499,8 @@ def collect_youtube_short(video_url: str) -> dict[str, Any]:
             break
 
     if not transcript:
-        transcript = transcribe_youtube_audio(video_url)
+        transcript, transcript_source = transcribe_youtube_audio(video_url)
         if transcript:
-            transcript_source = "openai_audio_asr"
             caption_language = "auto"
     if not transcript:
         raise AppError(
@@ -514,6 +656,107 @@ def call_openai_json(
     return json.loads(extract_response_text(body)), model
 
 
+def gemini_inline_image(image_url: str) -> dict[str, Any] | None:
+    if not image_url:
+        return None
+    parsed = urllib.parse.urlparse(image_url)
+    if parsed.scheme not in {"http", "https"}:
+        return None
+    request = urllib.request.Request(
+        image_url,
+        headers={"User-Agent": "Mozilla/5.0", "Accept": "image/*"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            media_type = str(response.headers.get_content_type() or "")
+            data = response.read(6 * 1024 * 1024 + 1)
+    except (urllib.error.URLError, TimeoutError, ValueError):
+        return None
+    if len(data) > 6 * 1024 * 1024 or not media_type.startswith("image/"):
+        return None
+    return {
+        "inlineData": {
+            "mimeType": media_type,
+            "data": base64.b64encode(data).decode("ascii"),
+        }
+    }
+
+
+def call_gemini_json(
+    *,
+    instructions: str,
+    text_input: str,
+    schema_name: str,
+    schema: dict[str, Any],
+    image_url: str = "",
+) -> tuple[dict[str, Any], str]:
+    del schema_name
+    model = os.getenv("GEMINI_JUDGE_MODEL", "gemini-2.5-flash")
+    parts: list[dict[str, Any]] = [{"text": text_input}]
+    image_part = gemini_inline_image(image_url)
+    if image_part:
+        parts.append(image_part)
+    payload = {
+        "systemInstruction": {"parts": [{"text": instructions}]},
+        "contents": [{"role": "user", "parts": parts}],
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "responseSchema": schema,
+            "temperature": 0,
+        },
+    }
+    response = gemini_generate_content(payload, model=model)
+    try:
+        result = json.loads(extract_gemini_text(response))
+    except (ValueError, json.JSONDecodeError) as exc:
+        raise AppError(
+            f"Gemini JSON 응답을 읽지 못했습니다: {exc}",
+            status=502,
+            code="gemini_invalid_json",
+        ) from exc
+    return result, f"Gemini · {model}"
+
+
+def call_judge_json(
+    *,
+    instructions: str,
+    text_input: str,
+    schema_name: str,
+    schema: dict[str, Any],
+    image_url: str = "",
+) -> tuple[dict[str, Any], str]:
+    errors: list[str] = []
+    kwargs = {
+        "instructions": instructions,
+        "text_input": text_input,
+        "schema_name": schema_name,
+        "schema": schema,
+        "image_url": image_url,
+    }
+    if os.getenv("OPENAI_API_KEY"):
+        try:
+            result, model = call_openai_json(**kwargs)
+            return result, f"OpenAI · {model}"
+        except AppError as exc:
+            errors.append(str(exc))
+    if gemini_api_key():
+        try:
+            return call_gemini_json(**kwargs)
+        except AppError as exc:
+            errors.append(str(exc))
+    if errors:
+        raise AppError(
+            " / ".join(errors),
+            status=502,
+            code="llm_provider_error",
+        )
+    raise AppError(
+        "OPENAI_API_KEY 또는 GEMINI_API_KEY가 없어 오프라인 프리뷰로 실행합니다.",
+        status=503,
+        code="missing_llm_key",
+    )
+
+
 def package_judge_schema() -> dict[str, Any]:
     score = {"type": "integer", "minimum": 0, "maximum": 4}
     return {
@@ -636,7 +879,7 @@ def run_package_judge(payload: dict[str, Any]) -> dict[str, Any]:
     )
     if mode != "preview":
         try:
-            result, model = call_openai_json(
+            result, model = call_judge_json(
                 instructions=package_judge_instructions(),
                 text_input=text_input,
                 image_url=thumbnail_url,
@@ -962,7 +1205,7 @@ def judge_candidate_pool(
             ],
         }
         try:
-            result, model = call_openai_json(
+            result, model = call_judge_json(
                 instructions=selection_instructions(),
                 text_input=json.dumps(batch, ensure_ascii=False),
                 schema_name="vpick_selection_judge",
@@ -1225,15 +1468,26 @@ class VpickBetaHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802
         path = self.path.split("?", 1)[0]
         if path == "/api/health":
+            openai_ready = bool(os.getenv("OPENAI_API_KEY"))
+            gemini_ready = bool(gemini_api_key())
+            provider = "OpenAI" if openai_ready else "Gemini" if gemini_ready else ""
+            model = (
+                os.getenv("OPENAI_JUDGE_MODEL", "gpt-5.6-sol")
+                if openai_ready
+                else os.getenv("GEMINI_JUDGE_MODEL", "gemini-2.5-flash")
+            )
             self.send_json(
                 {
                     "status": "ok",
-                    "openai_ready": bool(os.getenv("OPENAI_API_KEY")),
+                    "openai_ready": openai_ready,
+                    "gemini_ready": gemini_ready,
+                    "llm_ready": openai_ready or gemini_ready,
+                    "provider": provider,
                     "vpick_ready": bool(
                         os.getenv("VPICK_ACCESS_TOKEN")
                         or (os.getenv("VPICK_EMAIL") and os.getenv("VPICK_PASSWORD"))
                     ),
-                    "model": os.getenv("OPENAI_JUDGE_MODEL", "gpt-5.6-sol"),
+                    "model": model,
                     "library_count": len(available_library()),
                 }
             )
