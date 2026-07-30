@@ -1,5 +1,7 @@
 # Vpick 하이라이트 평가체계 구축 및 선택 개선
 
+[![CI](https://github.com/Ai-pre/Vpick/actions/workflows/ci.yml/badge.svg?branch=codex%2Fimprovement-listwise-v2)](https://github.com/Ai-pre/Vpick/actions/workflows/ci.yml)
+
 Vpick이 제공하는 장면 설명, 대사, 타임스탬프를 이용해 숏폼 후보를 평가하고,
 서로 다른 사건을 담은 Top5를 구성하는 프로젝트입니다.
 
