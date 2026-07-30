@@ -124,33 +124,44 @@
       <section id="generator-panel" class="tab-panel" role="tabpanel" hidden>
         <div class="generator-layout">
           <form id="generator-form" class="generator-toolbar">
-            <div class="generator-primary">
-              <label class="field">
+            <div class="generator-url-row">
+              <label class="field judge-url-field">
                 <span>롱폼 YouTube URL</span>
-                <input name="video_url" type="url" placeholder="https://www.youtube.com/watch?v=..." />
-              </label>
-              <label class="field">
-                <span>Vpick asset 주소 <small>선택</small></span>
-                <input name="vpick_asset_url" type="url" placeholder="https://app.vpick.ai/project/.../..." />
-              </label>
-            </div>
-            <div class="generator-actions">
-              <label class="file-button">
-                <input id="scene-file" type="file" accept=".json,application/json" />
-                장면 JSON
+                <input name="video_url" type="url" required placeholder="https://www.youtube.com/watch?v=..." />
               </label>
               <button class="button button-secondary" id="generator-sample" type="button">샘플</button>
-              <button class="button button-primary" type="submit">Top5 생성</button>
+              <button class="button button-primary" type="submit">자동 Top5 생성</button>
             </div>
-            <div class="generator-meta">
-              <span id="scene-file-name">장면 파일 미선택</span>
-              <fieldset class="mode-control compact">
-                <legend>실행 모드</legend>
-                <label><input type="radio" name="mode" value="auto" checked /><span>자동</span></label>
-                <label><input type="radio" name="mode" value="live" /><span>LLM</span></label>
-                <label><input type="radio" name="mode" value="preview" /><span>프리뷰</span></label>
-              </fieldset>
+            <div class="auto-source-strip generator-source-strip">
+              <span>Vpick 분석</span>
+              <span>후보 생성</span>
+              <span>중복 압축</span>
+              <span>AC + Judge</span>
+              <strong>자동 실행</strong>
             </div>
+
+            <details class="advanced-options generator-advanced">
+              <summary>고급 입력 수정</summary>
+              <div class="advanced-options-body">
+                <label class="field">
+                  <span>Vpick asset 주소 <small>선택</small></span>
+                  <input name="vpick_asset_url" type="url" placeholder="https://app.vpick.ai/project/.../..." />
+                </label>
+                <div class="generator-meta">
+                  <label class="file-button">
+                    <input id="scene-file" type="file" accept=".json,application/json" />
+                    장면 JSON
+                  </label>
+                  <span id="scene-file-name">장면 파일 미선택</span>
+                </div>
+                <fieldset class="mode-control compact">
+                  <legend>실행 모드</legend>
+                  <label><input type="radio" name="mode" value="auto" checked /><span>자동</span></label>
+                  <label><input type="radio" name="mode" value="live" /><span>LLM</span></label>
+                  <label><input type="radio" name="mode" value="preview" /><span>프리뷰</span></label>
+                </fieldset>
+              </div>
+            </details>
           </form>
 
           <section id="generator-empty" class="generator-empty">
@@ -158,12 +169,13 @@
               <span></span><span></span><span></span><span></span><span></span>
             </div>
             <h1>숏폼 후보 Top5</h1>
-            <p>저장된 Vpick 분석 영상은 URL만으로, 새 영상은 장면 JSON 또는 Vpick asset 주소로 실행합니다.</p>
+            <p>롱폼 주소를 입력하면 Vpick 분석부터 개선 파이프라인까지 자동 실행합니다.</p>
           </section>
 
           <section id="generator-loading" class="loading-state large" hidden>
             <span class="spinner"></span>
-            <strong>후보 생성 · 중복 압축 · Adaptive Coverage · Judge 보강 중</strong>
+            <strong>Vpick 영상 분석 · 후보 생성 · Adaptive Coverage · Judge 보강 중</strong>
+            <p>처음 분석하는 영상은 수 분 정도 걸릴 수 있습니다.</p>
           </section>
 
           <section id="generator-result" hidden></section>

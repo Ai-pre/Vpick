@@ -225,8 +225,9 @@ python -m webapp.server --port 8765
 `OPENAI_API_KEY`가 없더라도 `GEMINI_API_KEY`가 있으면 실제
 Pointwise/Listwise Judge를 호출합니다. Judge 탭은 Shorts URL만 입력하면 제목,
 설명, 길이, 썸네일과 한국어 자막을 자동 수집합니다. YouTube 자막이 없는
-경우에도 사용 가능한 공급자로 음성 전사를 시도합니다. 새 롱폼의 Top5
-생성에는 Vpick 장면 JSON 또는 Vpick asset 주소가 필요합니다.
+경우에도 사용 가능한 공급자로 음성 전사를 시도합니다. 생성 탭은 롱폼 URL만
+입력하면 기존 Vpick asset을 재사용하거나 새 분석을 요청하고, 장면 polling 후
+개선 파이프라인으로 Top5를 생성합니다.
 
 ### 환경
 

@@ -682,6 +682,30 @@ textarea:focus {
   padding: 20px;
 }
 
+.generator-url-row {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 84px 180px;
+  align-items: end;
+  gap: 10px;
+}
+
+.generator-url-row .button {
+  height: 52px;
+}
+
+.generator-source-strip {
+  max-width: 720px;
+}
+
+.generator-advanced .advanced-options-body {
+  display: grid;
+  gap: 10px;
+}
+
+.generator-advanced .generator-meta {
+  justify-content: flex-start;
+}
+
 .generator-primary {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1012,6 +1036,18 @@ textarea:focus {
   .signal-columns,
   .generator-primary {
     grid-template-columns: 1fr;
+  }
+
+  .generator-url-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .generator-url-row .field {
+    grid-column: 1 / -1;
+  }
+
+  .generator-url-row .button {
+    width: 100%;
   }
 
   .generator-actions {

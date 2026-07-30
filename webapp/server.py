@@ -9,6 +9,7 @@ import os
 import re
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -1267,6 +1268,189 @@ def parse_vpick_asset_url(value: str) -> tuple[str, str] | None:
     return match.group(1), match.group(2)
 
 
+def vpick_rows(payload: Any) -> list[dict[str, Any]]:
+    if isinstance(payload, list):
+        return [row for row in payload if isinstance(row, dict)]
+    if isinstance(payload, dict):
+        for key in ("data", "items", "projects", "assets"):
+            rows = payload.get(key)
+            if isinstance(rows, list):
+                return [row for row in rows if isinstance(row, dict)]
+    return []
+
+
+def vpick_projects(client: VpickClient) -> list[dict[str, Any]]:
+    output: list[dict[str, Any]] = []
+    offset = 0
+    while True:
+        payload = client.list_projects(offset=offset, limit=100)
+        rows = vpick_rows(payload)
+        output.extend(rows)
+        total = (
+            int(payload.get("total", len(output)))
+            if isinstance(payload, dict)
+            else len(output)
+        )
+        if not rows or len(output) >= total:
+            return output
+        offset += len(rows)
+
+
+def vpick_assets(client: VpickClient, project_id: str) -> list[dict[str, Any]]:
+    output: list[dict[str, Any]] = []
+    offset = 0
+    while True:
+        payload = client.list_assets(project_id, offset=offset, limit=100)
+        rows = vpick_rows(payload)
+        output.extend(rows)
+        total = (
+            int(payload.get("total", len(output)))
+            if isinstance(payload, dict)
+            else len(output)
+        )
+        if not rows or len(output) >= total:
+            return output
+        offset += len(rows)
+
+
+def find_vpick_asset(
+    client: VpickClient,
+    projects: list[dict[str, Any]],
+    video_id: str,
+) -> tuple[str, dict[str, Any]] | None:
+    matches: list[tuple[str, dict[str, Any]]] = []
+    for project in projects:
+        project_id = str(project.get("project_id") or "")
+        if not project_id:
+            continue
+        for asset in vpick_assets(client, project_id):
+            haystack = " ".join(
+                str(asset.get(field) or "")
+                for field in ("asset_name", "youtube_url", "source_url", "original_url")
+            )
+            if video_id in haystack:
+                matches.append((project_id, asset))
+    return next(
+        (
+            match
+            for match in matches
+            if str(match[1].get("status") or "") == "READY"
+        ),
+        matches[0] if matches else None,
+    )
+
+
+def web_vpick_project(
+    client: VpickClient,
+    projects: list[dict[str, Any]],
+) -> str:
+    configured = os.getenv("VPICK_WEB_PROJECT_ID", "").strip()
+    if configured:
+        return configured
+    project_name = os.getenv("VPICK_WEB_PROJECT_NAME", "web_beta_auto")
+    for project in projects:
+        if str(project.get("project_name") or "") == project_name:
+            return str(project["project_id"])
+    return client.create_project(project_name)
+
+
+def vpick_remaining_credits(client: VpickClient) -> int | None:
+    try:
+        payload = client.request("GET", "/plan-page")
+        return int(
+            payload.get("current_plan", {})
+            .get("credit_usage", {})
+            .get("remaining", 0)
+        )
+    except (RuntimeError, TypeError, ValueError, AttributeError):
+        return None
+
+
+def analyze_youtube_with_vpick(
+    video_url: str,
+    *,
+    client: VpickClient | None = None,
+    sleep_fn: Any = time.sleep,
+) -> tuple[list[dict[str, Any]], str]:
+    video_id = extract_youtube_id(video_url)
+    if not video_id:
+        raise AppError("올바른 YouTube 롱폼 주소를 입력해 주세요.")
+    client = client or VpickClient()
+    try:
+        client.login_from_env()
+        projects = vpick_projects(client)
+        existing = find_vpick_asset(client, projects, video_id)
+        if existing:
+            project_id, asset = existing
+            asset_id = str(asset.get("asset_id") or "")
+        else:
+            remaining = vpick_remaining_credits(client)
+            reserve = int(os.getenv("VPICK_MIN_CREDIT_RESERVE", "100"))
+            if remaining is not None and remaining <= reserve:
+                raise AppError(
+                    f"Vpick 분석 크레딧이 부족합니다. 잔여 {remaining}, 보존 기준 {reserve}.",
+                    status=402,
+                    code="vpick_insufficient_credits",
+                )
+            project_id = web_vpick_project(client, projects)
+            asset_id = client.create_asset_from_youtube(
+                project_id,
+                video_url,
+                f"web_{video_id}",
+            )
+        if not asset_id:
+            raise AppError(
+                "Vpick asset ID를 확보하지 못했습니다.",
+                status=502,
+                code="vpick_asset_missing",
+            )
+
+        timeout_sec = max(30, int(os.getenv("VPICK_ANALYSIS_TIMEOUT_SEC", "1800")))
+        interval_sec = max(2, int(os.getenv("VPICK_POLL_INTERVAL_SEC", "10")))
+        deadline = time.time() + timeout_sec
+        terminal_failures = {
+            "FAILED",
+            "PRETRANSCODING_FAILED",
+            "MI_ANALYSIS_FAILED",
+            "INSUFFICIENT_CREDITS",
+        }
+        last_status = ""
+        while time.time() < deadline:
+            asset_status = client.get_asset(project_id, asset_id)
+            last_status = str(asset_status.get("status") or "")
+            if last_status == "READY":
+                scenes_payload = client.get_scenes(project_id, asset_id)
+                scenes = extract_scene_list(scenes_payload)
+                if scenes:
+                    cache_path = RAW_VPICK_DIR / f"{video_id}_scenes.json"
+                    cache_path.parent.mkdir(parents=True, exist_ok=True)
+                    cache_path.write_text(
+                        json.dumps(scenes_payload, ensure_ascii=False, indent=2),
+                        encoding="utf-8",
+                    )
+                    return scenes, "vpick_api_auto_analysis"
+            if last_status in terminal_failures:
+                raise AppError(
+                    f"Vpick 분석 실패: {last_status}",
+                    status=422,
+                    code="vpick_analysis_failed",
+                )
+            sleep_fn(interval_sec)
+        raise AppError(
+            f"Vpick 분석 대기 시간이 초과되었습니다. 마지막 상태: {last_status or 'UNKNOWN'}",
+            status=504,
+            code="vpick_analysis_timeout",
+        )
+    except AppError:
+        raise
+    except Exception as exc:
+        raise AppError(
+            f"Vpick 자동 분석 요청에 실패했습니다: {str(exc)[:400]}",
+            status=502,
+            code="vpick_auto_analysis_error",
+        ) from exc
+
+
 def resolve_scenes(payload: dict[str, Any]) -> tuple[list[dict[str, Any]], str]:
     supplied = payload.get("scene_payload")
     if supplied:
@@ -1296,11 +1480,9 @@ def resolve_scenes(payload: dict[str, Any]) -> tuple[list[dict[str, Any]], str]:
             scenes = extract_scene_list(load_scene_payload(path))
             if scenes:
                 return scenes, "repository_vpick_scenes" if path.parent == RAW_VPICK_DIR else "sample_scene_json"
-    raise AppError(
-        "이 URL에 연결된 장면 분석 자료가 없습니다. 새 영상은 Vpick asset 주소를 입력하거나 장면 JSON을 업로드해 주세요.",
-        status=422,
-        code="scene_data_required",
-    )
+    if video_url:
+        return analyze_youtube_with_vpick(video_url)
+    raise AppError("롱폼 YouTube URL을 입력해 주세요.")
 
 
 def public_candidate(candidate: dict[str, Any], video_url: str, rank: int) -> dict[str, Any]:

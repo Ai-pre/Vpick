@@ -198,6 +198,80 @@ def test_transcription_router_uses_gemini_without_openai(monkeypatch) -> None:
     assert source == "gemini_youtube_asr"
 
 
+def test_vpick_auto_analysis_reuses_existing_asset(monkeypatch, tmp_path) -> None:
+    scene_payload = json.loads(Path(SAMPLE_SCENES).read_text(encoding="utf-8"))
+
+    class FakeVpickClient:
+        def login_from_env(self):
+            return None
+
+        def list_projects(self, offset=0, limit=100):
+            return {
+                "data": [{"project_id": "project-1", "project_name": "existing"}],
+                "total": 1,
+            }
+
+        def list_assets(self, project_id, offset=0, limit=100):
+            assert project_id == "project-1"
+            return {
+                "data": [
+                    {
+                        "asset_id": "asset-failed",
+                        "asset_name": "web_BETA_DEMO01_old",
+                        "status": "FAILED",
+                    },
+                    {
+                        "asset_id": "asset-1",
+                        "asset_name": "web_BETA_DEMO01",
+                        "status": "READY",
+                    }
+                ],
+                "total": 2,
+            }
+
+        def get_asset(self, project_id, asset_id):
+            assert asset_id == "asset-1"
+            return {"status": "READY"}
+
+        def get_scenes(self, project_id, asset_id):
+            return scene_payload
+
+    monkeypatch.setattr(server, "RAW_VPICK_DIR", tmp_path)
+    scenes, source = server.analyze_youtube_with_vpick(
+        "https://www.youtube.com/watch?v=BETA_DEMO01",
+        client=FakeVpickClient(),
+        sleep_fn=lambda seconds: None,
+    )
+
+    assert len(scenes) == 12
+    assert source == "vpick_api_auto_analysis"
+    assert (tmp_path / "BETA_DEMO01_scenes.json").exists()
+
+
+def test_resolve_scenes_starts_vpick_analysis_for_url_only(monkeypatch) -> None:
+    expected = [
+        {
+            "scene_id": "S001",
+            "start_sec": 0.0,
+            "end_sec": 10.0,
+            "description": "자동 분석 장면",
+            "transcript": "자동 분석 자막",
+        }
+    ]
+    monkeypatch.setattr(
+        server,
+        "analyze_youtube_with_vpick",
+        lambda video_url: (expected, "vpick_api_auto_analysis"),
+    )
+
+    scenes, source = server.resolve_scenes(
+        {"video_url": "https://www.youtube.com/watch?v=AUTO_DEMO01"}
+    )
+
+    assert scenes == expected
+    assert source == "vpick_api_auto_analysis"
+
+
 def test_demo_scenes_generate_a_diverse_candidate_pool() -> None:
     payload = json.loads(Path(SAMPLE_SCENES).read_text(encoding="utf-8"))
     scenes = extract_scene_list(payload)
