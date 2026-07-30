@@ -211,6 +211,20 @@ Judge의 완결성 게이트는 `전개·회수`, `독립적 이해`, `시작·�
 
 ## 실행
 
+### 로컬 베타 웹
+
+Judge 점수와 숏폼 Top5 생성 흐름은 별도 웹 프레임워크 없이 로컬에서
+시험할 수 있습니다.
+
+```bash
+python -m webapp.server --port 8765
+```
+
+브라우저에서 `http://127.0.0.1:8765`를 엽니다. `OPENAI_API_KEY`가 있으면
+실제 Pointwise/Listwise Judge를 호출하고, 키가 없으면 동일한 입출력과 선택
+흐름을 확인하는 오프라인 프리뷰로 자동 전환합니다. 새 영상은 Vpick 장면 JSON
+또는 Vpick asset 주소가 필요합니다.
+
 ### 환경
 
 Python 3.10 이상을 권장합니다.

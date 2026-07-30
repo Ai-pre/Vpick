@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Vpick Lab Beta</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">V</div>
+        <div>
+          <strong>Vpick Lab</strong>
+          <span>Beta</span>
+        </div>
+      </div>
+      <div id="system-status" class="system-status" aria-live="polite">
+        <span class="status-dot"></span>
+        연결 확인 중
+      </div>
+    </header>
+
+    <main>
+      <nav class="tabs" role="tablist" aria-label="Vpick 도구">
+        <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="judge-panel" data-tab="judge">
+          Judge 평가
+        </button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="generator-panel" data-tab="generator">
+          숏폼 생성
+        </button>
+      </nav>
+
+      <section id="judge-panel" class="tab-panel is-active" role="tabpanel">
+        <div class="workspace-grid">
+          <form id="judge-form" class="input-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">POINTWISE JUDGE</p>
+                <h1>숏폼 성공 잠재력 평가</h1>
+              </div>
+              <button class="button button-secondary" id="judge-sample" type="button">샘플 입력</button>
+            </div>
+
+            <label class="field field-wide">
+              <span>YouTube URL</span>
+              <input id="judge-video-url" name="video_url" type="url" placeholder="https://youtube.com/shorts/..." />
+            </label>
+
+            <div class="field-row">
+              <label class="field">
+                <span>시작</span>
+                <input name="start_time" type="text" placeholder="10:19" />
+              </label>
+              <label class="field">
+                <span>종료</span>
+                <input name="end_time" type="text" placeholder="11:04" />
+              </label>
+            </div>
+
+            <label class="field field-wide">
+              <span>제목</span>
+              <input name="title" type="text" placeholder="후보 제목" />
+            </label>
+
+            <label class="field field-wide">
+              <span>후보 장면 설명</span>
+              <textarea name="description" rows="4" placeholder="Vpick 장면 설명 또는 후보 요약"></textarea>
+            </label>
+
+            <label class="field field-wide">
+              <span>후보 자막</span>
+              <textarea name="transcript" rows="7" placeholder="타임스탬프가 포함된 후보 자막"></textarea>
+            </label>
+
+            <label class="field field-wide">
+              <span>썸네일 URL</span>
+              <input id="judge-thumbnail-url" name="thumbnail_url" type="url" placeholder="비워두면 YouTube 썸네일 자동 사용" />
+            </label>
+
+            <fieldset class="mode-control">
+              <legend>실행 모드</legend>
+              <label><input type="radio" name="mode" value="auto" checked /><span>자동</span></label>
+              <label><input type="radio" name="mode" value="live" /><span>LLM</span></label>
+              <label><input type="radio" name="mode" value="preview" /><span>프리뷰</span></label>
+            </fieldset>
+
+            <button class="button button-primary submit-button" type="submit">Judge 실행</button>
+          </form>
+
+          <section class="result-panel" aria-live="polite">
+            <div id="judge-empty" class="empty-state">
+              <div class="thumbnail-shell">
+                <img id="judge-thumbnail-preview" alt="" />
+                <div class="thumbnail-placeholder">THUMBNAIL</div>
+              </div>
+              <p>후보 정보를 입력하면 평가 결과가 여기에 표시됩니다.</p>
+            </div>
+            <div id="judge-loading" class="loading-state" hidden>
+              <span class="spinner"></span>
+              <strong>후보 근거를 평가하고 있습니다</strong>
+            </div>
+            <div id="judge-result" hidden></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="generator-panel" class="tab-panel" role="tabpanel" hidden>
+        <div class="generator-layout">
+          <form id="generator-form" class="generator-toolbar">
+            <div class="generator-primary">
+              <label class="field">
+                <span>롱폼 YouTube URL</span>
+                <input name="video_url" type="url" placeholder="https://www.youtube.com/watch?v=..." />
+              </label>
+              <label class="field">
+                <span>Vpick asset 주소 <small>선택</small></span>
+                <input name="vpick_asset_url" type="url" placeholder="https://app.vpick.ai/project/.../..." />
+              </label>
+            </div>
+            <div class="generator-actions">
+              <label class="file-button">
+                <input id="scene-file" type="file" accept=".json,application/json" />
+                장면 JSON
+              </label>
+              <button class="button button-secondary" id="generator-sample" type="button">샘플</button>
+              <button class="button button-primary" type="submit">Top5 생성</button>
+            </div>
+            <div class="generator-meta">
+              <span id="scene-file-name">장면 파일 미선택</span>
+              <fieldset class="mode-control compact">
+                <legend>실행 모드</legend>
+                <label><input type="radio" name="mode" value="auto" checked /><span>자동</span></label>
+                <label><input type="radio" name="mode" value="live" /><span>LLM</span></label>
+                <label><input type="radio" name="mode" value="preview" /><span>프리뷰</span></label>
+              </fieldset>
+            </div>
+          </form>
+
+          <section id="generator-empty" class="generator-empty">
+            <div class="timeline-placeholder">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h1>숏폼 후보 Top5</h1>
+            <p>저장된 Vpick 분석 영상은 URL만으로, 새 영상은 장면 JSON 또는 Vpick asset 주소로 실행합니다.</p>
+          </section>
+
+          <section id="generator-loading" class="loading-state large" hidden>
+            <span class="spinner"></span>
+            <strong>후보 생성 · 중복 압축 · Adaptive Coverage · Judge 보강 중</strong>
+          </section>
+
+          <section id="generator-result" hidden></section>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
