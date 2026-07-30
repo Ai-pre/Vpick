@@ -112,6 +112,7 @@ def test_pairwise_schema_rejects_invalid_winner() -> None:
         )
 
 
+@pytest.mark.private_artifacts
 def test_actual_data_builds_and_has_no_group_leakage() -> None:
     config = load_config(CONFIG)
     prepare_summary = prepare(config)
@@ -131,6 +132,7 @@ def test_actual_data_builds_and_has_no_group_leakage() -> None:
     assert all(len(splits) == 1 for splits in split_by_longform.values())
 
 
+@pytest.mark.private_artifacts
 def test_pairwise_requests_are_same_longform_unique_and_reversed() -> None:
     config = load_config(CONFIG)
     output_dir = ROOT / config["output_dir"]
@@ -205,6 +207,7 @@ def test_hybrid_scores_stay_in_range() -> None:
         assert math.isfinite(score)
 
 
+@pytest.mark.private_artifacts
 def test_all_case_outputs_exist() -> None:
     config = load_config(CONFIG)
     output_dir = ROOT / config["output_dir"]
