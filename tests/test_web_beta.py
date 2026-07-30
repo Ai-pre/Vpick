@@ -27,6 +27,24 @@ def test_package_formula_matches_frozen_weights() -> None:
     assert score == 81.2
 
 
+def test_env_file_loads_keys_without_overriding_process_env(
+    monkeypatch, tmp_path
+) -> None:
+    env_file = tmp_path / ".env"
+    env_file.write_text(
+        "GEMINI_API_KEY=from-file\n"
+        "OPENAI_API_KEY='from-file-openai'\n",
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    monkeypatch.setenv("OPENAI_API_KEY", "already-set")
+
+    server.load_env_file(env_file)
+
+    assert server.gemini_api_key() == "from-file"
+    assert server.os.getenv("OPENAI_API_KEY") == "already-set"
+
+
 def test_url_only_candidate_is_filled_from_youtube_collector() -> None:
     def fake_collector(video_url: str) -> dict[str, object]:
         assert video_url.endswith("demoShort1")
